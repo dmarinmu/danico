@@ -1,0 +1,7 @@
+C:\lookingplaces_danico\DanicoSolution\DanicoProject\bin\DanicoProject.dll
+C:\lookingplaces_danico\DanicoSolution\DanicoProject\bin\DanicoProject.pdb
+C:\lookingplaces_danico\DanicoSolution\DanicoProject\bin\EntityFramework.dll
+C:\lookingplaces_danico\DanicoSolution\DanicoProject\bin\EntityFramework.xml
+C:\lookingplaces_danico\DanicoSolution\DanicoProject\obj\Debug\ResolveAssemblyReference.cache
+C:\lookingplaces_danico\DanicoSolution\DanicoProject\obj\Debug\DanicoProject.dll
+C:\lookingplaces_danico\DanicoSolution\DanicoProject\obj\Debug\DanicoProject.pdb

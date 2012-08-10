@@ -1,0 +1,143 @@
+﻿@model IEnumerable<DanicoProject.Models.Hotel>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+
+  <title>Danico</title>
+
+</head>
+<body>
+
+<!-- titulo -->
+
+<div id="header" class="container">
+  <!--  <div id="account"><a href="/login">log in</a>
+      | <a href="/signup">sign up</a></div>-->
+  <label id="title"> Danico</label>  
+  
+</div>
+
+<!-- cuerpo -->
+
+
+<div id="main" class="container">
+  
+  <div id="start_pick">
+
+      @using (Html.BeginForm("Search", "Home", FormMethod.Get,
+            new { @id = "new_pick" }))
+      {
+          //<form id="new_pick" accept-charset="UTF-8" action="/picks" method="post">
+        <div class="row">
+            <div class="span13">
+           @* <input id="address" name="address" placeholder="Medellin" type="text" /> *@
+            @Html.TextBox("address", ViewBag.townFilter as string, new { @placeholder = "Medellín" })
+            </div>
+            <div class="span3">
+             <button class="btn primary" name="button" type="submit">go</button>
+            </div>
+        </div>
+       // </form>
+      }
+    </div>
+
+    
+<table id="newspaper-a" >
+    <tr>
+        <th>
+            name
+        </th>
+        <th>
+            address
+        </th>
+        <th>
+            description
+        </th>
+        <th>
+            phone1
+        </th>
+        <th>
+            phone2
+        </th>
+        <th>
+            email
+        </th>
+        <th>
+            fk_idTown
+        </th>
+        <th></th>
+    </tr>
+
+<tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fk_idTown)
+        </td>
+       
+    </tr>
+}
+</tbody>
+</table>
+<div id="about" class="row">
+   <!--<div class="span5">
+
+    <h2>what is this?</h2>
+  </div>
+  <div class="span11">
+    <p>We're the answer to the hardest part of your day: deciding where to get lunch.</p>
+
+    <p>We’ll give you just three places a day. Tell us what you like and we'll learn your preferences, sending you to a mix of old favorites and new discoveries.</p>
+    
+    <p>
+      <a href="http://blog.wheretoeatat.com" class="pill">blog</a>
+
+      <a href="http://twitter.com/#!/wheretoeatat" class="pill">twitter</a>
+      <a href="https://www.facebook.com/pages/Where-To-Eat-At/284929831519044" class="pill">facebook</a>
+      
+      
+    </p>
+  </div>-->
+</div>
+
+<div id="authForm" class="modal hide"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#address").autocomplete({
+            source: '@Url.Action("AutocompleteAsync")'
+        });
+    });
+</script>
+
+
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DanicoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DanicoModelStoreContainer">
+    <EntitySet Name="Hotel" EntityType="DanicoModel.Store.Hotel" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="pk_idHotel" />
+    </Key>
+    <Property Name="pk_idHotel" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="address" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="description" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="phone1" Type="varchar" MaxLength="14" />
+    <Property Name="phone2" Type="varchar" MaxLength="14" />
+    <Property Name="email" Type="nvarchar" MaxLength="80" />
+    <Property Name="fk_idTown" Type="bigint" Nullable="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DanicoModel1StoreContainer" CdmEntityContainer="DanicoAllCon">
+    <EntitySetMapping Name="Hotels">
+      <EntityTypeMapping TypeName="DanicoModel1.Hotel">
+        <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="pk_idHotel" ColumnName="pk_idHotel" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="phone1" ColumnName="phone1" />
+          <ScalarProperty Name="phone2" ColumnName="phone2" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="fk_idTown" ColumnName="fk_idTown" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="DanicoModel1.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="pkidHabitacion" ColumnName="pkidHabitacion" />
+          <ScalarProperty Name="fk_idHotel" ColumnName="fk_idHotel" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Towns">
+      <EntityTypeMapping TypeName="DanicoModel1.Town">
+        <MappingFragment StoreEntitySet="Town">
+          <ScalarProperty Name="pk_idTown" ColumnName="pk_idTown" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

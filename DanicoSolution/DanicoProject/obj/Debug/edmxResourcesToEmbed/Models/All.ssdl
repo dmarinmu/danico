@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DanicoModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DanicoModel1StoreContainer">
+    <EntitySet Name="Hotel" EntityType="DanicoModel1.Store.Hotel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Room" EntityType="DanicoModel1.Store.Room" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Town" EntityType="DanicoModel1.Store.Town" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Hotel_Town" Association="DanicoModel1.Store.FK_Hotel_Town">
+      <End Role="Town" EntitySet="Town" />
+      <End Role="Hotel" EntitySet="Hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_Hotel" Association="DanicoModel1.Store.FK_Room_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="pk_idHotel" />
+    </Key>
+    <Property Name="pk_idHotel" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="address" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="description" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="phone1" Type="varchar" MaxLength="14" />
+    <Property Name="phone2" Type="varchar" MaxLength="14" />
+    <Property Name="email" Type="nvarchar" MaxLength="80" />
+    <Property Name="fk_idTown" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="pkidHabitacion" />
+    </Key>
+    <Property Name="pkidHabitacion" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_idHotel" Type="bigint" Nullable="false" />
+    <Property Name="price" Type="decimal" />
+    <Property Name="description" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="pk_idTown" />
+    </Key>
+    <Property Name="pk_idTown" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Hotel_Town">
+    <End Role="Town" Type="DanicoModel1.Store.Town" Multiplicity="1" />
+    <End Role="Hotel" Type="DanicoModel1.Store.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="pk_idTown" />
+      </Principal>
+      <Dependent Role="Hotel">
+        <PropertyRef Name="fk_idTown" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_Hotel">
+    <End Role="Hotel" Type="DanicoModel1.Store.Hotel" Multiplicity="1" />
+    <End Role="Room" Type="DanicoModel1.Store.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="pk_idHotel" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="fk_idHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

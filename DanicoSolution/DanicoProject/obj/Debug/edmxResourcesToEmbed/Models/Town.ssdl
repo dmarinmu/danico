@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="townEntity.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="townEntityStoreContainer">
+    <EntitySet Name="Town" EntityType="townEntity.Store.Town" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="pk_idTown" />
+    </Key>
+    <Property Name="pk_idTown" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+</Schema>
