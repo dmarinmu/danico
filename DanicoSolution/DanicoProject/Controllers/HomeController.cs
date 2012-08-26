@@ -34,10 +34,9 @@ namespace DanicoProject.Controllers
         public ActionResult AutocompleteAsync(string term)
         {
             List<string> townList = new System.Collections.Generic.List<string>();
-            using (DanicoProject.Models.conection tmp = new Models.conection())
-            {
-                //townList = (from a  in tmp.Towns  where a.name.StartsWith(term) select a.name).Take(4).ToList();
-                   
+            using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
+            {             
+                townList = (from a  in tmp.Towns  where a.name.StartsWith(term) select a.name).Take(4).ToList();
             }
             return Json( townList, JsonRequestBehavior.AllowGet);
         }

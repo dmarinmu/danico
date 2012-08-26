@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DanicoModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-  <EntityContainer Name="DanicoModel1StoreContainer">
-    <EntitySet Name="Hotel" EntityType="DanicoModel1.Store.Hotel" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Room" EntityType="DanicoModel1.Store.Room" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Town" EntityType="DanicoModel1.Store.Town" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Hotel_Town" Association="DanicoModel1.Store.FK_Hotel_Town">
+<Schema Namespace="AllModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="AllModelStoreContainer">
+    <EntitySet Name="Hotel" EntityType="AllModel.Store.Hotel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Room" EntityType="AllModel.Store.Room" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Town" EntityType="AllModel.Store.Town" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="AllModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Hotel_Town" Association="AllModel.Store.FK_Hotel_Town">
       <End Role="Town" EntitySet="Town" />
       <End Role="Hotel" EntitySet="Hotel" />
     </AssociationSet>
-    <AssociationSet Name="FK_Room_Hotel" Association="DanicoModel1.Store.FK_Room_Hotel">
+    <AssociationSet Name="FK_Room_Hotel" Association="AllModel.Store.FK_Room_Hotel">
       <End Role="Hotel" EntitySet="Hotel" />
       <End Role="Room" EntitySet="Room" />
     </AssociationSet>
@@ -42,9 +43,16 @@
     <Property Name="pk_idTown" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="pk_idUser" />
+    </Key>
+    <Property Name="pk_idUser" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
   <Association Name="FK_Hotel_Town">
-    <End Role="Town" Type="DanicoModel1.Store.Town" Multiplicity="1" />
-    <End Role="Hotel" Type="DanicoModel1.Store.Hotel" Multiplicity="*" />
+    <End Role="Town" Type="AllModel.Store.Town" Multiplicity="1" />
+    <End Role="Hotel" Type="AllModel.Store.Hotel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Town">
         <PropertyRef Name="pk_idTown" />
@@ -55,8 +63,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Room_Hotel">
-    <End Role="Hotel" Type="DanicoModel1.Store.Hotel" Multiplicity="1" />
-    <End Role="Room" Type="DanicoModel1.Store.Room" Multiplicity="*" />
+    <End Role="Hotel" Type="AllModel.Store.Hotel" Multiplicity="1" />
+    <End Role="Room" Type="AllModel.Store.Room" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Hotel">
         <PropertyRef Name="pk_idHotel" />

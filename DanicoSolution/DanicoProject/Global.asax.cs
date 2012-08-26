@@ -27,6 +27,12 @@ namespace DanicoProject
             new { controller = "Hotel", action = "Details", id = 4 } // Parameter defaults
            );
             routes.MapRoute(
+            "Home   ", // Route name
+            "{controller}/{action}/{id}", // URL with parameters
+            new { controller = "Home", action = "Search", id = UrlParameter.Optional } // Parameter defaults
+           );
+
+            routes.MapRoute(
               "Default", // Route name
               "{controller}/{action}/{id}", // URL with parameters
               new { controller = "Home", action = "Search", id = UrlParameter.Optional } // Parameter defaults

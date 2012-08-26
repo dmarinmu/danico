@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DanicoModel1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-  <EntityContainer Name="DanicoAllCon" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Hotels" EntityType="DanicoModel1.Hotel" />
-    <EntitySet Name="Rooms" EntityType="DanicoModel1.Room" />
-    <EntitySet Name="Towns" EntityType="DanicoModel1.Town" />
-    <AssociationSet Name="FK_Hotel_Town" Association="DanicoModel1.FK_Hotel_Town">
+<Schema Namespace="AllModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="AllConection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Hotels" EntityType="AllModel.Hotel1" />
+    <EntitySet Name="Rooms" EntityType="AllModel.Room" />
+    <EntitySet Name="Towns" EntityType="AllModel.Town" />
+    <EntitySet Name="Users" EntityType="AllModel.User" />
+    <AssociationSet Name="FK_Hotel_Town" Association="AllModel.FK_Hotel_Town">
       <End Role="Town" EntitySet="Towns" />
       <End Role="Hotel" EntitySet="Hotels" />
     </AssociationSet>
-    <AssociationSet Name="FK_Room_Hotel" Association="DanicoModel1.FK_Room_Hotel">
+    <AssociationSet Name="FK_Room_Hotel" Association="AllModel.FK_Room_Hotel">
       <End Role="Hotel" EntitySet="Hotels" />
       <End Role="Room" EntitySet="Rooms" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Hotel">
+  <EntityType Name="Hotel1">
     <Key>
       <PropertyRef Name="pk_idHotel" />
     </Key>
@@ -25,8 +26,8 @@
     <Property Name="phone2" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
     <Property Name="email" Type="String" MaxLength="80" Unicode="true" FixedLength="false" />
     <Property Name="fk_idTown" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="Town" Relationship="DanicoModel1.FK_Hotel_Town" FromRole="Hotel" ToRole="Town" />
-    <NavigationProperty Name="Rooms" Relationship="DanicoModel1.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
+    <NavigationProperty Name="Town" Relationship="AllModel.FK_Hotel_Town" FromRole="Hotel" ToRole="Town" />
+    <NavigationProperty Name="Rooms" Relationship="AllModel.FK_Room_Hotel" FromRole="Hotel" ToRole="Room" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -36,7 +37,7 @@
     <Property Name="fk_idHotel" Type="Int64" Nullable="false" />
     <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="description" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
-    <NavigationProperty Name="Hotel" Relationship="DanicoModel1.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
+    <NavigationProperty Name="Hotel" Relationship="AllModel.FK_Room_Hotel" FromRole="Room" ToRole="Hotel" />
   </EntityType>
   <EntityType Name="Town">
     <Key>
@@ -44,11 +45,18 @@
     </Key>
     <Property Name="pk_idTown" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-    <NavigationProperty Name="Hotels" Relationship="DanicoModel1.FK_Hotel_Town" FromRole="Town" ToRole="Hotel" />
+    <NavigationProperty Name="Hotels" Relationship="AllModel.FK_Hotel_Town" FromRole="Town" ToRole="Hotel" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="pk_idUser" />
+    </Key>
+    <Property Name="pk_idUser" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
   </EntityType>
   <Association Name="FK_Hotel_Town">
-    <End Role="Town" Type="DanicoModel1.Town" Multiplicity="1" />
-    <End Role="Hotel" Type="DanicoModel1.Hotel" Multiplicity="*" />
+    <End Role="Town" Type="AllModel.Town" Multiplicity="1" />
+    <End Role="Hotel" Type="AllModel.Hotel1" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Town">
         <PropertyRef Name="pk_idTown" />
@@ -59,8 +67,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Room_Hotel">
-    <End Role="Hotel" Type="DanicoModel1.Hotel" Multiplicity="1" />
-    <End Role="Room" Type="DanicoModel1.Room" Multiplicity="*" />
+    <End Role="Hotel" Type="AllModel.Hotel1" Multiplicity="1" />
+    <End Role="Room" Type="AllModel.Room" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Hotel">
         <PropertyRef Name="pk_idHotel" />

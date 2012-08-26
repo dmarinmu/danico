@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DanicoModel1StoreContainer" CdmEntityContainer="DanicoAllCon">
+  <EntityContainerMapping StorageEntityContainer="AllModelStoreContainer" CdmEntityContainer="AllConection">
     <EntitySetMapping Name="Hotels">
-      <EntityTypeMapping TypeName="DanicoModel1.Hotel">
+      <EntityTypeMapping TypeName="AllModel.Hotel1">
         <MappingFragment StoreEntitySet="Hotel">
           <ScalarProperty Name="pk_idHotel" ColumnName="pk_idHotel" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -16,7 +16,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Rooms">
-      <EntityTypeMapping TypeName="DanicoModel1.Room">
+      <EntityTypeMapping TypeName="AllModel.Room">
         <MappingFragment StoreEntitySet="Room">
           <ScalarProperty Name="pkidHabitacion" ColumnName="pkidHabitacion" />
           <ScalarProperty Name="fk_idHotel" ColumnName="fk_idHotel" />
@@ -26,9 +26,17 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Towns">
-      <EntityTypeMapping TypeName="DanicoModel1.Town">
+      <EntityTypeMapping TypeName="AllModel.Town">
         <MappingFragment StoreEntitySet="Town">
           <ScalarProperty Name="pk_idTown" ColumnName="pk_idTown" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AllModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="pk_idUser" ColumnName="pk_idUser" />
           <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
