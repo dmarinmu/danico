@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DanicoProject.Models.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            name
+        </th>
+        <th>
+            address
+        </th>
+        <th>
+            description
+        </th>
+        <th>
+            phone1
+        </th>
+        <th>
+            phone2
+        </th>
+        <th>
+            email
+        </th>
+        <th>
+            fk_idTown
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fk_idTown)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pk_idHotel }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pk_idHotel }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pk_idHotel })
+        </td>
+    </tr>
+}
+
+</table>

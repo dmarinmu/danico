@@ -1,0 +1,50 @@
+﻿@model DanicoProject.Models.Hotel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Hotel</legend>
+
+    <div class="display-label">name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">address</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.address)
+    </div>
+
+    <div class="display-label">description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">phone1</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.phone1)
+    </div>
+
+    <div class="display-label">phone2</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.phone2)
+    </div>
+
+    <div class="display-label">email</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">fk_idTown</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.fk_idTown)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.pk_idHotel }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

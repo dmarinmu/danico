@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DanicoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-  <EntityContainer Name="DanicoCon" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Hotels" EntityType="DanicoModel.Hotel1" />
+  <EntityContainer Name="conection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Hotel" EntityType="DanicoModel.Hotel" />
   </EntityContainer>
-  <EntityType Name="Hotel1">
+  <EntityType Name="Hotel">
     <Key>
       <PropertyRef Name="pk_idHotel" />
     </Key>

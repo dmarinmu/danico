@@ -26,10 +26,10 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DanicoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="DanicoCon" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Hotels" EntityType="DanicoModel.Hotel1" />
+        <EntityContainer Name="conection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Hotel" EntityType="DanicoModel.Hotel" />
         </EntityContainer>
-        <EntityType Name="Hotel1">
+        <EntityType Name="Hotel">
           <Key>
             <PropertyRef Name="pk_idHotel" />
           </Key>
@@ -47,8 +47,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DanicoModelStoreContainer" CdmEntityContainer="DanicoCon">
-          <EntitySetMapping Name="Hotels"><EntityTypeMapping TypeName="DanicoModel.Hotel1"><MappingFragment StoreEntitySet="Hotel">
+        <EntityContainerMapping StorageEntityContainer="DanicoModelStoreContainer" CdmEntityContainer="conection">
+          <EntitySetMapping Name="Hotel"><EntityTypeMapping TypeName="DanicoModel.Hotel"><MappingFragment StoreEntitySet="Hotel">
             <ScalarProperty Name="pk_idHotel" ColumnName="pk_idHotel" />
             <ScalarProperty Name="name" ColumnName="name" />
             <ScalarProperty Name="address" ColumnName="address" />
@@ -79,7 +79,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Hotel">
-        <EntityTypeShape EntityType="DanicoModel.Hotel1" Width="1.5" PointX="0.75" PointY="0.75" Height="2.2496956380208331" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Hotel" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083335" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>

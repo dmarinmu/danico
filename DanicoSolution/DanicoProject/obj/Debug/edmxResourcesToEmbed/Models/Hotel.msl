@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DanicoModelStoreContainer" CdmEntityContainer="DanicoCon">
-    <EntitySetMapping Name="Hotels">
-      <EntityTypeMapping TypeName="DanicoModel.Hotel1">
+  <EntityContainerMapping StorageEntityContainer="DanicoModelStoreContainer" CdmEntityContainer="conection">
+    <EntitySetMapping Name="Hotel">
+      <EntityTypeMapping TypeName="DanicoModel.Hotel">
         <MappingFragment StoreEntitySet="Hotel">
           <ScalarProperty Name="pk_idHotel" ColumnName="pk_idHotel" />
           <ScalarProperty Name="name" ColumnName="name" />

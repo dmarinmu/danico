@@ -18,9 +18,9 @@ namespace DanicoProject.Controllers
             ViewBag.townFilter = address;
             
             List<Models.Hotel> hotelList = new System.Collections.Generic.List<Models.Hotel>();
-            using (DanicoProject.Models.DanicoAllCon tmp = new Models.DanicoAllCon())
+            using (DanicoProject.Models.conection tmp = new Models.conection())
             {
-                 hotelList= tmp.Hotels.Select(a =>  a).ToList();
+                 hotelList= tmp.Hotel .Select(a =>  a).ToList();
                  if (!String.IsNullOrEmpty(address))
                  {
                      hotelList = hotelList.Where(s => s.fk_idTown.ToString().Equals(address)).ToList();
@@ -34,9 +34,9 @@ namespace DanicoProject.Controllers
         public ActionResult AutocompleteAsync(string term)
         {
             List<string> townList = new System.Collections.Generic.List<string>();
-            using (DanicoProject.Models.DanicoAllCon tmp = new Models.DanicoAllCon())
+            using (DanicoProject.Models.conection tmp = new Models.conection())
             {
-                townList = (from a  in tmp.Towns  where a.name.StartsWith(term) select a.name).Take(4).ToList();
+                //townList = (from a  in tmp.Towns  where a.name.StartsWith(term) select a.name).Take(4).ToList();
                    
             }
             return Json( townList, JsonRequestBehavior.AllowGet);
