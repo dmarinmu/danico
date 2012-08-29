@@ -18,9 +18,9 @@ namespace DanicoProject.Controllers
             ViewBag.townFilter = address;
             
             List<Models.Hotel> hotelList = new System.Collections.Generic.List<Models.Hotel>();
-            using (DanicoProject.Models.conection tmp = new Models.conection())
+            using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
             {
-                 hotelList= tmp.Hotel .Select(a =>  a).ToList();
+                 hotelList= tmp.Hotels.Select(a =>  a).ToList();
                  if (!String.IsNullOrEmpty(address))
                  {
                      hotelList = hotelList.Where(s => s.fk_idTown.ToString().Equals(address)).ToList();

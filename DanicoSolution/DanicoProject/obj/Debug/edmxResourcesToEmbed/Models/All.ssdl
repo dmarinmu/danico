@@ -2,16 +2,87 @@
 <Schema Namespace="AllModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="AllModelStoreContainer">
     <EntitySet Name="Hotel" EntityType="AllModel.Store.Hotel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HotelService" EntityType="AllModel.Store.HotelService" store:Type="Tables" store:Schema="dbo" store:Name="HotelService">
+      <DefiningQuery>SELECT 
+      [HotelService].[idHotel] AS [idHotel], 
+      [HotelService].[idService] AS [idService], 
+      [HotelService].[price] AS [price], 
+      [HotelService].[description] AS [description], 
+      [HotelService].[imagesDirectory] AS [imagesDirectory], 
+      [HotelService].[coverImage0] AS [coverImage0], 
+      [HotelService].[coverImage1] AS [coverImage1], 
+      [HotelService].[coverImage2] AS [coverImage2], 
+      [HotelService].[idRoom] AS [idRoom]
+      FROM [dbo].[HotelService] AS [HotelService]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Room" EntityType="AllModel.Store.Room" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Service" EntityType="AllModel.Store.Service" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Town" EntityType="AllModel.Store.Town" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="User" EntityType="AllModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TripType" EntityType="AllModel.Store.TripType" store:Type="Tables" store:Schema="dbo" store:Name="TripType">
+      <DefiningQuery>SELECT 
+      [TripType].[idHotel] AS [idHotel], 
+      [TripType].[family] AS [family], 
+      [TripType].[couple] AS [couple], 
+      [TripType].[friends] AS [friends], 
+      [TripType].[lonely] AS [lonely], 
+      [TripType].[groups] AS [groups], 
+      [TripType].[transit] AS [transit], 
+      [TripType].[business] AS [business]
+      FROM [dbo].[TripType] AS [TripType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vHotel" EntityType="AllModel.Store.vHotel" store:Type="Views" store:Schema="dbo" store:Name="vHotel">
+      <DefiningQuery>SELECT 
+      [vHotel].[Hpk_idHotel] AS [Hpk_idHotel], 
+      [vHotel].[Hname] AS [Hname], 
+      [vHotel].[Haddress] AS [Haddress], 
+      [vHotel].[Hdescription] AS [Hdescription], 
+      [vHotel].[Hphone1] AS [Hphone1], 
+      [vHotel].[Hphone2] AS [Hphone2], 
+      [vHotel].[Hemail] AS [Hemail], 
+      [vHotel].[Hfk_idTown] AS [Hfk_idTown], 
+      [vHotel].[HimagesDirectory] AS [HimagesDirectory], 
+      [vHotel].[HcoverImage] AS [HcoverImage], 
+      [vHotel].[HSidHotel] AS [HSidHotel], 
+      [vHotel].[HSidService] AS [HSidService], 
+      [vHotel].[HSprice] AS [HSprice], 
+      [vHotel].[HSdescription] AS [HSdescription], 
+      [vHotel].[HSimagesDirectory] AS [HSimagesDirectory], 
+      [vHotel].[HScoverImage0] AS [HScoverImage0], 
+      [vHotel].[HScoverImage1] AS [HScoverImage1], 
+      [vHotel].[HScoverImage2] AS [HScoverImage2], 
+      [vHotel].[HSidRoom] AS [HSidRoom], 
+      [vHotel].[Sname] AS [Sname], 
+      [vHotel].[Stype] AS [Stype], 
+      [vHotel].[Spk_idService] AS [Spk_idService], 
+      [vHotel].[RpkidHabitacion] AS [RpkidHabitacion], 
+      [vHotel].[Rfk_idHotel] AS [Rfk_idHotel], 
+      [vHotel].[Rprice] AS [Rprice], 
+      [vHotel].[Rdescription] AS [Rdescription]
+      FROM [dbo].[vHotel] AS [vHotel]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_Hotel_Town" Association="AllModel.Store.FK_Hotel_Town">
       <End Role="Town" EntitySet="Town" />
       <End Role="Hotel" EntitySet="Hotel" />
     </AssociationSet>
+    <AssociationSet Name="FK_HotelService_Hotel" Association="AllModel.Store.FK_HotelService_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelService" EntitySet="HotelService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelService_Room" Association="AllModel.Store.FK_HotelService_Room">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="HotelService" EntitySet="HotelService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelService_Service" Association="AllModel.Store.FK_HotelService_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="HotelService" EntitySet="HotelService" />
+    </AssociationSet>
     <AssociationSet Name="FK_Room_Hotel" Association="AllModel.Store.FK_Room_Hotel">
       <End Role="Hotel" EntitySet="Hotel" />
       <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TripType_Hotel" Association="AllModel.Store.FK_TripType_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="TripType" EntitySet="TripType" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Hotel">
@@ -26,6 +97,28 @@
     <Property Name="phone2" Type="varchar" MaxLength="14" />
     <Property Name="email" Type="nvarchar" MaxLength="80" />
     <Property Name="fk_idTown" Type="bigint" Nullable="false" />
+    <Property Name="imagesDirectory" Type="varchar" MaxLength="100" />
+    <Property Name="coverImage" Type="varchar" MaxLength="100" />
+    <Property Name="stars" Type="char" MaxLength="1" />
+    <Property Name="state" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.HotelService' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="HotelService">
+    <Key>
+      <PropertyRef Name="idHotel" />
+      <PropertyRef Name="idService" />
+    </Key>
+    <Property Name="idHotel" Type="bigint" Nullable="false" />
+    <Property Name="idService" Type="bigint" Nullable="false" />
+    <Property Name="price" Type="float" />
+    <Property Name="description" Type="varchar" MaxLength="200" />
+    <Property Name="imagesDirectory" Type="varchar" MaxLength="100" />
+    <Property Name="coverImage0" Type="varchar" MaxLength="100" />
+    <Property Name="coverImage1" Type="nchar" MaxLength="10" />
+    <Property Name="coverImage2" Type="nchar" MaxLength="10" />
+    <Property Name="idRoom" Type="bigint" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -35,6 +128,15 @@
     <Property Name="fk_idHotel" Type="bigint" Nullable="false" />
     <Property Name="price" Type="decimal" />
     <Property Name="description" Type="varchar" MaxLength="300" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="pk_idService" />
+    </Key>
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="type" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="pk_idService" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Town">
     <Key>
@@ -43,12 +145,66 @@
     <Property Name="pk_idTown" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
-  <EntityType Name="User">
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.TripType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="TripType">
     <Key>
-      <PropertyRef Name="pk_idUser" />
+      <PropertyRef Name="idHotel" />
+      <PropertyRef Name="family" />
+      <PropertyRef Name="couple" />
+      <PropertyRef Name="friends" />
+      <PropertyRef Name="lonely" />
+      <PropertyRef Name="groups" />
+      <PropertyRef Name="transit" />
+      <PropertyRef Name="business" />
     </Key>
-    <Property Name="pk_idUser" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="idHotel" Type="bigint" Nullable="false" />
+    <Property Name="family" Type="bit" Nullable="false" />
+    <Property Name="couple" Type="bit" Nullable="false" />
+    <Property Name="friends" Type="bit" Nullable="false" />
+    <Property Name="lonely" Type="bit" Nullable="false" />
+    <Property Name="groups" Type="bit" Nullable="false" />
+    <Property Name="transit" Type="bit" Nullable="false" />
+    <Property Name="business" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.vHotel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vHotel">
+    <Key>
+      <PropertyRef Name="Hpk_idHotel" />
+      <PropertyRef Name="Hname" />
+      <PropertyRef Name="Haddress" />
+      <PropertyRef Name="Hdescription" />
+      <PropertyRef Name="Hfk_idTown" />
+    </Key>
+    <Property Name="Hpk_idHotel" Type="bigint" Nullable="false" />
+    <Property Name="Hname" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Haddress" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Hdescription" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Hphone1" Type="varchar" MaxLength="14" />
+    <Property Name="Hphone2" Type="varchar" MaxLength="14" />
+    <Property Name="Hemail" Type="nvarchar" MaxLength="80" />
+    <Property Name="Hfk_idTown" Type="bigint" Nullable="false" />
+    <Property Name="HimagesDirectory" Type="varchar" MaxLength="100" />
+    <Property Name="HcoverImage" Type="varchar" MaxLength="100" />
+    <Property Name="HSidHotel" Type="bigint" />
+    <Property Name="HSidService" Type="bigint" />
+    <Property Name="HSprice" Type="float" />
+    <Property Name="HSdescription" Type="varchar" MaxLength="200" />
+    <Property Name="HSimagesDirectory" Type="varchar" MaxLength="100" />
+    <Property Name="HScoverImage0" Type="varchar" MaxLength="100" />
+    <Property Name="HScoverImage1" Type="nchar" MaxLength="10" />
+    <Property Name="HScoverImage2" Type="nchar" MaxLength="10" />
+    <Property Name="HSidRoom" Type="bigint" />
+    <Property Name="Sname" Type="varchar" MaxLength="100" />
+    <Property Name="Stype" Type="char" MaxLength="1" />
+    <Property Name="Spk_idService" Type="bigint" />
+    <Property Name="RpkidHabitacion" Type="bigint" />
+    <Property Name="Rfk_idHotel" Type="bigint" />
+    <Property Name="Rprice" Type="decimal" />
+    <Property Name="Rdescription" Type="varchar" MaxLength="300" />
   </EntityType>
   <Association Name="FK_Hotel_Town">
     <End Role="Town" Type="AllModel.Store.Town" Multiplicity="1" />
@@ -62,6 +218,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HotelService_Hotel">
+    <End Role="Hotel" Type="AllModel.Store.Hotel" Multiplicity="1" />
+    <End Role="HotelService" Type="AllModel.Store.HotelService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="pk_idHotel" />
+      </Principal>
+      <Dependent Role="HotelService">
+        <PropertyRef Name="idHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelService_Room">
+    <End Role="Room" Type="AllModel.Store.Room" Multiplicity="0..1" />
+    <End Role="HotelService" Type="AllModel.Store.HotelService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="pkidHabitacion" />
+      </Principal>
+      <Dependent Role="HotelService">
+        <PropertyRef Name="idRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelService_Service">
+    <End Role="Service" Type="AllModel.Store.Service" Multiplicity="1" />
+    <End Role="HotelService" Type="AllModel.Store.HotelService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="pk_idService" />
+      </Principal>
+      <Dependent Role="HotelService">
+        <PropertyRef Name="idService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Room_Hotel">
     <End Role="Hotel" Type="AllModel.Store.Hotel" Multiplicity="1" />
     <End Role="Room" Type="AllModel.Store.Room" Multiplicity="*" />
@@ -71,6 +263,18 @@
       </Principal>
       <Dependent Role="Room">
         <PropertyRef Name="fk_idHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TripType_Hotel">
+    <End Role="Hotel" Type="AllModel.Store.Hotel" Multiplicity="1" />
+    <End Role="TripType" Type="AllModel.Store.TripType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="pk_idHotel" />
+      </Principal>
+      <Dependent Role="TripType">
+        <PropertyRef Name="idHotel" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

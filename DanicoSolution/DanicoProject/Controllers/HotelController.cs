@@ -11,14 +11,14 @@ namespace DanicoProject.Controllers
 { 
     public class HotelController : Controller
     {
-        private conection db = new conection();
+        private AllConection db = new AllConection();
 
         //
         // GET: /Hotel/
 
         public ViewResult Index()
         {
-            return View(db.Hotel.ToList());
+            return View(db.vHotels.ToList());
         }
 
         //
@@ -26,8 +26,8 @@ namespace DanicoProject.Controllers
 
         public ViewResult Details(long id)
         {
-            Hotel hotel = db.Hotel.Single(h => h.pk_idHotel == id);
-            return View(hotel);
+            vHotel vhotel = db.vHotels.Single(v => v.Hpk_idHotel == id);
+            return View(vhotel);
         }
 
         //
@@ -42,16 +42,16 @@ namespace DanicoProject.Controllers
         // POST: /Hotel/Create
 
         [HttpPost]
-        public ActionResult Create(Hotel hotel)
+        public ActionResult Create(vHotel vhotel)
         {
             if (ModelState.IsValid)
             {
-                db.Hotel.AddObject(hotel);
+                db.vHotels.AddObject(vhotel);
                 db.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
-            return View(hotel);
+            return View(vhotel);
         }
         
         //
@@ -59,24 +59,24 @@ namespace DanicoProject.Controllers
  
         public ActionResult Edit(long id)
         {
-            Hotel hotel = db.Hotel.Single(h => h.pk_idHotel == id);
-            return View(hotel);
+            vHotel vhotel = db.vHotels.Single(v => v.Hpk_idHotel == id);
+            return View(vhotel);
         }
 
         //
         // POST: /Hotel/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Hotel hotel)
+        public ActionResult Edit(vHotel vhotel)
         {
             if (ModelState.IsValid)
             {
-                db.Hotel.Attach(hotel);
-                db.ObjectStateManager.ChangeObjectState(hotel, EntityState.Modified);
+                db.vHotels.Attach(vhotel);
+                db.ObjectStateManager.ChangeObjectState(vhotel, EntityState.Modified);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hotel);
+            return View(vhotel);
         }
 
         //
@@ -84,8 +84,8 @@ namespace DanicoProject.Controllers
  
         public ActionResult Delete(long id)
         {
-            Hotel hotel = db.Hotel.Single(h => h.pk_idHotel == id);
-            return View(hotel);
+            vHotel vhotel = db.vHotels.Single(v => v.Hpk_idHotel == id);
+            return View(vhotel);
         }
 
         //
@@ -94,8 +94,8 @@ namespace DanicoProject.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(long id)
         {            
-            Hotel hotel = db.Hotel.Single(h => h.pk_idHotel == id);
-            db.Hotel.DeleteObject(hotel);
+            vHotel vhotel = db.vHotels.Single(v => v.Hpk_idHotel == id);
+            db.vHotels.DeleteObject(vhotel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

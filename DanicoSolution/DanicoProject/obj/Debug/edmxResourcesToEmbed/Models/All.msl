@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="AllModelStoreContainer" CdmEntityContainer="AllConection">
     <EntitySetMapping Name="Hotels">
-      <EntityTypeMapping TypeName="AllModel.Hotel1">
+      <EntityTypeMapping TypeName="AllModel.Hotel">
         <MappingFragment StoreEntitySet="Hotel">
           <ScalarProperty Name="pk_idHotel" ColumnName="pk_idHotel" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -12,6 +12,25 @@
           <ScalarProperty Name="phone2" ColumnName="phone2" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="fk_idTown" ColumnName="fk_idTown" />
+          <ScalarProperty Name="imagesDirectory" ColumnName="imagesDirectory" />
+          <ScalarProperty Name="coverImage" ColumnName="coverImage" />
+          <ScalarProperty Name="stars" ColumnName="stars" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelServices">
+      <EntityTypeMapping TypeName="AllModel.HotelService">
+        <MappingFragment StoreEntitySet="HotelService">
+          <ScalarProperty Name="idHotel" ColumnName="idHotel" />
+          <ScalarProperty Name="idService" ColumnName="idService" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="imagesDirectory" ColumnName="imagesDirectory" />
+          <ScalarProperty Name="coverImage0" ColumnName="coverImage0" />
+          <ScalarProperty Name="coverImage1" ColumnName="coverImage1" />
+          <ScalarProperty Name="coverImage2" ColumnName="coverImage2" />
+          <ScalarProperty Name="idRoom" ColumnName="idRoom" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -22,6 +41,16 @@
           <ScalarProperty Name="fk_idHotel" ColumnName="fk_idHotel" />
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="AllModel.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="pk_idService" ColumnName="pk_idService" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -33,11 +62,49 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="AllModel.User">
-        <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="pk_idUser" ColumnName="pk_idUser" />
-          <ScalarProperty Name="name" ColumnName="name" />
+    <EntitySetMapping Name="TripTypes">
+      <EntityTypeMapping TypeName="AllModel.TripType">
+        <MappingFragment StoreEntitySet="TripType">
+          <ScalarProperty Name="idHotel" ColumnName="idHotel" />
+          <ScalarProperty Name="family" ColumnName="family" />
+          <ScalarProperty Name="couple" ColumnName="couple" />
+          <ScalarProperty Name="friends" ColumnName="friends" />
+          <ScalarProperty Name="lonely" ColumnName="lonely" />
+          <ScalarProperty Name="groups" ColumnName="groups" />
+          <ScalarProperty Name="transit" ColumnName="transit" />
+          <ScalarProperty Name="business" ColumnName="business" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vHotels">
+      <EntityTypeMapping TypeName="AllModel.vHotel">
+        <MappingFragment StoreEntitySet="vHotel">
+          <ScalarProperty Name="Hpk_idHotel" ColumnName="Hpk_idHotel" />
+          <ScalarProperty Name="Hname" ColumnName="Hname" />
+          <ScalarProperty Name="Haddress" ColumnName="Haddress" />
+          <ScalarProperty Name="Hdescription" ColumnName="Hdescription" />
+          <ScalarProperty Name="Hphone1" ColumnName="Hphone1" />
+          <ScalarProperty Name="Hphone2" ColumnName="Hphone2" />
+          <ScalarProperty Name="Hemail" ColumnName="Hemail" />
+          <ScalarProperty Name="Hfk_idTown" ColumnName="Hfk_idTown" />
+          <ScalarProperty Name="HimagesDirectory" ColumnName="HimagesDirectory" />
+          <ScalarProperty Name="HcoverImage" ColumnName="HcoverImage" />
+          <ScalarProperty Name="HSidHotel" ColumnName="HSidHotel" />
+          <ScalarProperty Name="HSidService" ColumnName="HSidService" />
+          <ScalarProperty Name="HSprice" ColumnName="HSprice" />
+          <ScalarProperty Name="HSdescription" ColumnName="HSdescription" />
+          <ScalarProperty Name="HSimagesDirectory" ColumnName="HSimagesDirectory" />
+          <ScalarProperty Name="HScoverImage0" ColumnName="HScoverImage0" />
+          <ScalarProperty Name="HScoverImage1" ColumnName="HScoverImage1" />
+          <ScalarProperty Name="HScoverImage2" ColumnName="HScoverImage2" />
+          <ScalarProperty Name="HSidRoom" ColumnName="HSidRoom" />
+          <ScalarProperty Name="Sname" ColumnName="Sname" />
+          <ScalarProperty Name="Stype" ColumnName="Stype" />
+          <ScalarProperty Name="Spk_idService" ColumnName="Spk_idService" />
+          <ScalarProperty Name="RpkidHabitacion" ColumnName="RpkidHabitacion" />
+          <ScalarProperty Name="Rfk_idHotel" ColumnName="Rfk_idHotel" />
+          <ScalarProperty Name="Rprice" ColumnName="Rprice" />
+          <ScalarProperty Name="Rdescription" ColumnName="Rdescription" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

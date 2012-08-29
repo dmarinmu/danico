@@ -1,4 +1,4 @@
-﻿@model DanicoProject.Models.Hotel
+﻿@model DanicoProject.Models.vHotel
 
 @{
     ViewBag.Title = "Edit";
@@ -12,64 +12,184 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Hotel</legend>
+        <legend>vHotel</legend>
 
-        @Html.HiddenFor(model => model.pk_idHotel)
+        @Html.HiddenFor(model => model.Hpk_idHotel)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.name)
-            @Html.ValidationMessageFor(model => model.name)
-        </div>
+        @Html.HiddenFor(model => model.Hname)
+
+        @Html.HiddenFor(model => model.Haddress)
+
+        @Html.HiddenFor(model => model.Hdescription)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.address)
+            @Html.LabelFor(model => model.Hphone1)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.address)
-            @Html.ValidationMessageFor(model => model.address)
+            @Html.EditorFor(model => model.Hphone1)
+            @Html.ValidationMessageFor(model => model.Hphone1)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.description)
+            @Html.LabelFor(model => model.Hphone2)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.description)
-            @Html.ValidationMessageFor(model => model.description)
+            @Html.EditorFor(model => model.Hphone2)
+            @Html.ValidationMessageFor(model => model.Hphone2)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.phone1)
+            @Html.LabelFor(model => model.Hemail)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.phone1)
-            @Html.ValidationMessageFor(model => model.phone1)
+            @Html.EditorFor(model => model.Hemail)
+            @Html.ValidationMessageFor(model => model.Hemail)
+        </div>
+
+        @Html.HiddenFor(model => model.Hfk_idTown)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HimagesDirectory)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HimagesDirectory)
+            @Html.ValidationMessageFor(model => model.HimagesDirectory)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.phone2)
+            @Html.LabelFor(model => model.HcoverImage)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.phone2)
-            @Html.ValidationMessageFor(model => model.phone2)
+            @Html.EditorFor(model => model.HcoverImage)
+            @Html.ValidationMessageFor(model => model.HcoverImage)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.email)
+            @Html.LabelFor(model => model.HSidHotel)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.email)
-            @Html.ValidationMessageFor(model => model.email)
+            @Html.EditorFor(model => model.HSidHotel)
+            @Html.ValidationMessageFor(model => model.HSidHotel)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.fk_idTown)
+            @Html.LabelFor(model => model.HSidService)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.fk_idTown)
-            @Html.ValidationMessageFor(model => model.fk_idTown)
+            @Html.EditorFor(model => model.HSidService)
+            @Html.ValidationMessageFor(model => model.HSidService)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HSprice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HSprice)
+            @Html.ValidationMessageFor(model => model.HSprice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HSdescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HSdescription)
+            @Html.ValidationMessageFor(model => model.HSdescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HSimagesDirectory)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HSimagesDirectory)
+            @Html.ValidationMessageFor(model => model.HSimagesDirectory)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HScoverImage0)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HScoverImage0)
+            @Html.ValidationMessageFor(model => model.HScoverImage0)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HScoverImage1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HScoverImage1)
+            @Html.ValidationMessageFor(model => model.HScoverImage1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HScoverImage2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HScoverImage2)
+            @Html.ValidationMessageFor(model => model.HScoverImage2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HSidRoom)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HSidRoom)
+            @Html.ValidationMessageFor(model => model.HSidRoom)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sname)
+            @Html.ValidationMessageFor(model => model.Sname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stype)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Stype)
+            @Html.ValidationMessageFor(model => model.Stype)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Spk_idService)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Spk_idService)
+            @Html.ValidationMessageFor(model => model.Spk_idService)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RpkidHabitacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RpkidHabitacion)
+            @Html.ValidationMessageFor(model => model.RpkidHabitacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rfk_idHotel)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rfk_idHotel)
+            @Html.ValidationMessageFor(model => model.Rfk_idHotel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rprice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rprice)
+            @Html.ValidationMessageFor(model => model.Rprice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rdescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rdescription)
+            @Html.ValidationMessageFor(model => model.Rdescription)
         </div>
 
         <p>
