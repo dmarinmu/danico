@@ -78,11 +78,70 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\cssTheme\camera.css" />
+    <Content Include="Content\css\cssTheme\fonts\brushscriptstd-webfont.svg" />
+    <Content Include="Content\css\cssTheme\fonts\optima-webfont.svg" />
+    <Content Include="Content\css\cssTheme\layout.css" />
+    <Content Include="Content\css\cssTheme\prettyPhoto.css" />
+    <Content Include="Content\css\cssTheme\reset.css" />
+    <Content Include="Content\css\cssTheme\skeleton.css" />
+    <Content Include="Content\css\cssTheme\slider.css" />
+    <Content Include="Content\css\cssTheme\style.css" />
     <Content Include="Content\css\example.css" />
     <Content Include="Content\css\mosaic.css" />
+    <Content Include="Content\images\danico\aside-bg.gif" />
     <Content Include="Content\images\danico\bg-black.png" />
+    <Content Include="Content\images\danico\body-bg.gif" />
+    <Content Include="Content\images\danico\divider.gif" />
+    <Content Include="Content\images\danico\footer-bg.gif" />
+    <Content Include="Content\images\danico\full-sizes\page3-img1-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img10-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img2-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img3-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img4-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img5-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img6-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img7-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img8-full.jpg" />
+    <Content Include="Content\images\danico\full-sizes\page3-img9-full.jpg" />
+    <Content Include="Content\images\danico\link-bg.gif" />
+    <Content Include="Content\images\danico\marker.png" />
+    <Content Include="Content\images\danico\nal-li-bg.gif" />
+    <Content Include="Content\images\danico\nav-a-left.png" />
+    <Content Include="Content\images\danico\nav-a-right.png" />
+    <Content Include="Content\images\danico\nav-a-tail.png" />
+    <Content Include="Content\images\danico\next-slide.gif" />
+    <Content Include="Content\images\danico\page1-img1.jpg" />
+    <Content Include="Content\images\danico\page1-img2.jpg" />
+    <Content Include="Content\images\danico\page1-img3.jpg" />
+    <Content Include="Content\images\danico\page2-img0.jpg" />
+    <Content Include="Content\images\danico\page2-img1.jpg" />
+    <Content Include="Content\images\danico\page3-img1.jpg" />
+    <Content Include="Content\images\danico\page3-img10.jpg" />
+    <Content Include="Content\images\danico\page3-img2.jpg" />
+    <Content Include="Content\images\danico\page3-img3.jpg" />
+    <Content Include="Content\images\danico\page3-img4.jpg" />
+    <Content Include="Content\images\danico\page3-img5.jpg" />
+    <Content Include="Content\images\danico\page3-img6.jpg" />
+    <Content Include="Content\images\danico\page3-img7.jpg" />
+    <Content Include="Content\images\danico\page3-img8.jpg" />
+    <Content Include="Content\images\danico\page3-img9.jpg" />
+    <Content Include="Content\images\danico\page4-img1.jpg" />
+    <Content Include="Content\images\danico\page4-img2.jpg" />
+    <Content Include="Content\images\danico\page4-img3.jpg" />
+    <Content Include="Content\images\danico\page4-img4.jpg" />
+    <Content Include="Content\images\danico\PhotosToGoUnlimited-1026661.jpg" />
+    <Content Include="Content\images\danico\preload_img.gif" />
+    <Content Include="Content\images\danico\preload_img.png" />
+    <Content Include="Content\images\danico\prev-slide.gif" />
     <Content Include="Content\images\danico\progress.gif" />
     <Content Include="Content\css\jquery-ui.css" />
+    <Content Include="Content\images\danico\slide1.jpg" />
+    <Content Include="Content\images\danico\slide2.jpg" />
+    <Content Include="Content\images\danico\slide3.jpg" />
+    <Content Include="Content\images\danico\spacer.gif" />
+    <Content Include="Content\images\danico\stard.png" />
+    <Content Include="Content\images\danico\submit-bt.png" />
     <Content Include="Content\images\Hotels\1.jpg" />
     <Content Include="Content\images\Hotels\10.jpg" />
     <Content Include="Content\images\Hotels\11.jpg" />
@@ -103,6 +162,17 @@
     <Content Include="Content\images\Hotels\7.jpg" />
     <Content Include="Content\images\Hotels\8.jpg" />
     <Content Include="Content\images\Hotels\9.jpg" />
+    <Content Include="Content\jQuery\jsTheme\camera.js" />
+    <Content Include="Content\jQuery\jsTheme\excanvas.js" />
+    <Content Include="Content\jQuery\jsTheme\greyScale.js" />
+    <Content Include="Content\jQuery\jsTheme\imagepreloader.js" />
+    <Content Include="Content\jQuery\jsTheme\jflickrfeed.js" />
+    <Content Include="Content\jQuery\jsTheme\jquery.easing.1.3.js" />
+    <Content Include="Content\jQuery\jsTheme\jquery.mobile.customized.min.js" />
+    <Content Include="Content\jQuery\jsTheme\jquery.preloader.js" />
+    <Content Include="Content\jQuery\jsTheme\jquery.prettyPhoto.js" />
+    <Content Include="Content\jQuery\jsTheme\respond.src.js" />
+    <Content Include="Content\jQuery\jsTheme\script.js" />
     <Content Include="Content\jQuery\mosaic.1.0.1.js" />
     <Content Include="Content\jQuery\mosaic.1.0.1.min.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -197,6 +267,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Hotel\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\css\cssTheme\fonts\brushscriptstd-webfont.eot" />
+    <None Include="Content\css\cssTheme\fonts\brushscriptstd-webfont.ttf" />
+    <None Include="Content\css\cssTheme\fonts\brushscriptstd-webfont.woff" />
+    <None Include="Content\css\cssTheme\fonts\optima-webfont.eot" />
+    <None Include="Content\css\cssTheme\fonts\optima-webfont.ttf" />
+    <None Include="Content\css\cssTheme\fonts\optima-webfont.woff" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
