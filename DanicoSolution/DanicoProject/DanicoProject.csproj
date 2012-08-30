@@ -91,8 +91,11 @@
     <Content Include="Content\css\mosaic.css" />
     <Content Include="Content\css\searchBox.css" />
     <Content Include="Content\images\danico\aside-bg.gif" />
+    <Content Include="Content\images\danico\bano.png" />
     <Content Include="Content\images\danico\bg-black.png" />
     <Content Include="Content\images\danico\body-bg.gif" />
+    <Content Include="Content\images\danico\caja.png" />
+    <Content Include="Content\images\danico\comida2.png" />
     <Content Include="Content\images\danico\divider.gif" />
     <Content Include="Content\images\danico\footer-bg.gif" />
     <Content Include="Content\images\danico\full-sizes\page3-img1-full.jpg" />
@@ -105,6 +108,8 @@
     <Content Include="Content\images\danico\full-sizes\page3-img7-full.jpg" />
     <Content Include="Content\images\danico\full-sizes\page3-img8-full.jpg" />
     <Content Include="Content\images\danico\full-sizes\page3-img9-full.jpg" />
+    <Content Include="Content\images\danico\internet.png" />
+    <Content Include="Content\images\danico\lavanderia.png" />
     <Content Include="Content\images\danico\link-bg.gif" />
     <Content Include="Content\images\danico\marker.png" />
     <Content Include="Content\images\danico\nal-li-bg.gif" />
@@ -131,6 +136,7 @@
     <Content Include="Content\images\danico\page4-img2.jpg" />
     <Content Include="Content\images\danico\page4-img3.jpg" />
     <Content Include="Content\images\danico\page4-img4.jpg" />
+    <Content Include="Content\images\danico\parqueo.png" />
     <Content Include="Content\images\danico\PhotosToGoUnlimited-1026661.jpg" />
     <Content Include="Content\images\danico\preload_img.gif" />
     <Content Include="Content\images\danico\preload_img.png" />
@@ -143,6 +149,7 @@
     <Content Include="Content\images\danico\spacer.gif" />
     <Content Include="Content\images\danico\stard.png" />
     <Content Include="Content\images\danico\submit-bt.png" />
+    <Content Include="Content\images\danico\tarjetas.png" />
     <Content Include="Content\images\Hotels\1.jpg" />
     <Content Include="Content\images\Hotels\10.jpg" />
     <Content Include="Content\images\Hotels\11.jpg" />
@@ -163,6 +170,10 @@
     <Content Include="Content\images\Hotels\7.jpg" />
     <Content Include="Content\images\Hotels\8.jpg" />
     <Content Include="Content\images\Hotels\9.jpg" />
+    <Content Include="Content\images\Hotels\hotel14\fullSize\page3-img1-full.jpg" />
+    <Content Include="Content\images\Hotels\hotel14\page3-img1.jpg" />
+    <Content Include="Content\images\Hotels\hotel14\page3-img4.jpg" />
+    <Content Include="Content\images\Hotels\hotel14\page3-img5.jpg" />
     <Content Include="Content\jQuery\jsTheme\camera.js" />
     <Content Include="Content\jQuery\jsTheme\excanvas.js" />
     <Content Include="Content\jQuery\jsTheme\greyScale.js" />
@@ -234,7 +245,9 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

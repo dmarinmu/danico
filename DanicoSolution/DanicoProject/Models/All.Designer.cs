@@ -1830,7 +1830,8 @@ namespace DanicoProject.Models
         /// <param name="haddress">Initial value of the Haddress property.</param>
         /// <param name="hdescription">Initial value of the Hdescription property.</param>
         /// <param name="hfk_idTown">Initial value of the Hfk_idTown property.</param>
-        public static vHotel CreatevHotel(global::System.Int64 hpk_idHotel, global::System.String hname, global::System.String haddress, global::System.String hdescription, global::System.Int64 hfk_idTown)
+        /// <param name="hstate">Initial value of the Hstate property.</param>
+        public static vHotel CreatevHotel(global::System.Int64 hpk_idHotel, global::System.String hname, global::System.String haddress, global::System.String hdescription, global::System.Int64 hfk_idTown, global::System.Boolean hstate)
         {
             vHotel vHotel = new vHotel();
             vHotel.Hpk_idHotel = hpk_idHotel;
@@ -1838,6 +1839,7 @@ namespace DanicoProject.Models
             vHotel.Haddress = haddress;
             vHotel.Hdescription = hdescription;
             vHotel.Hfk_idTown = hfk_idTown;
+            vHotel.Hstate = hstate;
             return vHotel;
         }
 
@@ -2482,6 +2484,57 @@ namespace DanicoProject.Models
         private global::System.String _Rdescription;
         partial void OnRdescriptionChanging(global::System.String value);
         partial void OnRdescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Hstars
+        {
+            get
+            {
+                return _Hstars;
+            }
+            set
+            {
+                OnHstarsChanging(value);
+                ReportPropertyChanging("Hstars");
+                _Hstars = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hstars");
+                OnHstarsChanged();
+            }
+        }
+        private global::System.String _Hstars;
+        partial void OnHstarsChanging(global::System.String value);
+        partial void OnHstarsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Hstate
+        {
+            get
+            {
+                return _Hstate;
+            }
+            set
+            {
+                if (_Hstate != value)
+                {
+                    OnHstateChanging(value);
+                    ReportPropertyChanging("Hstate");
+                    _Hstate = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Hstate");
+                    OnHstateChanged();
+                }
+            }
+        }
+        private global::System.Boolean _Hstate;
+        partial void OnHstateChanging(global::System.Boolean value);
+        partial void OnHstateChanged();
 
         #endregion
     

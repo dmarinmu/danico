@@ -79,6 +79,8 @@
     <EntitySetMapping Name="vHotels">
       <EntityTypeMapping TypeName="AllModel.vHotel">
         <MappingFragment StoreEntitySet="vHotel">
+          <ScalarProperty Name="Hstate" ColumnName="Hstate" />
+          <ScalarProperty Name="Hstars" ColumnName="Hstars" />
           <ScalarProperty Name="Hpk_idHotel" ColumnName="Hpk_idHotel" />
           <ScalarProperty Name="Hname" ColumnName="Hname" />
           <ScalarProperty Name="Haddress" ColumnName="Haddress" />

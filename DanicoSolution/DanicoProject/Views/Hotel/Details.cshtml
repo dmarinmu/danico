@@ -12,13 +12,49 @@
 	<div id="content">
     	<div class="container">
         	<div class="sixteen columns page-title">
-            	<h3>Nombre del Hotel</h3>
+            	<h3>@Html.DisplayFor(model => model.Hname)</h3>
                 <div class="wrapper">   
-                    <input type="radio" name="radiobutton" id="star-1"/><label for="star-1" ></label>
+                    
+                    @if ( Int32.Parse(@Model.Hstars) == 5)
+                    {
+                        <input type="radio" name="radiobutton" id="star-1"/><label for="star-1" class="starred"></label>
+                        <input type="radio" name="radiobutton" id="star-2"/><label for="star-2" class="starred"></label>
+                        <input type="radio" name="radiobutton" id="star-3"/><label for="star-3" class="starred"></label>
+                        <input type="radio" name="radiobutton" id="star-4"/><label for="star-4" class="starred"></label>
+                        <input type="radio" name="radiobutton" id="star-5"/><label for="star-5" class="starred"></label>    
+                    }
+                    else if (Int32.Parse(@Model.Hstars) == 4)
+                    {
+                     <input type="radio" name="radiobutton" id="star-1"/><label for="star-1" ></label>
                     <input type="radio" name="radiobutton" id="star-2"/><label for="star-2" class="starred"></label>
                     <input type="radio" name="radiobutton" id="star-3"/><label for="star-3" class="starred"></label>
                     <input type="radio" name="radiobutton" id="star-4"/><label for="star-4" class="starred"></label>
-                    <input type="radio" name="radiobutton" id="star-5"/><label for="star-5" class="starred"></label>    
+                    <input type="radio" name="radiobutton" id="star-5"/><label for="star-5" class="starred"></label>        
+                     }
+                     else if (Int32.Parse(@Model.Hstars) == 4)
+                    {
+                     <input type="radio" name="radiobutton" id="star-1"/><label for="star-1" ></label>
+                    <input type="radio" name="radiobutton" id="star-2"/><label for="star-2"  ></label>
+                    <input type="radio" name="radiobutton" id="star-3"/><label for="star-3" class="starred"></label>
+                    <input type="radio" name="radiobutton" id="star-4"/><label for="star-4" class="starred"></label>
+                    <input type="radio" name="radiobutton" id="star-5"/><label for="star-5" class="starred"></label>        
+                     }
+                     else if (Int32.Parse(@Model.Hstars) == 4)
+                    {
+                     <input type="radio" name="radiobutton" id="star-1"/><label for="star-1" ></label>
+                    <input type="radio" name="radiobutton" id="star-2"/><label for="star-2"  ></label>
+                    <input type="radio" name="radiobutton" id="star-3"/><label for="star-3"  ></label>
+                    <input type="radio" name="radiobutton" id="star-4"/><label for="star-4" class="starred"></label>
+                    <input type="radio" name="radiobutton" id="star-5"/><label for="star-5" class="starred"></label>        
+                     }
+                     else if (Int32.Parse(@Model.Hstars) == 4)
+                    {
+                     <input type="radio" name="radiobutton" id="star-1"/><label for="star-1" ></label>
+                    <input type="radio" name="radiobutton" id="star-2"/><label for="star-2"  ></label>
+                    <input type="radio" name="radiobutton" id="star-3"/><label for="star-3"  ></label>
+                    <input type="radio" name="radiobutton" id="star-4"/><label for="star-4"  ></label>
+                    <input type="radio" name="radiobutton" id="star-5"/><label for="star-5" class="starred"></label>        
+                     }
                 </div>
         </div>
         </div>
@@ -37,18 +73,15 @@
                     <div class="clear"></div>
                 </div>
                 
-            </div>
-            
             <div id="portfolio">
-            
                 <div class="four columns Category1">
                     <figure class="img-container">
-                        <a href="images/full-sizes/page3-img1-full.jpg" rel="prettyPhoto"><img src="images/page3-img1.jpg" alt="" class="scale-with-grid grayscale"/></a>
+                        <a href="../../Content/images/Hotels/hotel14/fullSize/page3-img1-full.jpg" rel="prettyPhoto"><img src="@Model.HimagesDirectory"+"@Model.HScoverImage0" alt="" class="scale-with-grid grayscale"/></a>
                     </figure>
                 </div>
                 <div class="four columns Category2">
                     <figure class="img-container">
-                        <a href="images/full-sizes/page3-img1-full.jpg" rel="prettyPhoto"><img src="images/page3-img2.jpg" alt="" class="scale-with-grid grayscale"/></a>
+                        <a href="../../Content/images/Hotels/hotel14/fullSize/page3-img1-full.jpg" rel="prettyPhoto"><img src="images/page3-img2.jpg" alt="" class="scale-with-grid grayscale"/></a>
                     </figure>
                 </div>
                 <div class="four columns Category3">

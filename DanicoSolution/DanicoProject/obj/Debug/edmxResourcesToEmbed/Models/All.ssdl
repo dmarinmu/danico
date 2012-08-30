@@ -42,6 +42,8 @@
       [vHotel].[Hfk_idTown] AS [Hfk_idTown], 
       [vHotel].[HimagesDirectory] AS [HimagesDirectory], 
       [vHotel].[HcoverImage] AS [HcoverImage], 
+      [vHotel].[Hstars] AS [Hstars], 
+      [vHotel].[Hstate] AS [Hstate], 
       [vHotel].[HSidHotel] AS [HSidHotel], 
       [vHotel].[HSidService] AS [HSidService], 
       [vHotel].[HSprice] AS [HSprice], 
@@ -178,6 +180,7 @@
       <PropertyRef Name="Haddress" />
       <PropertyRef Name="Hdescription" />
       <PropertyRef Name="Hfk_idTown" />
+      <PropertyRef Name="Hstate" />
     </Key>
     <Property Name="Hpk_idHotel" Type="bigint" Nullable="false" />
     <Property Name="Hname" Type="varchar" Nullable="false" MaxLength="50" />
@@ -189,6 +192,8 @@
     <Property Name="Hfk_idTown" Type="bigint" Nullable="false" />
     <Property Name="HimagesDirectory" Type="varchar" MaxLength="100" />
     <Property Name="HcoverImage" Type="varchar" MaxLength="100" />
+    <Property Name="Hstars" Type="char" MaxLength="1" />
+    <Property Name="Hstate" Type="bit" Nullable="false" />
     <Property Name="HSidHotel" Type="bigint" />
     <Property Name="HSidService" Type="bigint" />
     <Property Name="HSprice" Type="float" />

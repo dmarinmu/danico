@@ -129,6 +129,7 @@
       <PropertyRef Name="Haddress" />
       <PropertyRef Name="Hdescription" />
       <PropertyRef Name="Hfk_idTown" />
+      <PropertyRef Name="Hstate" />
     </Key>
     <Property Name="Hpk_idHotel" Type="Int64" Nullable="false" />
     <Property Name="Hname" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
@@ -156,6 +157,8 @@
     <Property Name="Rfk_idHotel" Type="Int64" />
     <Property Name="Rprice" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Rdescription" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Type="String" Name="Hstars" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Boolean" Name="Hstate" Nullable="false" />
   </EntityType>
   <Association Name="FK_Hotel_Town">
     <End Role="Town" Type="AllModel.Town" Multiplicity="1" />

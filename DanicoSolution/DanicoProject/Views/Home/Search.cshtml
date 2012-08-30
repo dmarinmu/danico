@@ -1,18 +1,14 @@
 ﻿@model IEnumerable<DanicoProject.Models.Hotel>
-
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 @section section1
 {
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=8" />
     <link href="../../Content/css/mosaic.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/css/searchBox.css" rel="stylesheet" type="text/css" />
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
     <script src="../../Content/jQuery/mosaic.1.0.1.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -58,20 +54,15 @@
         });
 		    
     </script>
-
-		
 }
-
 <div id="content">
-
     <div class="container">
         <div class="sixteen columns page-title">
-            	<div id="formdiv">
-
-                 <!--   @using (Html.BeginForm("Search", "Home", FormMethod.Get,
+            <div id="formdiv">
+                <!--   @using (Html.BeginForm("Search", "Home", FormMethod.Get,
                         new { @id = "formdivInput" }))
-                    {
-                        //<form id="new_pick" accept-charset="UTF-8" action="/picks" method="post">
+                       {
+                           //<form id="new_pick" accept-charset="UTF-8" action="/picks" method="post">
                     <div class="row">
                         <div class="span13">
                         @* <input id="address" name="address" placeholder="Medellin" type="text" /> *@
@@ -85,47 +76,87 @@
                            
                         </div>
                     </div>
-                        // </form>
-                    }-->
-                    <form id="searchbox" action="">
-                        <input id="search" type="text" placeholder="Type here">
-                        <input id="submit" type="submit" value="Search">
-                    </form>
+                           // </form>
+                       }-->
+                <form id="searchbox" action="">
+                    <input id="search" type="text" placeholder="Type here">
+                    <input id="submit" type="submit" value="Search">
+                </form>
+
+                <div class="vibeButtons">
+                    <div class="buttonHolder">
+                        <span style="background-image: url(&quot../../Content/images/danico/comida2.png&quot;); box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);"
+                            class="vibeImage">
+                            <input type="checkbox" value="10" name="badges[]" style="display: none;">
+                        </span>
+                    </div>
+                    <div class="buttonHolder">
+                        <span style="background-image: url(&quot../../Content/images/danico/parqueo.png&quot;); box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);"
+                            class="vibeImage">
+                            <input type="checkbox" value="9" name="badges[]" style="display: none;">
+                        </span>
+                    </div>
+                    <div class="buttonHolder">
+                        <span style="background-image: url(&quot../../Content/images/danico/bano.png&quot;);
+                            box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);" class="vibeImage">
+                            <input type="checkbox" value="8" name="badges[]" style="display: none;">
+                        </span>
+                    </div>
+                    <div class="buttonHolder">
+                        <span style="background-image: url(&quot../../Content/images/danico/internet.png&quot;);" class="vibeImage">
+                            <input type="checkbox" value="7" name="badges[]" style="display: none;">
+                        </span>
+                    </div>
+                    <div class="buttonHolder">
+                        <span style="background-image: url(&quot../../Content/images/danico/caja.png&quot;);" class="vibeImage">
+                            <input type="checkbox" value="6" name="badges[]" style="display: none;">
+                        </span>
+                    </div>
+                    <div class="buttonHolder">
+                        <span style="background-image: url(&quot../../Content/images/danico/lavanderia.png&quot;); box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);"
+                            class="vibeImage">
+                            <input type="checkbox" value="5" name="badges[]" style="display: none;">
+                        </span>
+                    </div>
+                    <div class="buttonHolder">
+                        <span style="background-image: url(&quot.../../Content/images/danico/tarjetas.png&quot;);" class="vibeImage">
+                            <input type="checkbox" value="4" name="badges[]" style="display: none;">
+                        </span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div> <!-- class="container"-->
+    <div>
+        <!-- class="container"-->
+        <div id="content2">
+            <!--id="content2"-->
+            @foreach (var item in Model)
+            {
+                <!--Fade-->
+                <div class="mosaic-block fade">
+                    <a href="http://buildinternet.com/project/mightyicons/" target="_blank" class="mosaic-overlay">
+                        <div class="details">
+                            <h4>@Html.DisplayFor(modelItem => item.name)</h4>
+                            <p>@Html.DisplayFor(modelItem => item.description)
+                            </p>
+                        </div>
+                    </a>
+                    <div class="mosaic-backdrop">
+                        <img src="@Url.Content(item.imagesDirectory)" class= "image" /></div>
+                </div>
 
-             <div id="content2"><!--id="content2"--> 		
-	                @foreach (var item in Model){
-		                <!--Fade-->
-		                <div class="mosaic-block fade">
-			                <a href="http://buildinternet.com/project/mightyicons/" target="_blank" class="mosaic-overlay">
-				                <div class="details">
-					                <h4>@Html.DisplayFor(modelItem => item.name)</h4>
-					                <p>@Html.DisplayFor(modelItem => item.description) </p>
-				                </div>
-			                  </a>
-			                <div class="mosaic-backdrop"><img src="@Url.Content(item.imagesDirectory)" class= "image" /></div>
-		                </div>
-
-                  }
-            </div>
-  
+            }
         </div>
- 
+    </div>
 </div>
-    
-    
- <!--Autocomplete-->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#address").autocomplete({
-                source: '@Url.Action("AutocompleteAsync")'
-            });
+<!--Autocomplete-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#address").autocomplete({
+            source: '@Url.Action("AutocompleteAsync")'
         });
+    });
 </script>
-
-
-
