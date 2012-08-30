@@ -28,7 +28,7 @@ namespace DanicoProject.Controllers
         {
             List<vHotel> vlist2 = new List<vHotel>();
             vlist2 = db.vHotels.Select(v => v.Hpk_idHotel == id) as List<vHotel>;
-            vHotel vhotel = db.vHotels.Select(v => v.Hpk_idHotel == id).Take(1) as vHotel;
+            vHotel vhotel = db.vHotels.Single(v => v.Hpk_idHotel == id);
             return View(vhotel);
         }
 

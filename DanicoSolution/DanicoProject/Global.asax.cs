@@ -21,18 +21,22 @@ namespace DanicoProject
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-           routes.MapRoute(
-           "Hotel", // Route name
-           "{controller}/{action}/{id}", // URL with parameters
-           new { controller = "Hotel", action = "Details", id = 4 } // Parameter defaults
-          );
+        
             
 
-            routes.MapRoute(
+           routes.MapRoute(
             "Home   ", // Route name
             "{controller}/{action}/{id}", // URL with parameters
             new { controller = "Home", action = "Search", id = UrlParameter.Optional } // Parameter defaults
            );
+
+
+
+           routes.MapRoute(
+               "Hotel", // Route name
+               "{controller}/{action}/{id}", // URL with parameters
+               new { controller = "Hotel", action = "Details", id = 14 } // Parameter defaults
+              );
 
 
            

@@ -27,7 +27,8 @@
     <script src="../../Content/jQuery/jsTheme/jquery.prettyPhoto.js" type="text/javascript"></script>
     <script src="../../Content/jQuery/jsTheme/script.js" type="text/javascript"></script>
 
-    
+      @RenderSection("section1", required: false)
+
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <script src="js/respond.src.js"></script>
@@ -67,9 +68,32 @@
        });
    </script>
 </head>
+    <header>
+    	<div class="container">
+        	<div class="clearfix">
+                <div class="sixteen columns">
+                    <div class="clearfix">
+                    	<h1 id="site-title">
+                        	<a href="index.html">Danico</a>
+                            <span>frase</span>
+                        </h1>
+                        <nav class="header">
+                            <ul>
+                                <li><a href="index.html"><span><span>Home</span></span></a></li>
+                                <li><a href="about.html"><span><span>About</span></span></a></li>
+                                <li class="current"><a href="portfolio.html"><span><span>Portfolio</span></span></a></li>
+                                <li><a href="services.html"><span><span>Services</span></span></a></li>
+                                <li><a href="contacts.html"><span><span>Contacts</span></span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     
+<body  id="portfolio">
 
-<body>
     @RenderBody()
 
     

@@ -1202,7 +1202,7 @@ nav.footer li a:hover, nav.footer li.current a{
 		
 	}
 	
-	input[type="submit"]{
+/* removed	input[type="submit"]{
 		border:0;
 		margin:0;
 		background:0;
@@ -1211,7 +1211,7 @@ nav.footer li a:hover, nav.footer li.current a{
 		height:32px;
 		background:url(../../images/danico/submit-bt.png) 0 0 no-repeat;
 		cursor:pointer;
-	}
+	} */
 	
 	textarea {
 		min-height: 178px;
@@ -1243,7 +1243,7 @@ nav.footer li a:hover, nav.footer li.current a{
 	input:checked~label{
 		/*background-position:0px -1px; */
 	}	
-	input{
+	.wrapper input{
 		display:none;
 	}
 	.wrapper{
@@ -1254,3 +1254,33 @@ nav.footer li a:hover, nav.footer li.current a{
 		background-position:0px -1px;
 	}
 
+/*************************************/
+#formdiv {
+    position: relative;
+    padding-bottom: 0px; /*estp estaba en 40*/
+    margin: 0 auto;
+    width: 940px;
+}
+
+#formdiv #formdivInput input {
+   /* font-size: 24px;
+    height: 28px;
+    line-height: 24px;*/
+    padding: 5px 3px;
+    width: 320px;
+}
+
+.row {
+    margin-left: 150px;
+}
+
+.row .span13 {
+    width: 335px;
+}
+
+.row .span3 {
+    width: 80px;
+}
+
+
+	

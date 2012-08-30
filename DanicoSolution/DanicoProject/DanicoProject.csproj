@@ -89,6 +89,7 @@
     <Content Include="Content\css\cssTheme\style.css" />
     <Content Include="Content\css\example.css" />
     <Content Include="Content\css\mosaic.css" />
+    <Content Include="Content\css\searchBox.css" />
     <Content Include="Content\images\danico\aside-bg.gif" />
     <Content Include="Content\images\danico\bg-black.png" />
     <Content Include="Content\images\danico\body-bg.gif" />
