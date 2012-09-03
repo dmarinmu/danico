@@ -1231,7 +1231,7 @@ nav.footer li a:hover, nav.footer li.current a{
 		/*background-position:left bottom;*/
 	}
 	label{
-		background:url(../../../images/danico/stard.png) no-repeat left bottom;
+		background:url(../../images/danico/stard.png) no-repeat left bottom;
 		float:right;
 		line-height:20px;	
 		padding-left:20px;
@@ -1257,7 +1257,7 @@ nav.footer li a:hover, nav.footer li.current a{
 /*************************************/
 #formdiv {
     position: relative;
-    padding-bottom: 0px; /*estp estaba en 40*/
+    padding-bottom: 0px; /*esta estaba en 40*/
     margin: 0 auto;
     width: 940px;
 }
