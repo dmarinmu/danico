@@ -18,12 +18,11 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("AllModel", "FK_Hotel_Town", "Town", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Town), "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Hotel), true)]
-[assembly: EdmRelationshipAttribute("AllModel", "FK_HotelService_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
-[assembly: EdmRelationshipAttribute("AllModel", "FK_Room_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "Room", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Room), true)]
-[assembly: EdmRelationshipAttribute("AllModel", "FK_TripType_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "TripType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.TripType), true)]
-[assembly: EdmRelationshipAttribute("AllModel", "FK_HotelService_Room", "Room", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Room), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
-[assembly: EdmRelationshipAttribute("AllModel", "FK_HotelService_Service", "Service", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Service), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_Hotel_Town", "Town", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Town), "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Hotel), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_TripType_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "TripType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.TripType), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Room", "Room", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Room), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Service", "Service", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Service), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
 
 #endregion
 
@@ -257,7 +256,7 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AllModel", Name="Hotel")]
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="Hotel")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Hotel : EntityObject
@@ -589,16 +588,16 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_Hotel_Town", "Town")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_Hotel_Town", "Town")]
         public Town Town
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Town>("AllModel.FK_Hotel_Town", "Town").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Town>("DanicoModel.FK_Hotel_Town", "Town").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Town>("AllModel.FK_Hotel_Town", "Town").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Town>("DanicoModel.FK_Hotel_Town", "Town").Value = value;
             }
         }
         /// <summary>
@@ -610,13 +609,13 @@ namespace DanicoProject.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Town>("AllModel.FK_Hotel_Town", "Town");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Town>("DanicoModel.FK_Hotel_Town", "Town");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Town>("AllModel.FK_Hotel_Town", "Town", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Town>("DanicoModel.FK_Hotel_Town", "Town", value);
                 }
             }
         }
@@ -627,18 +626,18 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_HotelService_Hotel", "HotelService")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_HotelService_Hotel", "HotelService")]
         public EntityCollection<HotelService> HotelServices
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<HotelService>("AllModel.FK_HotelService_Hotel", "HotelService");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<HotelService>("AllModel.FK_HotelService_Hotel", "HotelService", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService", value);
                 }
             }
         }
@@ -649,40 +648,18 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_Room_Hotel", "Room")]
-        public EntityCollection<Room> Rooms
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Room>("AllModel.FK_Room_Hotel", "Room");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Room>("AllModel.FK_Room_Hotel", "Room", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_TripType_Hotel", "TripType")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_TripType_Hotel", "TripType")]
         public EntityCollection<TripType> TripTypes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TripType>("AllModel.FK_TripType_Hotel", "TripType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TripType>("DanicoModel.FK_TripType_Hotel", "TripType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TripType>("AllModel.FK_TripType_Hotel", "TripType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TripType>("DanicoModel.FK_TripType_Hotel", "TripType", value);
                 }
             }
         }
@@ -693,7 +670,7 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AllModel", Name="HotelService")]
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="HotelService")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class HotelService : EntityObject
@@ -847,24 +824,24 @@ namespace DanicoProject.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String coverImage0
+        public Nullable<global::System.Int64> idRoom
         {
             get
             {
-                return _coverImage0;
+                return _idRoom;
             }
             set
             {
-                OncoverImage0Changing(value);
-                ReportPropertyChanging("coverImage0");
-                _coverImage0 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("coverImage0");
-                OncoverImage0Changed();
+                OnidRoomChanging(value);
+                ReportPropertyChanging("idRoom");
+                _idRoom = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idRoom");
+                OnidRoomChanged();
             }
         }
-        private global::System.String _coverImage0;
-        partial void OncoverImage0Changing(global::System.String value);
-        partial void OncoverImage0Changed();
+        private Nullable<global::System.Int64> _idRoom;
+        partial void OnidRoomChanging(Nullable<global::System.Int64> value);
+        partial void OnidRoomChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -919,24 +896,24 @@ namespace DanicoProject.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> idRoom
+        public global::System.String coverImage0
         {
             get
             {
-                return _idRoom;
+                return _coverImage0;
             }
             set
             {
-                OnidRoomChanging(value);
-                ReportPropertyChanging("idRoom");
-                _idRoom = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idRoom");
-                OnidRoomChanged();
+                OncoverImage0Changing(value);
+                ReportPropertyChanging("coverImage0");
+                _coverImage0 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("coverImage0");
+                OncoverImage0Changed();
             }
         }
-        private Nullable<global::System.Int64> _idRoom;
-        partial void OnidRoomChanging(Nullable<global::System.Int64> value);
-        partial void OnidRoomChanged();
+        private global::System.String _coverImage0;
+        partial void OncoverImage0Changing(global::System.String value);
+        partial void OncoverImage0Changed();
 
         #endregion
     
@@ -948,16 +925,16 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_HotelService_Hotel", "Hotel")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_HotelService_Hotel", "Hotel")]
         public Hotel Hotel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_HotelService_Hotel", "Hotel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_HotelService_Hotel", "Hotel").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_HotelService_Hotel", "Hotel").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_HotelService_Hotel", "Hotel").Value = value;
             }
         }
         /// <summary>
@@ -969,13 +946,13 @@ namespace DanicoProject.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_HotelService_Hotel", "Hotel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_HotelService_Hotel", "Hotel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("AllModel.FK_HotelService_Hotel", "Hotel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("DanicoModel.FK_HotelService_Hotel", "Hotel", value);
                 }
             }
         }
@@ -986,16 +963,16 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_HotelService_Room", "Room")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_HotelService_Room", "Room")]
         public Room Room
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Room>("AllModel.FK_HotelService_Room", "Room").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Room>("DanicoModel.FK_HotelService_Room", "Room").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Room>("AllModel.FK_HotelService_Room", "Room").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Room>("DanicoModel.FK_HotelService_Room", "Room").Value = value;
             }
         }
         /// <summary>
@@ -1007,13 +984,13 @@ namespace DanicoProject.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Room>("AllModel.FK_HotelService_Room", "Room");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Room>("DanicoModel.FK_HotelService_Room", "Room");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Room>("AllModel.FK_HotelService_Room", "Room", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Room>("DanicoModel.FK_HotelService_Room", "Room", value);
                 }
             }
         }
@@ -1024,16 +1001,16 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_HotelService_Service", "Service")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_HotelService_Service", "Service")]
         public Service Service
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("AllModel.FK_HotelService_Service", "Service").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("DanicoModel.FK_HotelService_Service", "Service").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("AllModel.FK_HotelService_Service", "Service").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("DanicoModel.FK_HotelService_Service", "Service").Value = value;
             }
         }
         /// <summary>
@@ -1045,13 +1022,13 @@ namespace DanicoProject.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("AllModel.FK_HotelService_Service", "Service");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("DanicoModel.FK_HotelService_Service", "Service");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Service>("AllModel.FK_HotelService_Service", "Service", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Service>("DanicoModel.FK_HotelService_Service", "Service", value);
                 }
             }
         }
@@ -1062,7 +1039,7 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AllModel", Name="Room")]
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="Room")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Room : EntityObject
@@ -1073,12 +1050,10 @@ namespace DanicoProject.Models
         /// Create a new Room object.
         /// </summary>
         /// <param name="pkidHabitacion">Initial value of the pkidHabitacion property.</param>
-        /// <param name="fk_idHotel">Initial value of the fk_idHotel property.</param>
-        public static Room CreateRoom(global::System.Int64 pkidHabitacion, global::System.Int64 fk_idHotel)
+        public static Room CreateRoom(global::System.Int64 pkidHabitacion)
         {
             Room room = new Room();
             room.pkidHabitacion = pkidHabitacion;
-            room.fk_idHotel = fk_idHotel;
             return room;
         }
 
@@ -1115,78 +1090,6 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int64 fk_idHotel
-        {
-            get
-            {
-                return _fk_idHotel;
-            }
-            set
-            {
-                Onfk_idHotelChanging(value);
-                ReportPropertyChanging("fk_idHotel");
-                _fk_idHotel = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("fk_idHotel");
-                Onfk_idHotelChanged();
-            }
-        }
-        private global::System.Int64 _fk_idHotel;
-        partial void Onfk_idHotelChanging(global::System.Int64 value);
-        partial void Onfk_idHotelChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> price
-        {
-            get
-            {
-                return _price;
-            }
-            set
-            {
-                OnpriceChanging(value);
-                ReportPropertyChanging("price");
-                _price = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("price");
-                OnpriceChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _price;
-        partial void OnpriceChanging(Nullable<global::System.Decimal> value);
-        partial void OnpriceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String description
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                OndescriptionChanging(value);
-                ReportPropertyChanging("description");
-                _description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("description");
-                OndescriptionChanged();
-            }
-        }
-        private global::System.String _description;
-        partial void OndescriptionChanging(global::System.String value);
-        partial void OndescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String type
@@ -1218,56 +1121,18 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_Room_Hotel", "Hotel")]
-        public Hotel Hotel
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_Room_Hotel", "Hotel").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_Room_Hotel", "Hotel").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Hotel> HotelReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_Room_Hotel", "Hotel");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("AllModel.FK_Room_Hotel", "Hotel", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_HotelService_Room", "HotelService")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_HotelService_Room", "HotelService")]
         public EntityCollection<HotelService> HotelServices
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<HotelService>("AllModel.FK_HotelService_Room", "HotelService");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Room", "HotelService");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<HotelService>("AllModel.FK_HotelService_Room", "HotelService", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Room", "HotelService", value);
                 }
             }
         }
@@ -1278,7 +1143,7 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AllModel", Name="Service")]
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="Service")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Service : EntityObject
@@ -1388,18 +1253,18 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_HotelService_Service", "HotelService")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_HotelService_Service", "HotelService")]
         public EntityCollection<HotelService> HotelServices
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<HotelService>("AllModel.FK_HotelService_Service", "HotelService");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Service", "HotelService");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<HotelService>("AllModel.FK_HotelService_Service", "HotelService", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Service", "HotelService", value);
                 }
             }
         }
@@ -1410,7 +1275,7 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AllModel", Name="Town")]
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="Town")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Town : EntityObject
@@ -1494,18 +1359,18 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_Hotel_Town", "Hotel")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_Hotel_Town", "Hotel")]
         public EntityCollection<Hotel> Hotels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Hotel>("AllModel.FK_Hotel_Town", "Hotel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Hotel>("DanicoModel.FK_Hotel_Town", "Hotel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Hotel>("AllModel.FK_Hotel_Town", "Hotel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Hotel>("DanicoModel.FK_Hotel_Town", "Hotel", value);
                 }
             }
         }
@@ -1516,7 +1381,7 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AllModel", Name="TripType")]
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="TripType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class TripType : EntityObject
@@ -1777,16 +1642,16 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AllModel", "FK_TripType_Hotel", "Hotel")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_TripType_Hotel", "Hotel")]
         public Hotel Hotel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_TripType_Hotel", "Hotel").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_TripType_Hotel", "Hotel").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_TripType_Hotel", "Hotel").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_TripType_Hotel", "Hotel").Value = value;
             }
         }
         /// <summary>
@@ -1798,13 +1663,13 @@ namespace DanicoProject.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("AllModel.FK_TripType_Hotel", "Hotel");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_TripType_Hotel", "Hotel");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("AllModel.FK_TripType_Hotel", "Hotel", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("DanicoModel.FK_TripType_Hotel", "Hotel", value);
                 }
             }
         }
@@ -1815,7 +1680,7 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AllModel", Name="vHotel")]
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="vHotel")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class vHotel : EntityObject
@@ -1826,20 +1691,10 @@ namespace DanicoProject.Models
         /// Create a new vHotel object.
         /// </summary>
         /// <param name="hpk_idHotel">Initial value of the Hpk_idHotel property.</param>
-        /// <param name="hname">Initial value of the Hname property.</param>
-        /// <param name="haddress">Initial value of the Haddress property.</param>
-        /// <param name="hdescription">Initial value of the Hdescription property.</param>
-        /// <param name="hfk_idTown">Initial value of the Hfk_idTown property.</param>
-        /// <param name="hstate">Initial value of the Hstate property.</param>
-        public static vHotel CreatevHotel(global::System.Int64 hpk_idHotel, global::System.String hname, global::System.String haddress, global::System.String hdescription, global::System.Int64 hfk_idTown, global::System.Boolean hstate)
+        public static vHotel CreatevHotel(global::System.Int64 hpk_idHotel)
         {
             vHotel vHotel = new vHotel();
             vHotel.Hpk_idHotel = hpk_idHotel;
-            vHotel.Hname = hname;
-            vHotel.Haddress = haddress;
-            vHotel.Hdescription = hdescription;
-            vHotel.Hfk_idTown = hfk_idTown;
-            vHotel.Hstate = hstate;
             return vHotel;
         }
 
@@ -1876,7 +1731,7 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Hname
         {
@@ -1886,14 +1741,11 @@ namespace DanicoProject.Models
             }
             set
             {
-                if (_Hname != value)
-                {
-                    OnHnameChanging(value);
-                    ReportPropertyChanging("Hname");
-                    _Hname = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Hname");
-                    OnHnameChanged();
-                }
+                OnHnameChanging(value);
+                ReportPropertyChanging("Hname");
+                _Hname = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hname");
+                OnHnameChanged();
             }
         }
         private global::System.String _Hname;
@@ -1903,7 +1755,7 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Haddress
         {
@@ -1913,14 +1765,11 @@ namespace DanicoProject.Models
             }
             set
             {
-                if (_Haddress != value)
-                {
-                    OnHaddressChanging(value);
-                    ReportPropertyChanging("Haddress");
-                    _Haddress = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Haddress");
-                    OnHaddressChanged();
-                }
+                OnHaddressChanging(value);
+                ReportPropertyChanging("Haddress");
+                _Haddress = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Haddress");
+                OnHaddressChanged();
             }
         }
         private global::System.String _Haddress;
@@ -1930,7 +1779,7 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Hdescription
         {
@@ -1940,14 +1789,11 @@ namespace DanicoProject.Models
             }
             set
             {
-                if (_Hdescription != value)
-                {
-                    OnHdescriptionChanging(value);
-                    ReportPropertyChanging("Hdescription");
-                    _Hdescription = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Hdescription");
-                    OnHdescriptionChanged();
-                }
+                OnHdescriptionChanging(value);
+                ReportPropertyChanging("Hdescription");
+                _Hdescription = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hdescription");
+                OnHdescriptionChanged();
             }
         }
         private global::System.String _Hdescription;
@@ -2029,9 +1875,9 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int64 Hfk_idTown
+        public Nullable<global::System.Int64> Hfk_idTown
         {
             get
             {
@@ -2039,18 +1885,15 @@ namespace DanicoProject.Models
             }
             set
             {
-                if (_Hfk_idTown != value)
-                {
-                    OnHfk_idTownChanging(value);
-                    ReportPropertyChanging("Hfk_idTown");
-                    _Hfk_idTown = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Hfk_idTown");
-                    OnHfk_idTownChanged();
-                }
+                OnHfk_idTownChanging(value);
+                ReportPropertyChanging("Hfk_idTown");
+                _Hfk_idTown = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Hfk_idTown");
+                OnHfk_idTownChanged();
             }
         }
-        private global::System.Int64 _Hfk_idTown;
-        partial void OnHfk_idTownChanging(global::System.Int64 value);
+        private Nullable<global::System.Int64> _Hfk_idTown;
+        partial void OnHfk_idTownChanging(Nullable<global::System.Int64> value);
         partial void OnHfk_idTownChanged();
     
         /// <summary>
@@ -2100,6 +1943,54 @@ namespace DanicoProject.Models
         private global::System.String _HcoverImage;
         partial void OnHcoverImageChanging(global::System.String value);
         partial void OnHcoverImageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Hstars
+        {
+            get
+            {
+                return _Hstars;
+            }
+            set
+            {
+                OnHstarsChanging(value);
+                ReportPropertyChanging("Hstars");
+                _Hstars = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hstars");
+                OnHstarsChanged();
+            }
+        }
+        private global::System.String _Hstars;
+        partial void OnHstarsChanging(global::System.String value);
+        partial void OnHstarsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Hstate
+        {
+            get
+            {
+                return _Hstate;
+            }
+            set
+            {
+                OnHstateChanging(value);
+                ReportPropertyChanging("Hstate");
+                _Hstate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Hstate");
+                OnHstateChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Hstate;
+        partial void OnHstateChanging(Nullable<global::System.Boolean> value);
+        partial void OnHstateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2418,123 +2309,24 @@ namespace DanicoProject.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> Rfk_idHotel
+        public global::System.String Rtype
         {
             get
             {
-                return _Rfk_idHotel;
+                return _Rtype;
             }
             set
             {
-                OnRfk_idHotelChanging(value);
-                ReportPropertyChanging("Rfk_idHotel");
-                _Rfk_idHotel = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Rfk_idHotel");
-                OnRfk_idHotelChanged();
+                OnRtypeChanging(value);
+                ReportPropertyChanging("Rtype");
+                _Rtype = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Rtype");
+                OnRtypeChanged();
             }
         }
-        private Nullable<global::System.Int64> _Rfk_idHotel;
-        partial void OnRfk_idHotelChanging(Nullable<global::System.Int64> value);
-        partial void OnRfk_idHotelChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> Rprice
-        {
-            get
-            {
-                return _Rprice;
-            }
-            set
-            {
-                OnRpriceChanging(value);
-                ReportPropertyChanging("Rprice");
-                _Rprice = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Rprice");
-                OnRpriceChanged();
-            }
-        }
-        private Nullable<global::System.Decimal> _Rprice;
-        partial void OnRpriceChanging(Nullable<global::System.Decimal> value);
-        partial void OnRpriceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Rdescription
-        {
-            get
-            {
-                return _Rdescription;
-            }
-            set
-            {
-                OnRdescriptionChanging(value);
-                ReportPropertyChanging("Rdescription");
-                _Rdescription = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Rdescription");
-                OnRdescriptionChanged();
-            }
-        }
-        private global::System.String _Rdescription;
-        partial void OnRdescriptionChanging(global::System.String value);
-        partial void OnRdescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Hstars
-        {
-            get
-            {
-                return _Hstars;
-            }
-            set
-            {
-                OnHstarsChanging(value);
-                ReportPropertyChanging("Hstars");
-                _Hstars = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Hstars");
-                OnHstarsChanged();
-            }
-        }
-        private global::System.String _Hstars;
-        partial void OnHstarsChanging(global::System.String value);
-        partial void OnHstarsChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean Hstate
-        {
-            get
-            {
-                return _Hstate;
-            }
-            set
-            {
-                if (_Hstate != value)
-                {
-                    OnHstateChanging(value);
-                    ReportPropertyChanging("Hstate");
-                    _Hstate = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Hstate");
-                    OnHstateChanged();
-                }
-            }
-        }
-        private global::System.Boolean _Hstate;
-        partial void OnHstateChanging(global::System.Boolean value);
-        partial void OnHstateChanged();
+        private global::System.String _Rtype;
+        partial void OnRtypeChanging(global::System.String value);
+        partial void OnRtypeChanged();
 
         #endregion
     

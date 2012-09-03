@@ -12,7 +12,7 @@ namespace DanicoProject.Controllers
         public HomeController() {
         }
 
-        public ActionResult Search(string address)
+    /*    public ActionResult Search(string address)
         {
          
             ViewBag.townFilter = address;
@@ -38,10 +38,10 @@ namespace DanicoProject.Controllers
             {             
                 townList = (from a  in tmp.Towns  where a.name.StartsWith(term) select a.name).Take(4).ToList();
             }
-            return Json( townList, JsonRequestBehavior.AllowGet);
+            return Json(townList, JsonRequestBehavior.AllowGet);
         }
 
-
+        */
 
         //
         // GET: /HomeController.cs/

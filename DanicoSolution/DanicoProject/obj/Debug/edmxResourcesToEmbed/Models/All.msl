@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="AllModelStoreContainer" CdmEntityContainer="AllConection">
+  <EntityContainerMapping StorageEntityContainer="DanicoModelStoreContainer" CdmEntityContainer="AllConection">
     <EntitySetMapping Name="Hotels">
-      <EntityTypeMapping TypeName="AllModel.Hotel">
+      <EntityTypeMapping TypeName="DanicoModel.Hotel">
         <MappingFragment StoreEntitySet="Hotel">
           <ScalarProperty Name="pk_idHotel" ColumnName="pk_idHotel" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -20,33 +20,30 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HotelServices">
-      <EntityTypeMapping TypeName="AllModel.HotelService">
+      <EntityTypeMapping TypeName="DanicoModel.HotelService">
         <MappingFragment StoreEntitySet="HotelService">
           <ScalarProperty Name="idHotel" ColumnName="idHotel" />
           <ScalarProperty Name="idService" ColumnName="idService" />
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="imagesDirectory" ColumnName="imagesDirectory" />
-          <ScalarProperty Name="coverImage0" ColumnName="coverImage0" />
+          <ScalarProperty Name="idRoom" ColumnName="idRoom" />
           <ScalarProperty Name="coverImage1" ColumnName="coverImage1" />
           <ScalarProperty Name="coverImage2" ColumnName="coverImage2" />
-          <ScalarProperty Name="idRoom" ColumnName="idRoom" />
+          <ScalarProperty Name="coverImage0" ColumnName="coverImage0" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Rooms">
-      <EntityTypeMapping TypeName="AllModel.Room">
+      <EntityTypeMapping TypeName="DanicoModel.Room">
         <MappingFragment StoreEntitySet="Room">
           <ScalarProperty Name="pkidHabitacion" ColumnName="pkidHabitacion" />
-          <ScalarProperty Name="fk_idHotel" ColumnName="fk_idHotel" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="type" ColumnName="type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Services">
-      <EntityTypeMapping TypeName="AllModel.Service">
+      <EntityTypeMapping TypeName="DanicoModel.Service">
         <MappingFragment StoreEntitySet="Service">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="type" ColumnName="type" />
@@ -55,7 +52,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Towns">
-      <EntityTypeMapping TypeName="AllModel.Town">
+      <EntityTypeMapping TypeName="DanicoModel.Town">
         <MappingFragment StoreEntitySet="Town">
           <ScalarProperty Name="pk_idTown" ColumnName="pk_idTown" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -63,7 +60,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TripTypes">
-      <EntityTypeMapping TypeName="AllModel.TripType">
+      <EntityTypeMapping TypeName="DanicoModel.TripType">
         <MappingFragment StoreEntitySet="TripType">
           <ScalarProperty Name="idHotel" ColumnName="idHotel" />
           <ScalarProperty Name="family" ColumnName="family" />
@@ -77,10 +74,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="vHotels">
-      <EntityTypeMapping TypeName="AllModel.vHotel">
+      <EntityTypeMapping TypeName="DanicoModel.vHotel">
         <MappingFragment StoreEntitySet="vHotel">
-          <ScalarProperty Name="Hstate" ColumnName="Hstate" />
-          <ScalarProperty Name="Hstars" ColumnName="Hstars" />
           <ScalarProperty Name="Hpk_idHotel" ColumnName="Hpk_idHotel" />
           <ScalarProperty Name="Hname" ColumnName="Hname" />
           <ScalarProperty Name="Haddress" ColumnName="Haddress" />
@@ -91,6 +86,8 @@
           <ScalarProperty Name="Hfk_idTown" ColumnName="Hfk_idTown" />
           <ScalarProperty Name="HimagesDirectory" ColumnName="HimagesDirectory" />
           <ScalarProperty Name="HcoverImage" ColumnName="HcoverImage" />
+          <ScalarProperty Name="Hstars" ColumnName="Hstars" />
+          <ScalarProperty Name="Hstate" ColumnName="Hstate" />
           <ScalarProperty Name="HSidHotel" ColumnName="HSidHotel" />
           <ScalarProperty Name="HSidService" ColumnName="HSidService" />
           <ScalarProperty Name="HSprice" ColumnName="HSprice" />
@@ -104,9 +101,7 @@
           <ScalarProperty Name="Stype" ColumnName="Stype" />
           <ScalarProperty Name="Spk_idService" ColumnName="Spk_idService" />
           <ScalarProperty Name="RpkidHabitacion" ColumnName="RpkidHabitacion" />
-          <ScalarProperty Name="Rfk_idHotel" ColumnName="Rfk_idHotel" />
-          <ScalarProperty Name="Rprice" ColumnName="Rprice" />
-          <ScalarProperty Name="Rdescription" ColumnName="Rdescription" />
+          <ScalarProperty Name="Rtype" ColumnName="Rtype" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
