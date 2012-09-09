@@ -16,8 +16,9 @@ namespace DanicoProject.Controllers
         {
          
             ViewBag.townFilter = search;
-            string tmpcheckbox = Request.Form["orderNumbers"];
-            string[] eligibility = Request.Form.GetValues("orderNumbers");
+            ViewBag.checkList = orderNumbers;
+          /*  string tmpcheckbox = Request.Form["orderNumbers"];
+            string[] eligibility = Request.Form.GetValues("orderNumbers");*/
 
             List<Models.Hotel> hotelList = new System.Collections.Generic.List<Models.Hotel>();
             using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
@@ -29,7 +30,7 @@ namespace DanicoProject.Controllers
                  }
             }
 
-            ViewBag.checkList = orderNumbers;
+            
 
 
             return View(hotelList);

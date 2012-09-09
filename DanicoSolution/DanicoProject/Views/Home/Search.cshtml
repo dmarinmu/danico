@@ -56,10 +56,12 @@
             });
 
         });
+
+        
+
+
         function check(id,idImage) {
-
-            alert(document.getElementById(id).checked);
-
+           /* alert(document.getElementById(id).checked);*/
             if (document.getElementById(id).checked == true) {
                 $('#' + idImage).addClass("img_nonselected");
                 document.getElementById(id).attr('checked', false);
@@ -68,7 +70,24 @@
                 document.getElementById(id).attr('checked', true);
                
             }
-        }     
+        }
+
+        function checkImage(idImage) {
+
+            if (document.getElementById(idImage).hasClass("img_nonselected")) {
+                $('#' + idImage).removeClass("img_nonselected");
+                
+            } else {
+                $('#' + idImage).addClass("img_nonselected");
+            }
+        }
+
+        var boxes = $(":checkbox:checked");
+        $("#chk1").change(function () {
+            alert("chk1 Changed");
+        });
+       
+
     </script>
 
 }
@@ -110,63 +129,100 @@
                        </div>
                  
                 <div class="vibeButtons">
+                    
                     <div class="buttonHolder">
                         <div class="vibeImage" >
-                            <label for="prueba2"><img src="../../Content/images/danico/comida2.png" class="img_nonselected" id="prueba" onclick="javascript:check('prueba2','prueba');" alt="" /></label>
-                           <input type="checkbox" value="6" name="reglist" id="prueba2" />
-                           <!--    @Html.CheckBox("reglist", new { id = "prueba2", value = "1" }) -->
-                                
+                            <label for="chk1"><img src="../../Content/images/danico/comida2.png" class="img_nonselected" id="imge1" onclick="javascript:check('chk1','imge1');" alt="" /></label>
+                           <!--    @Html.CheckBox("reglist", new { id = "prueba2", value = "1" })  --> 
                                     @if (checkList != null && checkList.Contains("1"))
                                     {
-                                       <input type="CheckBox" name="orderNumbers" value="1" checked />
+                                       <input type="checkbox" value="1" name="orderNumbers" id="chk1"  onchange="javascript:checkImage('imge1');" checked />
                                     }
                                     else
                                     {
-                                       <input type="CheckBox" name="orderNumbers" value="1"  />
+                                      <input type="checkbox" value="1" name="orderNumbers" id="chk1" onchange="javascript:checkImage('imge1');" />
                                     }
-
-
-                               
-                                <input type="CheckBox" name="orderNumbers" value="2"/>
-                                <input type="CheckBox" name="orderNumbers" value="3"/>
-                                <input type="CheckBox" name="orderNumbers" value="4"/>
-
                         </div>
                     </div>
-                    <!--
-                      <div class="buttonHolder">
+                    <div class="buttonHolder">
                         <div class="vibeImage" >
-                                <label for="2c"><img src="../../Content/images/danico/parqueo.png" class="img_nonselected" id="2i" onclick="javascript:check('2c','2i');" alt="" /></label>
-                                <input type="checkbox" name="asd" value="2" id="2c" />
+                            <label for="chk2"><img src="../../Content/images/danico/parqueo.png" class="img_nonselected" id="imge2" onclick="javascript:check('chk2','imge2');" alt="" /></label>
+                                    @if (checkList != null && checkList.Contains("2"))
+                                    {
+                                       <input type="checkbox" value="2" name="orderNumbers" id="chk2"   checked />
+                                    }
+                                    else
+                                    {
+                                      <input type="checkbox" value="2" name="orderNumbers" id="chk2" />
+                                    }
                          </div>
                     </div>
                     <div class="buttonHolder">
-                        <span style="background-image: url(&quot../../Content/images/danico/bano.png&quot;);
-                            box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);" class="vibeImage">
-                            <input type="checkbox" value="8" name="badges[]" style="display: none;">
-                        </span>
+                        <div class="vibeImage" >
+                            <label for="chk3"><img src="../../Content/images/danico/bano.png" class="img_nonselected" id="imge3" onclick="javascript:check('chk3','imge3');" alt="" /></label>
+                                    @if (checkList != null && checkList.Contains("3"))
+                                    {
+                                       <input type="checkbox" value="3" name="orderNumbers" id="chk3"   checked />
+                                    }
+                                    else
+                                    {
+                                      <input type="checkbox" value="3" name="orderNumbers" id="chk3" />
+                                    }
+                         </div>
                     </div>
                     <div class="buttonHolder">
-                        <span style="background-image: url(&quot../../Content/images/danico/internet.png&quot;);" class="vibeImage">
-                            <input type="checkbox" value="7" name="badges[]" style="display: none;">
-                        </span>
+                        <div class="vibeImage" >
+                            <label for="chk4"><img src="../../Content/images/danico/internet.png" class="img_nonselected" id="imge4" onclick="javascript:check('chk4','imge4');" alt="" /></label>
+                                    @if (checkList != null && checkList.Contains("4"))
+                                    {
+                                       <input type="checkbox" value="4" name="orderNumbers" id="chk4"   checked />
+                                    }
+                                    else
+                                    {
+                                      <input type="checkbox" value="4" name="orderNumbers" id="chk4" />
+                                    }
+                         </div>
                     </div>
                     <div class="buttonHolder">
-                        <span style="background-image: url(&quot../../Content/images/danico/caja.png&quot;);" class="vibeImage">
-                            <input type="checkbox" value="6" name="badges[]" style="display: none;">
-                        </span>
+                        <div class="vibeImage" >
+                            <label for="chk5"><img src="../../Content/images/danico/caja.png" class="img_nonselected" id="imge5" onclick="javascript:check('chk5','imge5');" alt="" /></label>
+                                    @if (checkList != null && checkList.Contains("5"))
+                                    {
+                                       <input type="checkbox" value="5" name="orderNumbers" id="chk5"   checked />
+                                    }
+                                    else
+                                    {
+                                      <input type="checkbox" value="5" name="orderNumbers" id="chk5" />
+                                    }
+                         </div>
                     </div>
                     <div class="buttonHolder">
-                        <span style="background-image: url(&quot../../Content/images/danico/lavanderia.png&quot;); box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);"
-                            class="vibeImage">
-                            <input type="checkbox" value="5" name="badges[]" style="display: none;">
-                        </span>
+                        <div class="vibeImage" >
+                            <label for="chk6"><img src="../../Content/images/danico/lavanderia.png" class="img_nonselected" id="imge6" onclick="javascript:check('chk6','imge6');" alt="" /></label>
+                                    @if (checkList != null && checkList.Contains("6"))
+                                    {
+                                       <input type="checkbox" value="6" name="orderNumbers" id="chk6"   checked />
+                                    }
+                                    else
+                                    {
+                                      <input type="checkbox" value="6" name="orderNumbers" id="chk6" />
+                                    }
+                         </div>
                     </div>
                     <div class="buttonHolder">
-                        <span style="background-image: url(&quot.../../Content/images/danico/tarjetas.png&quot;);" class="vibeImage">
-                            <input type="checkbox" value="4" name="badges[]" style="display: none;">
-                        </span>
-                    </div> -->
+                        <div class="vibeImage" >
+                            <label for="chk7"><img src="../../Content/images/danico/tarjetas.png" class="img_nonselected" id="imge7" onclick="javascript:check('chk7','imge7');" alt="" /></label>
+                                    @if (checkList != null && checkList.Contains("7"))
+                                    {
+                                       <input type="checkbox" value="7" name="orderNumbers" id="chk7"   checked />
+                                    }
+                                    else
+                                    {
+                                      <input type="checkbox" value="7" name="orderNumbers" id="chk7" />
+                                    }
+                         </div>
+                    </div>
+                  
                 </div>
                  }
             </div>
