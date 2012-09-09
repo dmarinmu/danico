@@ -1230,7 +1230,7 @@ nav.footer li a:hover, nav.footer li.current a{
 .wrapper:hover label{
 		/*background-position:left bottom;*/
 	}
-	label{
+	.star{
 		background:url(../../images/danico/stard.png) no-repeat left bottom;
 		float:right;
 		line-height:20px;	

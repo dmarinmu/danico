@@ -2,9 +2,13 @@
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
+@{var checkList = ((string[])ViewBag.checkList);}  <!-- idea taken from http://stackoverflow.com/questions/10496353/how-to-get-checkbox-values-back-to-view/10521131#10521131-->
+
 @section section1
 {
+    <link href="../../Content/css/jquery-ui.css" rel="stylesheet" type="text/css" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=8" />
     <link href="../../Content/css/mosaic.css" rel="stylesheet" type="text/css" />
@@ -52,9 +56,24 @@
             });
 
         });
-		    
+        function check(id,idImage) {
+
+            alert(document.getElementById(id).checked);
+
+            if (document.getElementById(id).checked == true) {
+                $('#' + idImage).addClass("img_nonselected");
+                document.getElementById(id).attr('checked', false);
+            } else {
+                $('#' + idImage).removeClass("img_nonselected");
+                document.getElementById(id).attr('checked', true);
+               
+            }
+        }     
     </script>
+
 }
+
+
 <div id="content">
     <div class="container">
         <div class="sixteen columns page-title">
@@ -77,24 +96,49 @@
                         </div>
                     </div>
                            // </form>
-                       }-->
+                       }
                 <form id="searchbox" action="">
-                    <input id="search" type="text" placeholder="Type here">
+                    <input id="" type="text" placeholder="Type here">
                     <input id="submit" type="submit" value="Search">
                 </form>
-
+                -->
+                 @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+                 {
+                      <div class="searchbox">
+                        @Html.TextBox("search", ViewBag.townFilter as string, new { @placeholder = "Medellín" })
+                         <button class="btnSearch" name="submit" type="submit">Buscar</button>
+                       </div>
+                 
                 <div class="vibeButtons">
                     <div class="buttonHolder">
-                        <span style="background-image: url(&quot../../Content/images/danico/comida2.png&quot;); box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);"
-                            class="vibeImage">
-                            <input type="checkbox" value="10" name="badges[]" style="display: none;">
-                        </span>
+                        <div class="vibeImage" >
+                            <label for="prueba2"><img src="../../Content/images/danico/comida2.png" class="img_nonselected" id="prueba" onclick="javascript:check('prueba2','prueba');" alt="" /></label>
+                           <input type="checkbox" value="6" name="reglist" id="prueba2" />
+                           <!--    @Html.CheckBox("reglist", new { id = "prueba2", value = "1" }) -->
+                                
+                                    @if (checkList != null && checkList.Contains("1"))
+                                    {
+                                       <input type="CheckBox" name="orderNumbers" value="1" checked />
+                                    }
+                                    else
+                                    {
+                                       <input type="CheckBox" name="orderNumbers" value="1"  />
+                                    }
+
+
+                               
+                                <input type="CheckBox" name="orderNumbers" value="2"/>
+                                <input type="CheckBox" name="orderNumbers" value="3"/>
+                                <input type="CheckBox" name="orderNumbers" value="4"/>
+
+                        </div>
                     </div>
-                    <div class="buttonHolder">
-                        <span style="background-image: url(&quot../../Content/images/danico/parqueo.png&quot;); box-shadow: 0px 1px 4px 0px rgb(153, 153, 153);"
-                            class="vibeImage">
-                            <input type="checkbox" value="9" name="badges[]" style="display: none;">
-                        </span>
+                    <!--
+                      <div class="buttonHolder">
+                        <div class="vibeImage" >
+                                <label for="2c"><img src="../../Content/images/danico/parqueo.png" class="img_nonselected" id="2i" onclick="javascript:check('2c','2i');" alt="" /></label>
+                                <input type="checkbox" name="asd" value="2" id="2c" />
+                         </div>
                     </div>
                     <div class="buttonHolder">
                         <span style="background-image: url(&quot../../Content/images/danico/bano.png&quot;);
@@ -122,9 +166,9 @@
                         <span style="background-image: url(&quot.../../Content/images/danico/tarjetas.png&quot;);" class="vibeImage">
                             <input type="checkbox" value="4" name="badges[]" style="display: none;">
                         </span>
-                    </div>
+                    </div> -->
                 </div>
-
+                 }
             </div>
         </div>
     </div>
@@ -155,8 +199,10 @@
 <!--Autocomplete-->
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#address").autocomplete({
+        $("#search").autocomplete2({
             source: '@Url.Action("AutocompleteAsync")'
         });
     });
+
+
 </script>

@@ -33,6 +33,7 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <script src="js/respond.src.js"></script>
 	<![endif]-->
+   
    <script  type="text/javascript">
 
        preloadImages([
@@ -79,11 +80,8 @@
                         </h1>
                         <nav class="header">
                             <ul>
-                                <li><a href="index.html"><span><span>Home</span></span></a></li>
-                                <li><a href="about.html"><span><span>About</span></span></a></li>
-                                <li class="current"><a href="portfolio.html"><span><span>Portfolio</span></span></a></li>
-                                <li><a href="services.html"><span><span>Services</span></span></a></li>
-                                <li><a href="contacts.html"><span><span>Contacts</span></span></a></li>
+                                <li class="current"><a href="@Url.Action("Search", "Home")"><span><span>Inicio</span></span></a></li>
+                                <li><a href="@Url.Action("Search", "Home")"><span><span>Acerca</span></span></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -103,9 +101,9 @@
 <footer>
     	<div class="aside">
         	<div class="container">
-                <div class="spacer offcet-top">
+                <!--<div class="spacer offcet-top">
                     <div class="spacer spacer1">
-                        <div class="spacer spacer2">
+                        <div class="spacer spacer2"> -->
                         	<div class="clearfix">
                             	<div class="four columns">
                                 	<h3>Flickr photostream</h3>
@@ -120,7 +118,7 @@
                                         <div id="tweet-container"></div>
                                     </div>
                                 </div>
-                                <div class="four columns">
+                        <!--        <div class="four columns">
                                 	<h3>Blogroll</h3>
                                     <ul class="blogroll">
                                     	<li><a href="#">On the other hand we denounce</a></li> 
@@ -157,7 +155,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
             	</div>
             </div>
         </div>

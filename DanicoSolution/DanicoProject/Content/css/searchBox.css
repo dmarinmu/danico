@@ -17,6 +17,25 @@
 	overflow: hidden; /* Clear floats */
 }
 
+.searchbox
+{
+	background: #eaf8fc;
+	background-image: -moz-linear-gradient(#fff, #d4e8ec);
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #d4e8ec),color-stop(1, #fff));
+	
+/*	-moz-border-radius: 35px;
+	border-radius: 35px;*/
+	
+	border-width: 1px;
+	border-style: solid;
+	border-color: #c4d9df #a4c3ca #83afb7;            
+	width: 650px;
+	height: 35px;
+	padding: 0px;  /*de aca se le puede quitar el borde*/
+	margin: 0px auto 50px;
+	overflow: hidden; /* Clear floats */
+}
+
 #search, #submit
 {
 	float: left;
@@ -129,8 +148,26 @@ element.style {
     box-shadow: 0 1px 4px #999999;
     cursor: pointer;
     float: left;
-    height: 100px;
+    height: 100px;/*100px; se cambia cuando se arreglan los checkboxes*/
     margin-bottom: 11px;
     margin-right: 11px;
     width: 100px;
 }
+.vibeImage.selected {
+    background-position: right top;
+    border: 1px solid #143C60;
+}
+
+.btnSearch
+{
+    width: 100px;
+    height: 100%;
+    font-size: 13px;
+}
+
+.img_nonselected
+{
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+

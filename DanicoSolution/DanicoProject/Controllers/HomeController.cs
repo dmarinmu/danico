@@ -12,36 +12,41 @@ namespace DanicoProject.Controllers
         public HomeController() {
         }
 
-    /*    public ActionResult Search(string address)
+        public ActionResult Search(string search, string[] orderNumbers)
         {
          
-            ViewBag.townFilter = address;
-            
+            ViewBag.townFilter = search;
+            string tmpcheckbox = Request.Form["orderNumbers"];
+            string[] eligibility = Request.Form.GetValues("orderNumbers");
+
             List<Models.Hotel> hotelList = new System.Collections.Generic.List<Models.Hotel>();
             using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
             {
                  hotelList= tmp.Hotels.Select(a =>  a).ToList();
-                 if (!String.IsNullOrEmpty(address))
+                 if (!String.IsNullOrEmpty(search))
                  {
-                     hotelList = hotelList.Where(s => s.fk_idTown.ToString().Equals(address)).ToList();
+                     hotelList = hotelList.Where(s => s.fk_idTown.ToString().Equals(search)).ToList();
                  }
             }
+
+            ViewBag.checkList = orderNumbers;
+
 
             return View(hotelList);
         }
 
 
-        public ActionResult AutocompleteAsync(string term)
+        public ActionResult AutocompleteAsync(string search)
         {
             List<string> townList = new System.Collections.Generic.List<string>();
             using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
-            {             
-                townList = (from a  in tmp.Towns  where a.name.StartsWith(term) select a.name).Take(4).ToList();
+            {
+                townList = (from a in tmp.Towns where a.name.StartsWith(search) select a.name).ToList();
             }
             return Json(townList, JsonRequestBehavior.AllowGet);
         }
 
-        */
+        
 
         //
         // GET: /HomeController.cs/
