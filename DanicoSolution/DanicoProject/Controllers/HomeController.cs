@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DanicoProject.Models.Classes;
 
 namespace DanicoProject.Controllers
 {
     public class HomeController : Controller
     {
-        
+        cHotel varHotel;
         public HomeController() {
+              varHotel = new cHotel();
         }
 
         public ActionResult Search(string search, string[] orderNumbers)
@@ -17,16 +19,25 @@ namespace DanicoProject.Controllers
          
             ViewBag.townFilter = search;
             ViewBag.checkList = orderNumbers;
-          /*  string tmpcheckbox = Request.Form["orderNumbers"];
-            string[] eligibility = Request.Form.GetValues("orderNumbers");*/
+            List<long> serviceIdInDB = varHotel.getServiceID(orderNumbers);
+            List<Models.Hotel> hotelList = new List<Models.Hotel>();
 
-            List<Models.Hotel> hotelList = new System.Collections.Generic.List<Models.Hotel>();
             using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
             {
                  hotelList= tmp.Hotels.Select(a =>  a).ToList();
-                 if (!String.IsNullOrEmpty(search))
+                 //1s filter
+                if (!String.IsNullOrEmpty(search))
                  {
                      hotelList = hotelList.Where(s => s.fk_idTown.ToString().Equals(search)).ToList();
+                     //2d filter
+                     if (serviceIdInDB.Count > 0)
+                     {
+                         hotelList =
+                          (from hotel in tmp.Hotels
+                           join service in tmp.HotelServices on hotel.pk_idHotel equals service.idHotel
+                           where serviceIdInDB.Contains(service.idService)
+                           select hotel).ToList<Models.Hotel>();
+                     }
                  }
             }
 
