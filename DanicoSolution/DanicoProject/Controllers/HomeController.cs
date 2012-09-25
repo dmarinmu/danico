@@ -35,18 +35,21 @@ namespace DanicoProject.Controllers
                          hotelList =
                           (from hotel in tmp.Hotels
                            join service in tmp.HotelServices on hotel.pk_idHotel equals service.idHotel
-                           where serviceIdInDB.Contains(service.idService)
+                           where serviceIdInDB.Contains(Convert.ToInt32(service.idService))
                            select hotel).ToList<Models.Hotel>();
                      }
                  }
             }
-
-            
-
-
             return View(hotelList);
         }
 
+        [ChildActionOnly]
+        public ActionResult getdiscount()
+        {
+            List<Models.vDiscount> disList = new List<Models.vDiscount>();
+            disList = varHotel.getDiscountView();
+            return PartialView("_PartialFooter", disList);
+        }
 
         public ActionResult AutocompleteAsync(string search)
         {

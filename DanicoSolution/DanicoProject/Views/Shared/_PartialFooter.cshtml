@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DanicoProject.Models.vDiscount>
+@{
+ 
+    Layout = null;
+    
+}
+              
+<footer>
+    	<div class="aside">
+        	<div class="container">
+                <div class="clearfix">
+
+                    <div class="seven columns">
+                        <h3>Twitter</h3>
+                        <a class="twitter-timeline" data-dnt=true href="https://twitter.com/dmarinmu" data-widget-id="245710021256675328">Tweets by @@dmarinmu</a>
+                        <script>                            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } } (document, "script", "twitter-wjs");</script>
+                    </div>
+                                
+                    <div class="nine columns">
+                        <h3>Promociones</h3>
+                        <div id="promo">
+                        
+                            
+                            @foreach (var item in Model)
+                            {
+                                <p class="pPromocion">  @item.Hname  ofrece @item.Dpercentage% de Descuento en la ciudad  @item.Tname por el precio de @item.Dprice COP.  @item.Ddescription   </p>
+                              
+                            }
+                            <img class="iPromocion" src="../../Content/images/danico/label_sale_red.png" /><!-- taken from http://findicons.com/icon/177251/label_sale_red?id=177482# -->
+                        </div>           
+                    </div>
+                      
+            	</div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+        	<div class="container">
+            	<div class="clearfix">
+                	<div class="sixteen columns">
+                        <div class="fright">
+                            Copyright &copy; 2012
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>

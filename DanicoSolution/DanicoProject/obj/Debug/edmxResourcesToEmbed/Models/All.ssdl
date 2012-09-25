@@ -1,18 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DanicoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="DanicoModelStoreContainer">
+    <EntitySet Name="Discount" EntityType="DanicoModel.Store.Discount" store:Type="Tables" store:Schema="dbo" store:Name="Discount">
+      <DefiningQuery>SELECT 
+      [Discount].[idHotel] AS [idHotel], 
+      [Discount].[percentage] AS [percentage], 
+      [Discount].[price] AS [price], 
+      [Discount].[description] AS [description], 
+      [Discount].[startDate] AS [startDate], 
+      [Discount].[endDate] AS [endDate], 
+      [Discount].[state] AS [state]
+      FROM [dbo].[Discount] AS [Discount]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Hotel" EntityType="DanicoModel.Store.Hotel" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HotelService" EntityType="DanicoModel.Store.HotelService" store:Type="Tables" store:Schema="dbo" store:Name="HotelService">
       <DefiningQuery>SELECT 
       [HotelService].[idHotel] AS [idHotel], 
-      [HotelService].[idService] AS [idService], 
       [HotelService].[price] AS [price], 
       [HotelService].[description] AS [description], 
       [HotelService].[imagesDirectory] AS [imagesDirectory], 
       [HotelService].[idRoom] AS [idRoom], 
       [HotelService].[coverImage1] AS [coverImage1], 
       [HotelService].[coverImage2] AS [coverImage2], 
-      [HotelService].[coverImage0] AS [coverImage0]
+      [HotelService].[coverImage0] AS [coverImage0], 
+      [HotelService].[idService] AS [idService], 
+      [HotelService].[capactity] AS [capactity]
       FROM [dbo].[HotelService] AS [HotelService]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="Room" EntityType="DanicoModel.Store.Room" store:Type="Tables" Schema="dbo" />
@@ -30,6 +42,18 @@
       [TripType].[business] AS [business]
       FROM [dbo].[TripType] AS [TripType]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="vDiscount" EntityType="DanicoModel.Store.vDiscount" store:Type="Views" store:Schema="dbo" store:Name="vDiscount">
+      <DefiningQuery>SELECT 
+      [vDiscount].[Hpk_idHotel] AS [Hpk_idHotel], 
+      [vDiscount].[Hname] AS [Hname], 
+      [vDiscount].[Ddescription] AS [Ddescription], 
+      [vDiscount].[Dpercentage] AS [Dpercentage], 
+      [vDiscount].[Dprice] AS [Dprice], 
+      [vDiscount].[DstartDate] AS [DstartDate], 
+      [vDiscount].[DendDate] AS [DendDate], 
+      [vDiscount].[Tname] AS [Tname]
+      FROM [dbo].[vDiscount] AS [vDiscount]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="vHotel" EntityType="DanicoModel.Store.vHotel" store:Type="Views" store:Schema="dbo" store:Name="vHotel">
       <DefiningQuery>SELECT 
       [vHotel].[Hpk_idHotel] AS [Hpk_idHotel], 
@@ -44,6 +68,8 @@
       [vHotel].[HcoverImage] AS [HcoverImage], 
       [vHotel].[Hstars] AS [Hstars], 
       [vHotel].[Hstate] AS [Hstate], 
+      [vHotel].[Hlat] AS [Hlat], 
+      [vHotel].[Hlng] AS [Hlng], 
       [vHotel].[HSidHotel] AS [HSidHotel], 
       [vHotel].[HSidService] AS [HSidService], 
       [vHotel].[HSprice] AS [HSprice], 
@@ -60,6 +86,10 @@
       [vHotel].[Rtype] AS [Rtype]
       FROM [dbo].[vHotel] AS [vHotel]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_discount_Hotel" Association="DanicoModel.Store.FK_discount_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="Discount" EntitySet="Discount" />
+    </AssociationSet>
     <AssociationSet Name="FK_Hotel_Town" Association="DanicoModel.Store.FK_Hotel_Town">
       <End Role="Town" EntitySet="Town" />
       <End Role="Hotel" EntitySet="Hotel" />
@@ -81,6 +111,21 @@
       <End Role="TripType" EntitySet="TripType" />
     </AssociationSet>
   </EntityContainer>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.Discount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="idHotel" />
+    </Key>
+    <Property Name="idHotel" Type="bigint" Nullable="false" />
+    <Property Name="percentage" Type="float" />
+    <Property Name="price" Type="float" />
+    <Property Name="description" Type="varchar" MaxLength="100" />
+    <Property Name="startDate" Type="date" />
+    <Property Name="endDate" Type="date" />
+    <Property Name="state" Type="bit" />
+  </EntityType>
   <EntityType Name="Hotel">
     <Key>
       <PropertyRef Name="pk_idHotel" />
@@ -97,6 +142,8 @@
     <Property Name="coverImage" Type="varchar" MaxLength="100" />
     <Property Name="stars" Type="char" MaxLength="1" />
     <Property Name="state" Type="bit" Nullable="false" />
+    <Property Name="lat" Type="varchar" MaxLength="50" />
+    <Property Name="lng" Type="varchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
       warning 6002: The table/view 'Danico.dbo.HotelService' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -104,10 +151,8 @@
   <EntityType Name="HotelService">
     <Key>
       <PropertyRef Name="idHotel" />
-      <PropertyRef Name="idService" />
     </Key>
     <Property Name="idHotel" Type="bigint" Nullable="false" />
-    <Property Name="idService" Type="bigint" Nullable="false" />
     <Property Name="price" Type="float" />
     <Property Name="description" Type="varchar" MaxLength="200" />
     <Property Name="imagesDirectory" Type="varchar" MaxLength="100" />
@@ -115,6 +160,8 @@
     <Property Name="coverImage1" Type="varchar" MaxLength="100" />
     <Property Name="coverImage2" Type="varchar" MaxLength="100" />
     <Property Name="coverImage0" Type="varchar" MaxLength="100" />
+    <Property Name="idService" Type="bigint" />
+    <Property Name="capactity" Type="bigint" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -162,6 +209,22 @@
     <Property Name="business" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.vDiscount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vDiscount">
+    <Key>
+      <PropertyRef Name="Hpk_idHotel" />
+    </Key>
+    <Property Name="Hpk_idHotel" Type="bigint" Nullable="false" />
+    <Property Name="Hname" Type="varchar" MaxLength="50" />
+    <Property Name="Ddescription" Type="varchar" MaxLength="100" />
+    <Property Name="Dpercentage" Type="float" />
+    <Property Name="Dprice" Type="float" />
+    <Property Name="DstartDate" Type="date" />
+    <Property Name="DendDate" Type="date" />
+    <Property Name="Tname" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
       warning 6002: The table/view 'Danico.dbo.vHotel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="vHotel">
@@ -180,6 +243,8 @@
     <Property Name="HcoverImage" Type="varchar" MaxLength="100" />
     <Property Name="Hstars" Type="char" MaxLength="1" />
     <Property Name="Hstate" Type="bit" />
+    <Property Name="Hlat" Type="varchar" MaxLength="50" />
+    <Property Name="Hlng" Type="varchar" MaxLength="50" />
     <Property Name="HSidHotel" Type="bigint" />
     <Property Name="HSidService" Type="bigint" />
     <Property Name="HSprice" Type="float" />
@@ -195,6 +260,18 @@
     <Property Name="RpkidHabitacion" Type="bigint" />
     <Property Name="Rtype" Type="varchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_discount_Hotel">
+    <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="1" />
+    <End Role="Discount" Type="DanicoModel.Store.Discount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="pk_idHotel" />
+      </Principal>
+      <Dependent Role="Discount">
+        <PropertyRef Name="idHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Hotel_Town">
     <End Role="Town" Type="DanicoModel.Store.Town" Multiplicity="1" />
     <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="*" />
@@ -209,7 +286,7 @@
   </Association>
   <Association Name="FK_HotelService_Hotel">
     <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="1" />
-    <End Role="HotelService" Type="DanicoModel.Store.HotelService" Multiplicity="*" />
+    <End Role="HotelService" Type="DanicoModel.Store.HotelService" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Hotel">
         <PropertyRef Name="pk_idHotel" />
@@ -232,7 +309,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_HotelService_Service">
-    <End Role="Service" Type="DanicoModel.Store.Service" Multiplicity="1" />
+    <End Role="Service" Type="DanicoModel.Store.Service" Multiplicity="0..1" />
     <End Role="HotelService" Type="DanicoModel.Store.HotelService" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Service">

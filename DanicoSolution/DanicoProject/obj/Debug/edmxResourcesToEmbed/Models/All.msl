@@ -1,6 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DanicoModelStoreContainer" CdmEntityContainer="AllConection">
+    <EntitySetMapping Name="Discounts">
+      <EntityTypeMapping TypeName="DanicoModel.Discount">
+        <MappingFragment StoreEntitySet="Discount">
+          <ScalarProperty Name="idHotel" ColumnName="idHotel" />
+          <ScalarProperty Name="percentage" ColumnName="percentage" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="state" ColumnName="state" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Hotels">
       <EntityTypeMapping TypeName="DanicoModel.Hotel">
         <MappingFragment StoreEntitySet="Hotel">
@@ -16,6 +29,8 @@
           <ScalarProperty Name="coverImage" ColumnName="coverImage" />
           <ScalarProperty Name="stars" ColumnName="stars" />
           <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -23,7 +38,6 @@
       <EntityTypeMapping TypeName="DanicoModel.HotelService">
         <MappingFragment StoreEntitySet="HotelService">
           <ScalarProperty Name="idHotel" ColumnName="idHotel" />
-          <ScalarProperty Name="idService" ColumnName="idService" />
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="imagesDirectory" ColumnName="imagesDirectory" />
@@ -31,6 +45,8 @@
           <ScalarProperty Name="coverImage1" ColumnName="coverImage1" />
           <ScalarProperty Name="coverImage2" ColumnName="coverImage2" />
           <ScalarProperty Name="coverImage0" ColumnName="coverImage0" />
+          <ScalarProperty Name="idService" ColumnName="idService" />
+          <ScalarProperty Name="capactity" ColumnName="capactity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -73,6 +89,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vDiscounts">
+      <EntityTypeMapping TypeName="DanicoModel.vDiscount">
+        <MappingFragment StoreEntitySet="vDiscount">
+          <ScalarProperty Name="Hpk_idHotel" ColumnName="Hpk_idHotel" />
+          <ScalarProperty Name="Hname" ColumnName="Hname" />
+          <ScalarProperty Name="Ddescription" ColumnName="Ddescription" />
+          <ScalarProperty Name="Dpercentage" ColumnName="Dpercentage" />
+          <ScalarProperty Name="Dprice" ColumnName="Dprice" />
+          <ScalarProperty Name="DstartDate" ColumnName="DstartDate" />
+          <ScalarProperty Name="DendDate" ColumnName="DendDate" />
+          <ScalarProperty Name="Tname" ColumnName="Tname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="vHotels">
       <EntityTypeMapping TypeName="DanicoModel.vHotel">
         <MappingFragment StoreEntitySet="vHotel">
@@ -88,6 +118,8 @@
           <ScalarProperty Name="HcoverImage" ColumnName="HcoverImage" />
           <ScalarProperty Name="Hstars" ColumnName="Hstars" />
           <ScalarProperty Name="Hstate" ColumnName="Hstate" />
+          <ScalarProperty Name="Hlat" ColumnName="Hlat" />
+          <ScalarProperty Name="Hlng" ColumnName="Hlng" />
           <ScalarProperty Name="HSidHotel" ColumnName="HSidHotel" />
           <ScalarProperty Name="HSidService" ColumnName="HSidService" />
           <ScalarProperty Name="HSprice" ColumnName="HSprice" />

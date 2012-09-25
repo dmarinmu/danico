@@ -6,18 +6,30 @@
     <edmx:StorageModels>
       <Schema Namespace="DanicoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="DanicoModelStoreContainer">
+          <EntitySet Name="Discount" EntityType="DanicoModel.Store.Discount" store:Type="Tables" store:Schema="dbo" store:Name="Discount">
+            <DefiningQuery>SELECT 
+      [Discount].[idHotel] AS [idHotel], 
+      [Discount].[percentage] AS [percentage], 
+      [Discount].[price] AS [price], 
+      [Discount].[description] AS [description], 
+      [Discount].[startDate] AS [startDate], 
+      [Discount].[endDate] AS [endDate], 
+      [Discount].[state] AS [state]
+      FROM [dbo].[Discount] AS [Discount]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Hotel" EntityType="DanicoModel.Store.Hotel" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="HotelService" EntityType="DanicoModel.Store.HotelService" store:Type="Tables" store:Schema="dbo" store:Name="HotelService">
             <DefiningQuery>SELECT 
       [HotelService].[idHotel] AS [idHotel], 
-      [HotelService].[idService] AS [idService], 
       [HotelService].[price] AS [price], 
       [HotelService].[description] AS [description], 
       [HotelService].[imagesDirectory] AS [imagesDirectory], 
       [HotelService].[idRoom] AS [idRoom], 
       [HotelService].[coverImage1] AS [coverImage1], 
       [HotelService].[coverImage2] AS [coverImage2], 
-      [HotelService].[coverImage0] AS [coverImage0]
+      [HotelService].[coverImage0] AS [coverImage0], 
+      [HotelService].[idService] AS [idService], 
+      [HotelService].[capactity] AS [capactity]
       FROM [dbo].[HotelService] AS [HotelService]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Room" EntityType="DanicoModel.Store.Room" store:Type="Tables" Schema="dbo" />
@@ -35,6 +47,18 @@
       [TripType].[business] AS [business]
       FROM [dbo].[TripType] AS [TripType]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vDiscount" EntityType="DanicoModel.Store.vDiscount" store:Type="Views" store:Schema="dbo" store:Name="vDiscount">
+            <DefiningQuery>SELECT 
+      [vDiscount].[Hpk_idHotel] AS [Hpk_idHotel], 
+      [vDiscount].[Hname] AS [Hname], 
+      [vDiscount].[Ddescription] AS [Ddescription], 
+      [vDiscount].[Dpercentage] AS [Dpercentage], 
+      [vDiscount].[Dprice] AS [Dprice], 
+      [vDiscount].[DstartDate] AS [DstartDate], 
+      [vDiscount].[DendDate] AS [DendDate], 
+      [vDiscount].[Tname] AS [Tname]
+      FROM [dbo].[vDiscount] AS [vDiscount]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vHotel" EntityType="DanicoModel.Store.vHotel" store:Type="Views" store:Schema="dbo" store:Name="vHotel">
             <DefiningQuery>SELECT 
       [vHotel].[Hpk_idHotel] AS [Hpk_idHotel], 
@@ -49,6 +73,8 @@
       [vHotel].[HcoverImage] AS [HcoverImage], 
       [vHotel].[Hstars] AS [Hstars], 
       [vHotel].[Hstate] AS [Hstate], 
+      [vHotel].[Hlat] AS [Hlat], 
+      [vHotel].[Hlng] AS [Hlng], 
       [vHotel].[HSidHotel] AS [HSidHotel], 
       [vHotel].[HSidService] AS [HSidService], 
       [vHotel].[HSprice] AS [HSprice], 
@@ -65,6 +91,10 @@
       [vHotel].[Rtype] AS [Rtype]
       FROM [dbo].[vHotel] AS [vHotel]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_discount_Hotel" Association="DanicoModel.Store.FK_discount_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Discount" EntitySet="Discount" />
+          </AssociationSet>
           <AssociationSet Name="FK_Hotel_Town" Association="DanicoModel.Store.FK_Hotel_Town">
             <End Role="Town" EntitySet="Town" />
             <End Role="Hotel" EntitySet="Hotel" />
@@ -86,6 +116,21 @@
             <End Role="TripType" EntitySet="TripType" />
           </AssociationSet>
         </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.Discount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="idHotel" />
+          </Key>
+          <Property Name="idHotel" Type="bigint" Nullable="false" />
+          <Property Name="percentage" Type="float" />
+          <Property Name="price" Type="float" />
+          <Property Name="description" Type="varchar" MaxLength="100" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="state" Type="bit" />
+        </EntityType>
         <EntityType Name="Hotel">
           <Key>
             <PropertyRef Name="pk_idHotel" />
@@ -102,6 +147,8 @@
           <Property Name="coverImage" Type="varchar" MaxLength="100" />
           <Property Name="stars" Type="char" MaxLength="1" />
           <Property Name="state" Type="bit" Nullable="false" />
+          <Property Name="lat" Type="varchar" MaxLength="50" />
+          <Property Name="lng" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'Danico.dbo.HotelService' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -109,10 +156,8 @@
         <EntityType Name="HotelService">
           <Key>
             <PropertyRef Name="idHotel" />
-            <PropertyRef Name="idService" />
           </Key>
           <Property Name="idHotel" Type="bigint" Nullable="false" />
-          <Property Name="idService" Type="bigint" Nullable="false" />
           <Property Name="price" Type="float" />
           <Property Name="description" Type="varchar" MaxLength="200" />
           <Property Name="imagesDirectory" Type="varchar" MaxLength="100" />
@@ -120,6 +165,8 @@
           <Property Name="coverImage1" Type="varchar" MaxLength="100" />
           <Property Name="coverImage2" Type="varchar" MaxLength="100" />
           <Property Name="coverImage0" Type="varchar" MaxLength="100" />
+          <Property Name="idService" Type="bigint" />
+          <Property Name="capactity" Type="bigint" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -167,6 +214,22 @@
           <Property Name="business" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.vDiscount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vDiscount">
+          <Key>
+            <PropertyRef Name="Hpk_idHotel" />
+          </Key>
+          <Property Name="Hpk_idHotel" Type="bigint" Nullable="false" />
+          <Property Name="Hname" Type="varchar" MaxLength="50" />
+          <Property Name="Ddescription" Type="varchar" MaxLength="100" />
+          <Property Name="Dpercentage" Type="float" />
+          <Property Name="Dprice" Type="float" />
+          <Property Name="DstartDate" Type="date" />
+          <Property Name="DendDate" Type="date" />
+          <Property Name="Tname" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
       warning 6002: The table/view 'Danico.dbo.vHotel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="vHotel">
@@ -185,6 +248,8 @@
           <Property Name="HcoverImage" Type="varchar" MaxLength="100" />
           <Property Name="Hstars" Type="char" MaxLength="1" />
           <Property Name="Hstate" Type="bit" />
+          <Property Name="Hlat" Type="varchar" MaxLength="50" />
+          <Property Name="Hlng" Type="varchar" MaxLength="50" />
           <Property Name="HSidHotel" Type="bigint" />
           <Property Name="HSidService" Type="bigint" />
           <Property Name="HSprice" Type="float" />
@@ -200,6 +265,18 @@
           <Property Name="RpkidHabitacion" Type="bigint" />
           <Property Name="Rtype" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_discount_Hotel">
+          <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="1" />
+          <End Role="Discount" Type="DanicoModel.Store.Discount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="pk_idHotel" />
+            </Principal>
+            <Dependent Role="Discount">
+              <PropertyRef Name="idHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Hotel_Town">
           <End Role="Town" Type="DanicoModel.Store.Town" Multiplicity="1" />
           <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="*" />
@@ -214,7 +291,7 @@
         </Association>
         <Association Name="FK_HotelService_Hotel">
           <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="1" />
-          <End Role="HotelService" Type="DanicoModel.Store.HotelService" Multiplicity="*" />
+          <End Role="HotelService" Type="DanicoModel.Store.HotelService" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="pk_idHotel" />
@@ -237,7 +314,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HotelService_Service">
-          <End Role="Service" Type="DanicoModel.Store.Service" Multiplicity="1" />
+          <End Role="Service" Type="DanicoModel.Store.Service" Multiplicity="0..1" />
           <End Role="HotelService" Type="DanicoModel.Store.HotelService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
@@ -266,13 +343,19 @@
     <edmx:ConceptualModels>
       <Schema Namespace="DanicoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="AllConection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Discounts" EntityType="DanicoModel.Discount" />
           <EntitySet Name="Hotels" EntityType="DanicoModel.Hotel" />
           <EntitySet Name="HotelServices" EntityType="DanicoModel.HotelService" />
           <EntitySet Name="Rooms" EntityType="DanicoModel.Room" />
           <EntitySet Name="Services" EntityType="DanicoModel.Service" />
           <EntitySet Name="Towns" EntityType="DanicoModel.Town" />
           <EntitySet Name="TripTypes" EntityType="DanicoModel.TripType" />
+          <EntitySet Name="vDiscounts" EntityType="DanicoModel.vDiscount" />
           <EntitySet Name="vHotels" EntityType="DanicoModel.vHotel" />
+          <AssociationSet Name="FK_discount_Hotel" Association="DanicoModel.FK_discount_Hotel">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Discount" EntitySet="Discounts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Hotel_Town" Association="DanicoModel.FK_Hotel_Town">
             <End Role="Town" EntitySet="Towns" />
             <End Role="Hotel" EntitySet="Hotels" />
@@ -294,6 +377,19 @@
             <End Role="HotelService" EntitySet="HotelServices" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="idHotel" />
+          </Key>
+          <Property Name="idHotel" Type="Int64" Nullable="false" />
+          <Property Name="percentage" Type="Double" />
+          <Property Name="price" Type="Double" />
+          <Property Name="description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="startDate" Type="DateTime" />
+          <Property Name="endDate" Type="DateTime" />
+          <Property Name="state" Type="Boolean" />
+          <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_discount_Hotel" FromRole="Discount" ToRole="Hotel" />
+        </EntityType>
         <EntityType Name="Hotel">
           <Key>
             <PropertyRef Name="pk_idHotel" />
@@ -310,17 +406,18 @@
           <Property Name="coverImage" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="stars" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
           <Property Name="state" Type="Boolean" Nullable="false" />
+          <Property Name="lat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="lng" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Discount" Relationship="DanicoModel.FK_discount_Hotel" FromRole="Hotel" ToRole="Discount" />
           <NavigationProperty Name="Town" Relationship="DanicoModel.FK_Hotel_Town" FromRole="Hotel" ToRole="Town" />
-          <NavigationProperty Name="HotelServices" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="Hotel" ToRole="HotelService" />
+          <NavigationProperty Name="HotelService" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="Hotel" ToRole="HotelService" />
           <NavigationProperty Name="TripTypes" Relationship="DanicoModel.FK_TripType_Hotel" FromRole="Hotel" ToRole="TripType" />
         </EntityType>
         <EntityType Name="HotelService">
           <Key>
             <PropertyRef Name="idHotel" />
-            <PropertyRef Name="idService" />
           </Key>
           <Property Name="idHotel" Type="Int64" Nullable="false" />
-          <Property Name="idService" Type="Int64" Nullable="false" />
           <Property Name="price" Type="Double" />
           <Property Name="description" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="imagesDirectory" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
@@ -328,6 +425,8 @@
           <Property Name="coverImage1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="coverImage2" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="coverImage0" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="idService" Type="Int64" />
+          <Property Name="capactity" Type="Int64" />
           <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="HotelService" ToRole="Hotel" />
           <NavigationProperty Name="Room" Relationship="DanicoModel.FK_HotelService_Room" FromRole="HotelService" ToRole="Room" />
           <NavigationProperty Name="Service" Relationship="DanicoModel.FK_HotelService_Service" FromRole="HotelService" ToRole="Service" />
@@ -378,6 +477,19 @@
           <Property Name="business" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_TripType_Hotel" FromRole="TripType" ToRole="Hotel" />
         </EntityType>
+        <EntityType Name="vDiscount">
+          <Key>
+            <PropertyRef Name="Hpk_idHotel" />
+          </Key>
+          <Property Name="Hpk_idHotel" Type="Int64" Nullable="false" />
+          <Property Name="Hname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Ddescription" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Dpercentage" Type="Double" />
+          <Property Name="Dprice" Type="Double" />
+          <Property Name="DstartDate" Type="DateTime" />
+          <Property Name="DendDate" Type="DateTime" />
+          <Property Name="Tname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
         <EntityType Name="vHotel">
           <Key>
             <PropertyRef Name="Hpk_idHotel" />
@@ -394,6 +506,8 @@
           <Property Name="HcoverImage" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Hstars" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
           <Property Name="Hstate" Type="Boolean" />
+          <Property Name="Hlat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Hlng" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="HSidHotel" Type="Int64" />
           <Property Name="HSidService" Type="Int64" />
           <Property Name="HSprice" Type="Double" />
@@ -409,6 +523,18 @@
           <Property Name="RpkidHabitacion" Type="Int64" />
           <Property Name="Rtype" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
         </EntityType>
+        <Association Name="FK_discount_Hotel">
+          <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="1" />
+          <End Role="Discount" Type="DanicoModel.Discount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="pk_idHotel" />
+            </Principal>
+            <Dependent Role="Discount">
+              <PropertyRef Name="idHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Hotel_Town">
           <End Role="Town" Type="DanicoModel.Town" Multiplicity="1" />
           <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="*" />
@@ -423,7 +549,7 @@
         </Association>
         <Association Name="FK_HotelService_Hotel">
           <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="1" />
-          <End Role="HotelService" Type="DanicoModel.HotelService" Multiplicity="*" />
+          <End Role="HotelService" Type="DanicoModel.HotelService" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="pk_idHotel" />
@@ -458,7 +584,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HotelService_Service">
-          <End Role="Service" Type="DanicoModel.Service" Multiplicity="1" />
+          <End Role="Service" Type="DanicoModel.Service" Multiplicity="0..1" />
           <End Role="HotelService" Type="DanicoModel.HotelService" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
@@ -475,6 +601,15 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DanicoModelStoreContainer" CdmEntityContainer="AllConection">
+          <EntitySetMapping Name="Discounts"><EntityTypeMapping TypeName="DanicoModel.Discount"><MappingFragment StoreEntitySet="Discount">
+            <ScalarProperty Name="idHotel" ColumnName="idHotel" />
+            <ScalarProperty Name="percentage" ColumnName="percentage" />
+            <ScalarProperty Name="price" ColumnName="price" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="startDate" ColumnName="startDate" />
+            <ScalarProperty Name="endDate" ColumnName="endDate" />
+            <ScalarProperty Name="state" ColumnName="state" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Hotels"><EntityTypeMapping TypeName="DanicoModel.Hotel"><MappingFragment StoreEntitySet="Hotel">
             <ScalarProperty Name="pk_idHotel" ColumnName="pk_idHotel" />
             <ScalarProperty Name="name" ColumnName="name" />
@@ -488,10 +623,11 @@
             <ScalarProperty Name="coverImage" ColumnName="coverImage" />
             <ScalarProperty Name="stars" ColumnName="stars" />
             <ScalarProperty Name="state" ColumnName="state" />
+            <ScalarProperty Name="lat" ColumnName="lat" />
+            <ScalarProperty Name="lng" ColumnName="lng" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="HotelServices"><EntityTypeMapping TypeName="DanicoModel.HotelService"><MappingFragment StoreEntitySet="HotelService">
             <ScalarProperty Name="idHotel" ColumnName="idHotel" />
-            <ScalarProperty Name="idService" ColumnName="idService" />
             <ScalarProperty Name="price" ColumnName="price" />
             <ScalarProperty Name="description" ColumnName="description" />
             <ScalarProperty Name="imagesDirectory" ColumnName="imagesDirectory" />
@@ -499,6 +635,8 @@
             <ScalarProperty Name="coverImage1" ColumnName="coverImage1" />
             <ScalarProperty Name="coverImage2" ColumnName="coverImage2" />
             <ScalarProperty Name="coverImage0" ColumnName="coverImage0" />
+            <ScalarProperty Name="idService" ColumnName="idService" />
+            <ScalarProperty Name="capactity" ColumnName="capactity" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Rooms"><EntityTypeMapping TypeName="DanicoModel.Room"><MappingFragment StoreEntitySet="Room">
             <ScalarProperty Name="pkidHabitacion" ColumnName="pkidHabitacion" />
@@ -523,6 +661,16 @@
             <ScalarProperty Name="transit" ColumnName="transit" />
             <ScalarProperty Name="business" ColumnName="business" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="vDiscounts"><EntityTypeMapping TypeName="DanicoModel.vDiscount"><MappingFragment StoreEntitySet="vDiscount">
+            <ScalarProperty Name="Hpk_idHotel" ColumnName="Hpk_idHotel" />
+            <ScalarProperty Name="Hname" ColumnName="Hname" />
+            <ScalarProperty Name="Ddescription" ColumnName="Ddescription" />
+            <ScalarProperty Name="Dpercentage" ColumnName="Dpercentage" />
+            <ScalarProperty Name="Dprice" ColumnName="Dprice" />
+            <ScalarProperty Name="DstartDate" ColumnName="DstartDate" />
+            <ScalarProperty Name="DendDate" ColumnName="DendDate" />
+            <ScalarProperty Name="Tname" ColumnName="Tname" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="vHotels"><EntityTypeMapping TypeName="DanicoModel.vHotel"><MappingFragment StoreEntitySet="vHotel">
             <ScalarProperty Name="Hpk_idHotel" ColumnName="Hpk_idHotel" />
             <ScalarProperty Name="Hname" ColumnName="Hname" />
@@ -536,6 +684,8 @@
             <ScalarProperty Name="HcoverImage" ColumnName="HcoverImage" />
             <ScalarProperty Name="Hstars" ColumnName="Hstars" />
             <ScalarProperty Name="Hstate" ColumnName="Hstate" />
+            <ScalarProperty Name="Hlat" ColumnName="Hlat" />
+            <ScalarProperty Name="Hlng" ColumnName="Hlng" />
             <ScalarProperty Name="HSidHotel" ColumnName="HSidHotel" />
             <ScalarProperty Name="HSidService" ColumnName="HSidService" />
             <ScalarProperty Name="HSprice" ColumnName="HSprice" />
@@ -572,39 +722,40 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="All">
-        <EntityTypeShape EntityType="DanicoModel.Hotel" Width="1.5" PointX="3" PointY="3.875" Height="3.9033007812499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.HotelService" Width="1.5" PointX="5.25" PointY="4.125" Height="3.3263964843749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.Room" Width="1.5" PointX="3" PointY="0.75" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.Service" Width="1.5" PointX="3" PointY="9.125" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.Town" Width="1.5" PointX="0.75" PointY="5" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.TripType" Width="1.5" PointX="5.25" PointY="8.5" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.vHotel" Width="1.5" PointX="7.75" PointY="2" Height="6.0186165364583326" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Discount" Width="1.5" PointX="5.25" PointY="3.5" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Hotel" Width="1.5" PointX="3" PointY="4.25" Height="4.480205078125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.HotelService" Width="1.5" PointX="8.25" PointY="4.75" Height="3.5186979166666648" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Room" Width="1.5" PointX="6" PointY="7.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Service" Width="1.5" PointX="6" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Town" Width="1.5" PointX="0.75" PointY="5.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.TripType" Width="1.5" PointX="5.25" PointY="11" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.vDiscount" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.vHotel" Width="1.5" PointX="0.75" PointY="9.75" Height="6.4032194010416674" IsExpanded="true" />
+        <AssociationConnector Association="DanicoModel.FK_discount_Hotel" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="5.1535953776041667" />
+          <ConnectorPoint PointX="5.25" PointY="5.1535953776041667" />
+        </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_Hotel_Town" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="5.797841796875" />
-          <ConnectorPoint PointX="3" PointY="5.797841796875" />
+          <ConnectorPoint PointX="2.25" PointY="6.547841796875" />
+          <ConnectorPoint PointX="3" PointY="6.547841796875" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_HotelService_Hotel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="5.7881982421875" />
-          <ConnectorPoint PointX="5.25" PointY="5.7881982421875" />
+          <ConnectorPoint PointX="4.5" PointY="6.7160953776041667" />
+          <ConnectorPoint PointX="8.25" PointY="6.7160953776041667" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_TripType_Hotel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.77830078125" />
-          <ConnectorPoint PointX="4.875" PointY="8.15330078125" />
-          <ConnectorPoint PointX="4.875" PointY="9.87474609375" />
-          <ConnectorPoint PointX="5.25" PointY="9.87474609375" />
+          <ConnectorPoint PointX="3.75" PointY="8.730205078125" />
+          <ConnectorPoint PointX="3.75" PointY="12.37474609375" />
+          <ConnectorPoint PointX="5.25" PointY="12.37474609375" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_HotelService_Room" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="1.5478417968749998" />
-          <ConnectorPoint PointX="6" PointY="1.5478417968749998" />
-          <ConnectorPoint PointX="6" PointY="4.125" />
+          <ConnectorPoint PointX="7.5" PointY="7.8218489583333319" />
+          <ConnectorPoint PointX="8.25" PointY="7.8218489583333319" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_HotelService_Service" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="9.18846053846154" />
-          <ConnectorPoint PointX="4.8160744349011209" PointY="8.8723861035604177" />
-          <ConnectorPoint PointX="4.9339255650988791" PointY="8.7545349733626612" />
-          <ConnectorPoint PointX="5.0625" PointY="8.62596053846154" />
-          <ConnectorPoint PointX="5.0625" PointY="6.6510493632812508" />
-          <ConnectorPoint PointX="5.25" PointY="6.6510493632812508" />
+          <ConnectorPoint PointX="7.5" PointY="1.6439925130208337" />
+          <ConnectorPoint PointX="9" PointY="1.6439925130208337" />
+          <ConnectorPoint PointX="9" PointY="4.75" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -318,3 +318,18 @@
       width: 0;
       height: 0;
     }
+
+/***********************************************/
+
+#promo
+{
+    padding:12px;
+    height:324px;
+    margin-bottom:10px;
+    /*background-color:#fff;*/
+    border:1px solid #4A4A4A;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+   
+}

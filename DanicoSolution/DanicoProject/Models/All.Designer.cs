@@ -18,11 +18,12 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_discount_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "Discount", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Discount), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_Hotel_Town", "Town", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Town), "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Hotel), true)]
-[assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.HotelService), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_TripType_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "TripType", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.TripType), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Room", "Room", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Room), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
-[assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Service", "Service", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Service), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Service", "Service", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Service), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
 
 #endregion
 
@@ -73,6 +74,22 @@ namespace DanicoProject.Models
         #endregion
     
         #region ObjectSet Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Discount> Discounts
+        {
+            get
+            {
+                if ((_Discounts == null))
+                {
+                    _Discounts = base.CreateObjectSet<Discount>("Discounts");
+                }
+                return _Discounts;
+            }
+        }
+        private ObjectSet<Discount> _Discounts;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -173,6 +190,22 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<vDiscount> vDiscounts
+        {
+            get
+            {
+                if ((_vDiscounts == null))
+                {
+                    _vDiscounts = base.CreateObjectSet<vDiscount>("vDiscounts");
+                }
+                return _vDiscounts;
+            }
+        }
+        private ObjectSet<vDiscount> _vDiscounts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<vHotel> vHotels
         {
             get
@@ -188,6 +221,14 @@ namespace DanicoProject.Models
 
         #endregion
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Discounts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDiscounts(Discount discount)
+        {
+            base.AddObject("Discounts", discount);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Hotels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -238,6 +279,14 @@ namespace DanicoProject.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the vDiscounts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTovDiscounts(vDiscount vDiscount)
+        {
+            base.AddObject("vDiscounts", vDiscount);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the vHotels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTovHotels(vHotel vHotel)
@@ -252,6 +301,246 @@ namespace DanicoProject.Models
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="Discount")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Discount : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Discount object.
+        /// </summary>
+        /// <param name="idHotel">Initial value of the idHotel property.</param>
+        public static Discount CreateDiscount(global::System.Int64 idHotel)
+        {
+            Discount discount = new Discount();
+            discount.idHotel = idHotel;
+            return discount;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 idHotel
+        {
+            get
+            {
+                return _idHotel;
+            }
+            set
+            {
+                if (_idHotel != value)
+                {
+                    OnidHotelChanging(value);
+                    ReportPropertyChanging("idHotel");
+                    _idHotel = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("idHotel");
+                    OnidHotelChanged();
+                }
+            }
+        }
+        private global::System.Int64 _idHotel;
+        partial void OnidHotelChanging(global::System.Int64 value);
+        partial void OnidHotelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> percentage
+        {
+            get
+            {
+                return _percentage;
+            }
+            set
+            {
+                OnpercentageChanging(value);
+                ReportPropertyChanging("percentage");
+                _percentage = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("percentage");
+                OnpercentageChanged();
+            }
+        }
+        private Nullable<global::System.Double> _percentage;
+        partial void OnpercentageChanging(Nullable<global::System.Double> value);
+        partial void OnpercentageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> price
+        {
+            get
+            {
+                return _price;
+            }
+            set
+            {
+                OnpriceChanging(value);
+                ReportPropertyChanging("price");
+                _price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("price");
+                OnpriceChanged();
+            }
+        }
+        private Nullable<global::System.Double> _price;
+        partial void OnpriceChanging(Nullable<global::System.Double> value);
+        partial void OnpriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                OndescriptionChanging(value);
+                ReportPropertyChanging("description");
+                _description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("description");
+                OndescriptionChanged();
+            }
+        }
+        private global::System.String _description;
+        partial void OndescriptionChanging(global::System.String value);
+        partial void OndescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> startDate
+        {
+            get
+            {
+                return _startDate;
+            }
+            set
+            {
+                OnstartDateChanging(value);
+                ReportPropertyChanging("startDate");
+                _startDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("startDate");
+                OnstartDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _startDate;
+        partial void OnstartDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnstartDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> endDate
+        {
+            get
+            {
+                return _endDate;
+            }
+            set
+            {
+                OnendDateChanging(value);
+                ReportPropertyChanging("endDate");
+                _endDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("endDate");
+                OnendDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _endDate;
+        partial void OnendDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnendDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> state
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                OnstateChanging(value);
+                ReportPropertyChanging("state");
+                _state = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("state");
+                OnstateChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _state;
+        partial void OnstateChanging(Nullable<global::System.Boolean> value);
+        partial void OnstateChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_discount_Hotel", "Hotel")]
+        public Hotel Hotel
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_discount_Hotel", "Hotel").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_discount_Hotel", "Hotel").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Hotel> HotelReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Hotel>("DanicoModel.FK_discount_Hotel", "Hotel");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Hotel>("DanicoModel.FK_discount_Hotel", "Hotel", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -577,10 +866,96 @@ namespace DanicoProject.Models
         private global::System.Boolean _state;
         partial void OnstateChanging(global::System.Boolean value);
         partial void OnstateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String lat
+        {
+            get
+            {
+                return _lat;
+            }
+            set
+            {
+                OnlatChanging(value);
+                ReportPropertyChanging("lat");
+                _lat = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("lat");
+                OnlatChanged();
+            }
+        }
+        private global::System.String _lat;
+        partial void OnlatChanging(global::System.String value);
+        partial void OnlatChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String lng
+        {
+            get
+            {
+                return _lng;
+            }
+            set
+            {
+                OnlngChanging(value);
+                ReportPropertyChanging("lng");
+                _lng = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("lng");
+                OnlngChanged();
+            }
+        }
+        private global::System.String _lng;
+        partial void OnlngChanging(global::System.String value);
+        partial void OnlngChanged();
 
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_discount_Hotel", "Discount")]
+        public Discount Discount
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Discount>("DanicoModel.FK_discount_Hotel", "Discount").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Discount>("DanicoModel.FK_discount_Hotel", "Discount").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Discount> DiscountReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Discount>("DanicoModel.FK_discount_Hotel", "Discount");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Discount>("DanicoModel.FK_discount_Hotel", "Discount", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -627,17 +1002,33 @@ namespace DanicoProject.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_HotelService_Hotel", "HotelService")]
-        public EntityCollection<HotelService> HotelServices
+        public HotelService HotelService
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<HotelService> HotelServiceReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<HotelService>("DanicoModel.FK_HotelService_Hotel", "HotelService", value);
                 }
             }
         }
@@ -681,12 +1072,10 @@ namespace DanicoProject.Models
         /// Create a new HotelService object.
         /// </summary>
         /// <param name="idHotel">Initial value of the idHotel property.</param>
-        /// <param name="idService">Initial value of the idService property.</param>
-        public static HotelService CreateHotelService(global::System.Int64 idHotel, global::System.Int64 idService)
+        public static HotelService CreateHotelService(global::System.Int64 idHotel)
         {
             HotelService hotelService = new HotelService();
             hotelService.idHotel = idHotel;
-            hotelService.idService = idService;
             return hotelService;
         }
 
@@ -719,33 +1108,6 @@ namespace DanicoProject.Models
         private global::System.Int64 _idHotel;
         partial void OnidHotelChanging(global::System.Int64 value);
         partial void OnidHotelChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int64 idService
-        {
-            get
-            {
-                return _idService;
-            }
-            set
-            {
-                if (_idService != value)
-                {
-                    OnidServiceChanging(value);
-                    ReportPropertyChanging("idService");
-                    _idService = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("idService");
-                    OnidServiceChanged();
-                }
-            }
-        }
-        private global::System.Int64 _idService;
-        partial void OnidServiceChanging(global::System.Int64 value);
-        partial void OnidServiceChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -914,6 +1276,54 @@ namespace DanicoProject.Models
         private global::System.String _coverImage0;
         partial void OncoverImage0Changing(global::System.String value);
         partial void OncoverImage0Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> idService
+        {
+            get
+            {
+                return _idService;
+            }
+            set
+            {
+                OnidServiceChanging(value);
+                ReportPropertyChanging("idService");
+                _idService = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idService");
+                OnidServiceChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _idService;
+        partial void OnidServiceChanging(Nullable<global::System.Int64> value);
+        partial void OnidServiceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> capactity
+        {
+            get
+            {
+                return _capactity;
+            }
+            set
+            {
+                OncapactityChanging(value);
+                ReportPropertyChanging("capactity");
+                _capactity = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("capactity");
+                OncapactityChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _capactity;
+        partial void OncapactityChanging(Nullable<global::System.Int64> value);
+        partial void OncapactityChanged();
 
         #endregion
     
@@ -1680,6 +2090,229 @@ namespace DanicoProject.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="vDiscount")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class vDiscount : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new vDiscount object.
+        /// </summary>
+        /// <param name="hpk_idHotel">Initial value of the Hpk_idHotel property.</param>
+        public static vDiscount CreatevDiscount(global::System.Int64 hpk_idHotel)
+        {
+            vDiscount vDiscount = new vDiscount();
+            vDiscount.Hpk_idHotel = hpk_idHotel;
+            return vDiscount;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Hpk_idHotel
+        {
+            get
+            {
+                return _Hpk_idHotel;
+            }
+            set
+            {
+                if (_Hpk_idHotel != value)
+                {
+                    OnHpk_idHotelChanging(value);
+                    ReportPropertyChanging("Hpk_idHotel");
+                    _Hpk_idHotel = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Hpk_idHotel");
+                    OnHpk_idHotelChanged();
+                }
+            }
+        }
+        private global::System.Int64 _Hpk_idHotel;
+        partial void OnHpk_idHotelChanging(global::System.Int64 value);
+        partial void OnHpk_idHotelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Hname
+        {
+            get
+            {
+                return _Hname;
+            }
+            set
+            {
+                OnHnameChanging(value);
+                ReportPropertyChanging("Hname");
+                _Hname = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hname");
+                OnHnameChanged();
+            }
+        }
+        private global::System.String _Hname;
+        partial void OnHnameChanging(global::System.String value);
+        partial void OnHnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Ddescription
+        {
+            get
+            {
+                return _Ddescription;
+            }
+            set
+            {
+                OnDdescriptionChanging(value);
+                ReportPropertyChanging("Ddescription");
+                _Ddescription = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Ddescription");
+                OnDdescriptionChanged();
+            }
+        }
+        private global::System.String _Ddescription;
+        partial void OnDdescriptionChanging(global::System.String value);
+        partial void OnDdescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> Dpercentage
+        {
+            get
+            {
+                return _Dpercentage;
+            }
+            set
+            {
+                OnDpercentageChanging(value);
+                ReportPropertyChanging("Dpercentage");
+                _Dpercentage = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Dpercentage");
+                OnDpercentageChanged();
+            }
+        }
+        private Nullable<global::System.Double> _Dpercentage;
+        partial void OnDpercentageChanging(Nullable<global::System.Double> value);
+        partial void OnDpercentageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> Dprice
+        {
+            get
+            {
+                return _Dprice;
+            }
+            set
+            {
+                OnDpriceChanging(value);
+                ReportPropertyChanging("Dprice");
+                _Dprice = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Dprice");
+                OnDpriceChanged();
+            }
+        }
+        private Nullable<global::System.Double> _Dprice;
+        partial void OnDpriceChanging(Nullable<global::System.Double> value);
+        partial void OnDpriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DstartDate
+        {
+            get
+            {
+                return _DstartDate;
+            }
+            set
+            {
+                OnDstartDateChanging(value);
+                ReportPropertyChanging("DstartDate");
+                _DstartDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DstartDate");
+                OnDstartDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DstartDate;
+        partial void OnDstartDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDstartDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DendDate
+        {
+            get
+            {
+                return _DendDate;
+            }
+            set
+            {
+                OnDendDateChanging(value);
+                ReportPropertyChanging("DendDate");
+                _DendDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DendDate");
+                OnDendDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DendDate;
+        partial void OnDendDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDendDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Tname
+        {
+            get
+            {
+                return _Tname;
+            }
+            set
+            {
+                OnTnameChanging(value);
+                ReportPropertyChanging("Tname");
+                _Tname = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Tname");
+                OnTnameChanged();
+            }
+        }
+        private global::System.String _Tname;
+        partial void OnTnameChanging(global::System.String value);
+        partial void OnTnameChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="DanicoModel", Name="vHotel")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1991,6 +2624,54 @@ namespace DanicoProject.Models
         private Nullable<global::System.Boolean> _Hstate;
         partial void OnHstateChanging(Nullable<global::System.Boolean> value);
         partial void OnHstateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Hlat
+        {
+            get
+            {
+                return _Hlat;
+            }
+            set
+            {
+                OnHlatChanging(value);
+                ReportPropertyChanging("Hlat");
+                _Hlat = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hlat");
+                OnHlatChanged();
+            }
+        }
+        private global::System.String _Hlat;
+        partial void OnHlatChanging(global::System.String value);
+        partial void OnHlatChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Hlng
+        {
+            get
+            {
+                return _Hlng;
+            }
+            set
+            {
+                OnHlngChanging(value);
+                ReportPropertyChanging("Hlng");
+                _Hlng = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hlng");
+                OnHlngChanged();
+            }
+        }
+        private global::System.String _Hlng;
+        partial void OnHlngChanging(global::System.String value);
+        partial void OnHlngChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

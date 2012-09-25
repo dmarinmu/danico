@@ -74,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>All.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Classes\cGeocoding.cs" />
     <Compile Include="Models\Classes\cHotel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +89,7 @@
     <Content Include="Content\css\cssTheme\slider.css" />
     <Content Include="Content\css\cssTheme\style.css" />
     <Content Include="Content\css\example.css" />
+    <Content Include="Content\css\MapStyle.css" />
     <Content Include="Content\css\mosaic.css" />
     <Content Include="Content\css\searchBox.css" />
     <Content Include="Content\images\danico\aside-bg.gif" />
@@ -99,6 +101,7 @@
     <Content Include="Content\images\danico\divider.gif" />
     <Content Include="Content\images\danico\footer-bg.gif" />
     <Content Include="Content\images\danico\internet.png" />
+    <Content Include="Content\images\danico\label_sale_red.png" />
     <Content Include="Content\images\danico\lavanderia.png" />
     <Content Include="Content\images\danico\link-bg.gif" />
     <Content Include="Content\images\danico\marker.png" />
@@ -303,22 +306,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Search1.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Hotel\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Hotel\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Hotel\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Hotel\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Hotel\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\css\cssTheme\fonts\brushscriptstd-webfont.eot" />
@@ -327,6 +315,7 @@
     <None Include="Content\css\cssTheme\fonts\optima-webfont.eot" />
     <None Include="Content\css\cssTheme\fonts\optima-webfont.ttf" />
     <None Include="Content\css\cssTheme\fonts\optima-webfont.woff" />
+    <Content Include="Views\Shared\_PartialFooter.cshtml" />
     <EntityDeploy Include="Models\All.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>All.Designer.cs</LastGenOutput>

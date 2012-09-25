@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DanicoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="AllConection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Discounts" EntityType="DanicoModel.Discount" />
     <EntitySet Name="Hotels" EntityType="DanicoModel.Hotel" />
     <EntitySet Name="HotelServices" EntityType="DanicoModel.HotelService" />
     <EntitySet Name="Rooms" EntityType="DanicoModel.Room" />
     <EntitySet Name="Services" EntityType="DanicoModel.Service" />
     <EntitySet Name="Towns" EntityType="DanicoModel.Town" />
     <EntitySet Name="TripTypes" EntityType="DanicoModel.TripType" />
+    <EntitySet Name="vDiscounts" EntityType="DanicoModel.vDiscount" />
     <EntitySet Name="vHotels" EntityType="DanicoModel.vHotel" />
+    <AssociationSet Name="FK_discount_Hotel" Association="DanicoModel.FK_discount_Hotel">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="Discount" EntitySet="Discounts" />
+    </AssociationSet>
     <AssociationSet Name="FK_Hotel_Town" Association="DanicoModel.FK_Hotel_Town">
       <End Role="Town" EntitySet="Towns" />
       <End Role="Hotel" EntitySet="Hotels" />
@@ -29,6 +35,19 @@
       <End Role="HotelService" EntitySet="HotelServices" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="idHotel" />
+    </Key>
+    <Property Name="idHotel" Type="Int64" Nullable="false" />
+    <Property Name="percentage" Type="Double" />
+    <Property Name="price" Type="Double" />
+    <Property Name="description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="startDate" Type="DateTime" />
+    <Property Name="endDate" Type="DateTime" />
+    <Property Name="state" Type="Boolean" />
+    <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_discount_Hotel" FromRole="Discount" ToRole="Hotel" />
+  </EntityType>
   <EntityType Name="Hotel">
     <Key>
       <PropertyRef Name="pk_idHotel" />
@@ -45,17 +64,18 @@
     <Property Name="coverImage" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="stars" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
     <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="lat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="lng" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Discount" Relationship="DanicoModel.FK_discount_Hotel" FromRole="Hotel" ToRole="Discount" />
     <NavigationProperty Name="Town" Relationship="DanicoModel.FK_Hotel_Town" FromRole="Hotel" ToRole="Town" />
-    <NavigationProperty Name="HotelServices" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="Hotel" ToRole="HotelService" />
+    <NavigationProperty Name="HotelService" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="Hotel" ToRole="HotelService" />
     <NavigationProperty Name="TripTypes" Relationship="DanicoModel.FK_TripType_Hotel" FromRole="Hotel" ToRole="TripType" />
   </EntityType>
   <EntityType Name="HotelService">
     <Key>
       <PropertyRef Name="idHotel" />
-      <PropertyRef Name="idService" />
     </Key>
     <Property Name="idHotel" Type="Int64" Nullable="false" />
-    <Property Name="idService" Type="Int64" Nullable="false" />
     <Property Name="price" Type="Double" />
     <Property Name="description" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
     <Property Name="imagesDirectory" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
@@ -63,6 +83,8 @@
     <Property Name="coverImage1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="coverImage2" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="coverImage0" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="idService" Type="Int64" />
+    <Property Name="capactity" Type="Int64" />
     <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="HotelService" ToRole="Hotel" />
     <NavigationProperty Name="Room" Relationship="DanicoModel.FK_HotelService_Room" FromRole="HotelService" ToRole="Room" />
     <NavigationProperty Name="Service" Relationship="DanicoModel.FK_HotelService_Service" FromRole="HotelService" ToRole="Service" />
@@ -113,6 +135,19 @@
     <Property Name="business" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_TripType_Hotel" FromRole="TripType" ToRole="Hotel" />
   </EntityType>
+  <EntityType Name="vDiscount">
+    <Key>
+      <PropertyRef Name="Hpk_idHotel" />
+    </Key>
+    <Property Name="Hpk_idHotel" Type="Int64" Nullable="false" />
+    <Property Name="Hname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Ddescription" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Dpercentage" Type="Double" />
+    <Property Name="Dprice" Type="Double" />
+    <Property Name="DstartDate" Type="DateTime" />
+    <Property Name="DendDate" Type="DateTime" />
+    <Property Name="Tname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
   <EntityType Name="vHotel">
     <Key>
       <PropertyRef Name="Hpk_idHotel" />
@@ -129,6 +164,8 @@
     <Property Name="HcoverImage" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="Hstars" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
     <Property Name="Hstate" Type="Boolean" />
+    <Property Name="Hlat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Hlng" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="HSidHotel" Type="Int64" />
     <Property Name="HSidService" Type="Int64" />
     <Property Name="HSprice" Type="Double" />
@@ -144,6 +181,18 @@
     <Property Name="RpkidHabitacion" Type="Int64" />
     <Property Name="Rtype" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
   </EntityType>
+  <Association Name="FK_discount_Hotel">
+    <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="1" />
+    <End Role="Discount" Type="DanicoModel.Discount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="pk_idHotel" />
+      </Principal>
+      <Dependent Role="Discount">
+        <PropertyRef Name="idHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Hotel_Town">
     <End Role="Town" Type="DanicoModel.Town" Multiplicity="1" />
     <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="*" />
@@ -158,7 +207,7 @@
   </Association>
   <Association Name="FK_HotelService_Hotel">
     <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="1" />
-    <End Role="HotelService" Type="DanicoModel.HotelService" Multiplicity="*" />
+    <End Role="HotelService" Type="DanicoModel.HotelService" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Hotel">
         <PropertyRef Name="pk_idHotel" />
@@ -193,7 +242,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_HotelService_Service">
-    <End Role="Service" Type="DanicoModel.Service" Multiplicity="1" />
+    <End Role="Service" Type="DanicoModel.Service" Multiplicity="0..1" />
     <End Role="HotelService" Type="DanicoModel.HotelService" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Service">
