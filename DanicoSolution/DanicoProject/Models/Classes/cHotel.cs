@@ -9,9 +9,9 @@ namespace DanicoProject.Models.Classes
     {
         public cHotel() { }
 
-        public List<long> getServiceID(string[] orderNumbers)
+        public List<long?> getServiceID(string[] orderNumbers)
         {
-            List<long> serviceIdInDB = new List<long>();
+            List<long?> serviceIdInDB = new List<long?>();
             long serviceTmp;
             string mapService;
             if (orderNumbers != null)
@@ -40,15 +40,15 @@ namespace DanicoProject.Models.Classes
                 case "2":
                     return "parqueadero";
                 case "3":
-                    return "bano";
+                    return "baño";
                 case "4":
                     return "internet";
                 case "5":
-                    return "cajaFuerte";
+                    return "caja fuerte";
                 case "6":
                     return "lavanderia";
                 case "7":
-                    return "tarjetasCredito";
+                    return "tarjetas de credito";
                 default:
                     return "";
             }

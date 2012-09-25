@@ -40,7 +40,7 @@ ON		HotelService.idRoom = Room.pkidHabitacion
 WHERE	Hotel.state = 1
 and Hotel.pk_idHotel = 4
 
-
+select * from vDiscount
 --drop view vDiscount 
 CREATE VIEW vDiscount AS
 SELECT ISNULL( Hotel.pk_idHotel,-999) Hpk_idHotel,NULLIF(Hotel.name,'') Hname,

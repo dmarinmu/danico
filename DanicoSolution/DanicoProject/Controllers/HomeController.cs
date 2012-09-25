@@ -19,7 +19,7 @@ namespace DanicoProject.Controllers
          
             ViewBag.townFilter = search;
             ViewBag.checkList = orderNumbers;
-            List<long> serviceIdInDB = varHotel.getServiceID(orderNumbers);
+            List<long?> serviceIdInDB = varHotel.getServiceID(orderNumbers);
             List<Models.Hotel> hotelList = new List<Models.Hotel>();
 
             using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
@@ -35,7 +35,7 @@ namespace DanicoProject.Controllers
                          hotelList =
                           (from hotel in tmp.Hotels
                            join service in tmp.HotelServices on hotel.pk_idHotel equals service.idHotel
-                           where serviceIdInDB.Contains(Convert.ToInt32(service.idService))
+                           where serviceIdInDB.Contains(service.idService)
                            select hotel).ToList<Models.Hotel>();
                      }
                  }
