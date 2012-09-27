@@ -237,7 +237,8 @@
             {
                 <!--Fade-->
                 <div class="mosaic-block fade">
-                    <a href="http://buildinternet.com/project/mightyicons/" target="_blank" class="mosaic-overlay"> 
+                    
+                    <a href="@Url.Action("Details", "Hotel", new { id= item.pk_idHotel })" class="mosaic-overlay"> 
                         <div class="details">
                             <h4>@Html.DisplayFor(modelItem => item.name)</h4>
                             <p>@Html.DisplayFor(modelItem => item.description)
@@ -245,20 +246,18 @@
                         </div>
                     </a>
                     <div class="mosaic-backdrop">
-                        <img src="@Url.Content(item.imagesDirectory)" class= "image" /></div>
-                </div>
+                     <img src="@Url.Content(item.imagesDirectory)", alt=" " />
+                    
+                     <!--  borrado <img src="@Url.Content(item.imagesDirectory)" class= "image" /></div> -->
 
+                     </div> 
+                  </div> 
+                
+   
+  
+                
             }
         </div>
     </div>
 </div>
-<!--Autocomplete-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#search").autocomplete2({
-            source: '@Url.Action("AutocompleteAsync")'
-        });
-    });
 
-
-</script>
