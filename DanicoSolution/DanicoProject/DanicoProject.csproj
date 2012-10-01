@@ -324,11 +324,11 @@
     <None Include="Content\css\cssTheme\fonts\optima-webfont.ttf" />
     <None Include="Content\css\cssTheme\fonts\optima-webfont.woff" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
     <EntityDeploy Include="Models\All.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>All.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

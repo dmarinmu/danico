@@ -50,6 +50,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Quotes">
+      <EntityTypeMapping TypeName="DanicoModel.Quote">
+        <MappingFragment StoreEntitySet="Quote">
+          <ScalarProperty Name="requestDate" ColumnName="requestDate" />
+          <ScalarProperty Name="idHotel" ColumnName="idHotel" />
+          <ScalarProperty Name="iduser" ColumnName="iduser" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="tripStartDate" ColumnName="tripStartDate" />
+          <ScalarProperty Name="tripEndDate" ColumnName="tripEndDate" />
+          <ScalarProperty Name="idTripType" ColumnName="idTripType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Rooms">
       <EntityTypeMapping TypeName="DanicoModel.Room">
         <MappingFragment StoreEntitySet="Room">
@@ -67,6 +80,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DanicoModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Towns">
       <EntityTypeMapping TypeName="DanicoModel.Town">
         <MappingFragment StoreEntitySet="Town">
@@ -78,14 +102,17 @@
     <EntitySetMapping Name="TripTypes">
       <EntityTypeMapping TypeName="DanicoModel.TripType">
         <MappingFragment StoreEntitySet="TripType">
-          <ScalarProperty Name="idHotel" ColumnName="idHotel" />
-          <ScalarProperty Name="family" ColumnName="family" />
-          <ScalarProperty Name="couple" ColumnName="couple" />
-          <ScalarProperty Name="friends" ColumnName="friends" />
-          <ScalarProperty Name="lonely" ColumnName="lonely" />
-          <ScalarProperty Name="groups" ColumnName="groups" />
-          <ScalarProperty Name="transit" ColumnName="transit" />
-          <ScalarProperty Name="business" ColumnName="business" />
+          <ScalarProperty Name="pk_idTripType" ColumnName="pk_idTripType" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTs">
+      <EntityTypeMapping TypeName="DanicoModel.UserT">
+        <MappingFragment StoreEntitySet="UserT">
+          <ScalarProperty Name="pk_idUser" ColumnName="pk_idUser" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -134,6 +161,20 @@
           <ScalarProperty Name="Spk_idService" ColumnName="Spk_idService" />
           <ScalarProperty Name="RpkidHabitacion" ColumnName="RpkidHabitacion" />
           <ScalarProperty Name="Rtype" ColumnName="Rtype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vQuotes">
+      <EntityTypeMapping TypeName="DanicoModel.vQuote">
+        <MappingFragment StoreEntitySet="vQuote">
+          <ScalarProperty Name="Uname" ColumnName="Uname" />
+          <ScalarProperty Name="Uemail" ColumnName="Uemail" />
+          <ScalarProperty Name="QrequestDate" ColumnName="QrequestDate" />
+          <ScalarProperty Name="QidHotel" ColumnName="QidHotel" />
+          <ScalarProperty Name="Qdescription" ColumnName="Qdescription" />
+          <ScalarProperty Name="QtripStartDate" ColumnName="QtripStartDate" />
+          <ScalarProperty Name="QtripEndDate" ColumnName="QtripEndDate" />
+          <ScalarProperty Name="idTripType" ColumnName="idTripType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

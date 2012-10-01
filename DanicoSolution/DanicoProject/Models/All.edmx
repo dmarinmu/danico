@@ -32,21 +32,23 @@
       [HotelService].[capactity] AS [capactity]
       FROM [dbo].[HotelService] AS [HotelService]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Quote" EntityType="DanicoModel.Store.Quote" store:Type="Tables" store:Schema="dbo" store:Name="Quote">
+            <DefiningQuery>SELECT 
+      [Quote].[requestDate] AS [requestDate], 
+      [Quote].[idHotel] AS [idHotel], 
+      [Quote].[iduser] AS [iduser], 
+      [Quote].[description] AS [description], 
+      [Quote].[tripStartDate] AS [tripStartDate], 
+      [Quote].[tripEndDate] AS [tripEndDate], 
+      [Quote].[idTripType] AS [idTripType]
+      FROM [dbo].[Quote] AS [Quote]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Room" EntityType="DanicoModel.Store.Room" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Service" EntityType="DanicoModel.Store.Service" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="DanicoModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Town" EntityType="DanicoModel.Store.Town" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TripType" EntityType="DanicoModel.Store.TripType" store:Type="Tables" store:Schema="dbo" store:Name="TripType">
-            <DefiningQuery>SELECT 
-      [TripType].[idHotel] AS [idHotel], 
-      [TripType].[family] AS [family], 
-      [TripType].[couple] AS [couple], 
-      [TripType].[friends] AS [friends], 
-      [TripType].[lonely] AS [lonely], 
-      [TripType].[groups] AS [groups], 
-      [TripType].[transit] AS [transit], 
-      [TripType].[business] AS [business]
-      FROM [dbo].[TripType] AS [TripType]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="TripType" EntityType="DanicoModel.Store.TripType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserT" EntityType="DanicoModel.Store.UserT" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="vDiscount" EntityType="DanicoModel.Store.vDiscount" store:Type="Views" store:Schema="dbo" store:Name="vDiscount">
             <DefiningQuery>SELECT 
       [vDiscount].[Hpk_idHotel] AS [Hpk_idHotel], 
@@ -91,6 +93,18 @@
       [vHotel].[Rtype] AS [Rtype]
       FROM [dbo].[vHotel] AS [vHotel]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vQuote" EntityType="DanicoModel.Store.vQuote" store:Type="Views" store:Schema="dbo" store:Name="vQuote">
+            <DefiningQuery>SELECT 
+      [vQuote].[Uname] AS [Uname], 
+      [vQuote].[Uemail] AS [Uemail], 
+      [vQuote].[QrequestDate] AS [QrequestDate], 
+      [vQuote].[QidHotel] AS [QidHotel], 
+      [vQuote].[Qdescription] AS [Qdescription], 
+      [vQuote].[QtripStartDate] AS [QtripStartDate], 
+      [vQuote].[QtripEndDate] AS [QtripEndDate], 
+      [vQuote].[idTripType] AS [idTripType]
+      FROM [dbo].[vQuote] AS [vQuote]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_discount_Hotel" Association="DanicoModel.Store.FK_discount_Hotel">
             <End Role="Hotel" EntitySet="Hotel" />
             <End Role="Discount" EntitySet="Discount" />
@@ -111,9 +125,17 @@
             <End Role="Service" EntitySet="Service" />
             <End Role="HotelService" EntitySet="HotelService" />
           </AssociationSet>
-          <AssociationSet Name="FK_TripType_Hotel" Association="DanicoModel.Store.FK_TripType_Hotel">
+          <AssociationSet Name="FK_Quote_Hotel" Association="DanicoModel.Store.FK_Quote_Hotel">
             <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Quote" EntitySet="Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_TripType" Association="DanicoModel.Store.FK_Quote_TripType">
             <End Role="TripType" EntitySet="TripType" />
+            <End Role="Quote" EntitySet="Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_User" Association="DanicoModel.Store.FK_Quote_User">
+            <End Role="UserT" EntitySet="UserT" />
+            <End Role="Quote" EntitySet="Quote" />
           </AssociationSet>
         </EntityContainer>
         <!--Errors Found During Generation:
@@ -168,6 +190,22 @@
           <Property Name="idService" Type="bigint" />
           <Property Name="capactity" Type="bigint" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.Quote' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="idHotel" />
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="requestDate" Type="date" />
+          <Property Name="idHotel" Type="bigint" Nullable="false" />
+          <Property Name="iduser" Type="bigint" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="tripStartDate" Type="date" />
+          <Property Name="tripEndDate" Type="date" />
+          <Property Name="idTripType" Type="bigint" />
+        </EntityType>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="pkidHabitacion" />
@@ -183,6 +221,16 @@
           <Property Name="type" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="pk_idService" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Town">
           <Key>
             <PropertyRef Name="pk_idTown" />
@@ -190,28 +238,20 @@
           <Property Name="pk_idTown" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'Danico.dbo.TripType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="TripType">
           <Key>
-            <PropertyRef Name="idHotel" />
-            <PropertyRef Name="family" />
-            <PropertyRef Name="couple" />
-            <PropertyRef Name="friends" />
-            <PropertyRef Name="lonely" />
-            <PropertyRef Name="groups" />
-            <PropertyRef Name="transit" />
-            <PropertyRef Name="business" />
+            <PropertyRef Name="pk_idTripType" />
           </Key>
-          <Property Name="idHotel" Type="bigint" Nullable="false" />
-          <Property Name="family" Type="bit" Nullable="false" />
-          <Property Name="couple" Type="bit" Nullable="false" />
-          <Property Name="friends" Type="bit" Nullable="false" />
-          <Property Name="lonely" Type="bit" Nullable="false" />
-          <Property Name="groups" Type="bit" Nullable="false" />
-          <Property Name="transit" Type="bit" Nullable="false" />
-          <Property Name="business" Type="bit" Nullable="false" />
+          <Property Name="pk_idTripType" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserT">
+          <Key>
+            <PropertyRef Name="pk_idUser" />
+          </Key>
+          <Property Name="pk_idUser" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'Danico.dbo.vDiscount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -264,6 +304,23 @@
           <Property Name="Spk_idService" Type="bigint" />
           <Property Name="RpkidHabitacion" Type="bigint" />
           <Property Name="Rtype" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Danico.dbo.vQuote' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vQuote">
+          <Key>
+            <PropertyRef Name="Uemail" />
+            <PropertyRef Name="QidHotel" />
+          </Key>
+          <Property Name="Uname" Type="varchar" MaxLength="100" />
+          <Property Name="Uemail" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="QrequestDate" Type="date" />
+          <Property Name="QidHotel" Type="bigint" Nullable="false" />
+          <Property Name="Qdescription" Type="varchar" MaxLength="200" />
+          <Property Name="QtripStartDate" Type="date" />
+          <Property Name="QtripEndDate" Type="date" />
+          <Property Name="idTripType" Type="bigint" />
         </EntityType>
         <Association Name="FK_discount_Hotel">
           <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="1" />
@@ -325,15 +382,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TripType_Hotel">
+        <Association Name="FK_Quote_Hotel">
           <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="1" />
-          <End Role="TripType" Type="DanicoModel.Store.TripType" Multiplicity="*" />
+          <End Role="Quote" Type="DanicoModel.Store.Quote" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="pk_idHotel" />
             </Principal>
-            <Dependent Role="TripType">
+            <Dependent Role="Quote">
               <PropertyRef Name="idHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_TripType">
+          <End Role="TripType" Type="DanicoModel.Store.TripType" Multiplicity="0..1" />
+          <End Role="Quote" Type="DanicoModel.Store.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TripType">
+              <PropertyRef Name="pk_idTripType" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="idTripType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_User">
+          <End Role="UserT" Type="DanicoModel.Store.UserT" Multiplicity="1" />
+          <End Role="Quote" Type="DanicoModel.Store.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserT">
+              <PropertyRef Name="pk_idUser" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="iduser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -346,12 +427,16 @@
           <EntitySet Name="Discounts" EntityType="DanicoModel.Discount" />
           <EntitySet Name="Hotels" EntityType="DanicoModel.Hotel" />
           <EntitySet Name="HotelServices" EntityType="DanicoModel.HotelService" />
+          <EntitySet Name="Quotes" EntityType="DanicoModel.Quote" />
           <EntitySet Name="Rooms" EntityType="DanicoModel.Room" />
           <EntitySet Name="Services" EntityType="DanicoModel.Service" />
+          <EntitySet Name="sysdiagrams" EntityType="DanicoModel.sysdiagram" />
           <EntitySet Name="Towns" EntityType="DanicoModel.Town" />
           <EntitySet Name="TripTypes" EntityType="DanicoModel.TripType" />
+          <EntitySet Name="UserTs" EntityType="DanicoModel.UserT" />
           <EntitySet Name="vDiscounts" EntityType="DanicoModel.vDiscount" />
           <EntitySet Name="vHotels" EntityType="DanicoModel.vHotel" />
+          <EntitySet Name="vQuotes" EntityType="DanicoModel.vQuote" />
           <AssociationSet Name="FK_discount_Hotel" Association="DanicoModel.FK_discount_Hotel">
             <End Role="Hotel" EntitySet="Hotels" />
             <End Role="Discount" EntitySet="Discounts" />
@@ -364,9 +449,9 @@
             <End Role="Hotel" EntitySet="Hotels" />
             <End Role="HotelService" EntitySet="HotelServices" />
           </AssociationSet>
-          <AssociationSet Name="FK_TripType_Hotel" Association="DanicoModel.FK_TripType_Hotel">
+          <AssociationSet Name="FK_Quote_Hotel" Association="DanicoModel.FK_Quote_Hotel">
             <End Role="Hotel" EntitySet="Hotels" />
-            <End Role="TripType" EntitySet="TripTypes" />
+            <End Role="Quote" EntitySet="Quotes" />
           </AssociationSet>
           <AssociationSet Name="FK_HotelService_Room" Association="DanicoModel.FK_HotelService_Room">
             <End Role="Room" EntitySet="Rooms" />
@@ -375,6 +460,14 @@
           <AssociationSet Name="FK_HotelService_Service" Association="DanicoModel.FK_HotelService_Service">
             <End Role="Service" EntitySet="Services" />
             <End Role="HotelService" EntitySet="HotelServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_TripType" Association="DanicoModel.FK_Quote_TripType">
+            <End Role="TripType" EntitySet="TripTypes" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_User" Association="DanicoModel.FK_Quote_User">
+            <End Role="UserT" EntitySet="UserTs" />
+            <End Role="Quote" EntitySet="Quotes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Discount">
@@ -411,7 +504,7 @@
           <NavigationProperty Name="Discount" Relationship="DanicoModel.FK_discount_Hotel" FromRole="Hotel" ToRole="Discount" />
           <NavigationProperty Name="Town" Relationship="DanicoModel.FK_Hotel_Town" FromRole="Hotel" ToRole="Town" />
           <NavigationProperty Name="HotelService" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="Hotel" ToRole="HotelService" />
-          <NavigationProperty Name="TripTypes" Relationship="DanicoModel.FK_TripType_Hotel" FromRole="Hotel" ToRole="TripType" />
+          <NavigationProperty Name="Quotes" Relationship="DanicoModel.FK_Quote_Hotel" FromRole="Hotel" ToRole="Quote" />
         </EntityType>
         <EntityType Name="HotelService">
           <Key>
@@ -431,6 +524,22 @@
           <NavigationProperty Name="Room" Relationship="DanicoModel.FK_HotelService_Room" FromRole="HotelService" ToRole="Room" />
           <NavigationProperty Name="Service" Relationship="DanicoModel.FK_HotelService_Service" FromRole="HotelService" ToRole="Service" />
         </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="idHotel" />
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="requestDate" Type="DateTime" />
+          <Property Name="idHotel" Type="Int64" Nullable="false" />
+          <Property Name="iduser" Type="Int64" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="tripStartDate" Type="DateTime" />
+          <Property Name="tripEndDate" Type="DateTime" />
+          <Property Name="idTripType" Type="Int64" />
+          <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_Quote_Hotel" FromRole="Quote" ToRole="Hotel" />
+          <NavigationProperty Name="TripType" Relationship="DanicoModel.FK_Quote_TripType" FromRole="Quote" ToRole="TripType" />
+          <NavigationProperty Name="UserT" Relationship="DanicoModel.FK_Quote_User" FromRole="Quote" ToRole="UserT" />
+        </EntityType>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="pkidHabitacion" />
@@ -448,6 +557,16 @@
           <Property Name="pk_idService" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="HotelServices" Relationship="DanicoModel.FK_HotelService_Service" FromRole="Service" ToRole="HotelService" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Town">
           <Key>
             <PropertyRef Name="pk_idTown" />
@@ -458,24 +577,20 @@
         </EntityType>
         <EntityType Name="TripType">
           <Key>
-            <PropertyRef Name="idHotel" />
-            <PropertyRef Name="family" />
-            <PropertyRef Name="couple" />
-            <PropertyRef Name="friends" />
-            <PropertyRef Name="lonely" />
-            <PropertyRef Name="groups" />
-            <PropertyRef Name="transit" />
-            <PropertyRef Name="business" />
+            <PropertyRef Name="pk_idTripType" />
           </Key>
-          <Property Name="idHotel" Type="Int64" Nullable="false" />
-          <Property Name="family" Type="Boolean" Nullable="false" />
-          <Property Name="couple" Type="Boolean" Nullable="false" />
-          <Property Name="friends" Type="Boolean" Nullable="false" />
-          <Property Name="lonely" Type="Boolean" Nullable="false" />
-          <Property Name="groups" Type="Boolean" Nullable="false" />
-          <Property Name="transit" Type="Boolean" Nullable="false" />
-          <Property Name="business" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_TripType_Hotel" FromRole="TripType" ToRole="Hotel" />
+          <Property Name="pk_idTripType" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Quotes" Relationship="DanicoModel.FK_Quote_TripType" FromRole="TripType" ToRole="Quote" />
+        </EntityType>
+        <EntityType Name="UserT">
+          <Key>
+            <PropertyRef Name="pk_idUser" />
+          </Key>
+          <Property Name="pk_idUser" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Quotes" Relationship="DanicoModel.FK_Quote_User" FromRole="UserT" ToRole="Quote" />
         </EntityType>
         <EntityType Name="vDiscount">
           <Key>
@@ -523,6 +638,20 @@
           <Property Name="RpkidHabitacion" Type="Int64" />
           <Property Name="Rtype" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
         </EntityType>
+        <EntityType Name="vQuote">
+          <Key>
+            <PropertyRef Name="Uemail" />
+            <PropertyRef Name="QidHotel" />
+          </Key>
+          <Property Name="Uname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Uemail" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="QrequestDate" Type="DateTime" />
+          <Property Name="QidHotel" Type="Int64" Nullable="false" />
+          <Property Name="Qdescription" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="QtripStartDate" Type="DateTime" />
+          <Property Name="QtripEndDate" Type="DateTime" />
+          <Property Name="idTripType" Type="Int64" />
+        </EntityType>
         <Association Name="FK_discount_Hotel">
           <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="1" />
           <End Role="Discount" Type="DanicoModel.Discount" Multiplicity="0..1" />
@@ -559,14 +688,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TripType_Hotel">
+        <Association Name="FK_Quote_Hotel">
           <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="1" />
-          <End Role="TripType" Type="DanicoModel.TripType" Multiplicity="*" />
+          <End Role="Quote" Type="DanicoModel.Quote" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="pk_idHotel" />
             </Principal>
-            <Dependent Role="TripType">
+            <Dependent Role="Quote">
               <PropertyRef Name="idHotel" />
             </Dependent>
           </ReferentialConstraint>
@@ -592,6 +721,30 @@
             </Principal>
             <Dependent Role="HotelService">
               <PropertyRef Name="idService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_TripType">
+          <End Role="TripType" Type="DanicoModel.TripType" Multiplicity="0..1" />
+          <End Role="Quote" Type="DanicoModel.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TripType">
+              <PropertyRef Name="pk_idTripType" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="idTripType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_User">
+          <End Role="UserT" Type="DanicoModel.UserT" Multiplicity="1" />
+          <End Role="Quote" Type="DanicoModel.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserT">
+              <PropertyRef Name="pk_idUser" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="iduser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -638,6 +791,15 @@
             <ScalarProperty Name="idService" ColumnName="idService" />
             <ScalarProperty Name="capactity" ColumnName="capactity" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Quotes"><EntityTypeMapping TypeName="DanicoModel.Quote"><MappingFragment StoreEntitySet="Quote">
+            <ScalarProperty Name="requestDate" ColumnName="requestDate" />
+            <ScalarProperty Name="idHotel" ColumnName="idHotel" />
+            <ScalarProperty Name="iduser" ColumnName="iduser" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="tripStartDate" ColumnName="tripStartDate" />
+            <ScalarProperty Name="tripEndDate" ColumnName="tripEndDate" />
+            <ScalarProperty Name="idTripType" ColumnName="idTripType" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Rooms"><EntityTypeMapping TypeName="DanicoModel.Room"><MappingFragment StoreEntitySet="Room">
             <ScalarProperty Name="pkidHabitacion" ColumnName="pkidHabitacion" />
             <ScalarProperty Name="type" ColumnName="type" />
@@ -647,19 +809,25 @@
             <ScalarProperty Name="type" ColumnName="type" />
             <ScalarProperty Name="pk_idService" ColumnName="pk_idService" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams"><EntityTypeMapping TypeName="DanicoModel.sysdiagram"><MappingFragment StoreEntitySet="sysdiagrams">
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+            <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+            <ScalarProperty Name="version" ColumnName="version" />
+            <ScalarProperty Name="definition" ColumnName="definition" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Towns"><EntityTypeMapping TypeName="DanicoModel.Town"><MappingFragment StoreEntitySet="Town">
             <ScalarProperty Name="pk_idTown" ColumnName="pk_idTown" />
             <ScalarProperty Name="name" ColumnName="name" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="TripTypes"><EntityTypeMapping TypeName="DanicoModel.TripType"><MappingFragment StoreEntitySet="TripType">
-            <ScalarProperty Name="idHotel" ColumnName="idHotel" />
-            <ScalarProperty Name="family" ColumnName="family" />
-            <ScalarProperty Name="couple" ColumnName="couple" />
-            <ScalarProperty Name="friends" ColumnName="friends" />
-            <ScalarProperty Name="lonely" ColumnName="lonely" />
-            <ScalarProperty Name="groups" ColumnName="groups" />
-            <ScalarProperty Name="transit" ColumnName="transit" />
-            <ScalarProperty Name="business" ColumnName="business" />
+            <ScalarProperty Name="pk_idTripType" ColumnName="pk_idTripType" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserTs"><EntityTypeMapping TypeName="DanicoModel.UserT"><MappingFragment StoreEntitySet="UserT">
+            <ScalarProperty Name="pk_idUser" ColumnName="pk_idUser" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="email" ColumnName="email" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="vDiscounts"><EntityTypeMapping TypeName="DanicoModel.vDiscount"><MappingFragment StoreEntitySet="vDiscount">
             <ScalarProperty Name="Hpk_idHotel" ColumnName="Hpk_idHotel" />
@@ -701,6 +869,16 @@
             <ScalarProperty Name="RpkidHabitacion" ColumnName="RpkidHabitacion" />
             <ScalarProperty Name="Rtype" ColumnName="Rtype" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="vQuotes"><EntityTypeMapping TypeName="DanicoModel.vQuote"><MappingFragment StoreEntitySet="vQuote">
+            <ScalarProperty Name="Uname" ColumnName="Uname" />
+            <ScalarProperty Name="Uemail" ColumnName="Uemail" />
+            <ScalarProperty Name="QrequestDate" ColumnName="QrequestDate" />
+            <ScalarProperty Name="QidHotel" ColumnName="QidHotel" />
+            <ScalarProperty Name="Qdescription" ColumnName="Qdescription" />
+            <ScalarProperty Name="QtripStartDate" ColumnName="QtripStartDate" />
+            <ScalarProperty Name="QtripEndDate" ColumnName="QtripEndDate" />
+            <ScalarProperty Name="idTripType" ColumnName="idTripType" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -721,41 +899,68 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="All">
-        <EntityTypeShape EntityType="DanicoModel.Discount" Width="1.5" PointX="5.25" PointY="3.5" Height="2.5571907552083335" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.Hotel" Width="1.5" PointX="3" PointY="4.25" Height="4.480205078125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.HotelService" Width="1.5" PointX="8.25" PointY="4.75" Height="3.5186979166666648" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.Room" Width="1.5" PointX="6" PointY="7.375" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.Service" Width="1.5" PointX="6" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
+      <Diagram Name="All" ZoomLevel="55">
+        <EntityTypeShape EntityType="DanicoModel.Discount" Width="1.5" PointX="5.25" PointY="5.375" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Hotel" Width="1.5" PointX="3" PointY="4.375" Height="4.4802050781249987" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.HotelService" Width="1.5" PointX="8.25" PointY="4.875" Height="3.5186979166666648" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Quote" Width="1.5" PointX="5.25" PointY="1.125" Height="2.9417936197916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Room" Width="1.5" PointX="6" PointY="9.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.Service" Width="1.5" PointX="6" PointY="11.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="DanicoModel.Town" Width="1.5" PointX="0.75" PointY="5.75" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.TripType" Width="1.5" PointX="5.25" PointY="11" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.vDiscount" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083317" IsExpanded="true" />
-        <EntityTypeShape EntityType="DanicoModel.vHotel" Width="1.5" PointX="0.75" PointY="9.75" Height="6.4032194010416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.TripType" Width="1.5" PointX="3" PointY="2" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.UserT" Width="1.5" PointX="3" PointY="10.25" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.vDiscount" Width="1.5" PointX="9.75" PointY="0.75" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.vHotel" Width="1.5" PointX="8.75" PointY="9.75" Height="6.4032194010416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DanicoModel.vQuote" Width="1.5" PointX="10.75" PointY="4.75" Height="2.5571907552083388" IsExpanded="true" />
         <AssociationConnector Association="DanicoModel.FK_discount_Hotel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="5.1535953776041667" />
-          <ConnectorPoint PointX="5.25" PointY="5.1535953776041667" />
+          <ConnectorPoint PointX="4.5" PointY="6.6535953776041667" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="6.6535953776041659" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="6.6535953776041667" />
+          <ConnectorPoint PointX="5.25" PointY="6.6535953776041667" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_Hotel_Town" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="6.547841796875" />
           <ConnectorPoint PointX="3" PointY="6.547841796875" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_HotelService_Hotel" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="6.7160953776041667" />
-          <ConnectorPoint PointX="8.25" PointY="6.7160953776041667" />
+          <ConnectorPoint PointX="4.5" PointY="5.09375" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="5.0937499999999991" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="5.09375" />
+          <ConnectorPoint PointX="8.25" PointY="5.09375" />
         </AssociationConnector>
-        <AssociationConnector Association="DanicoModel.FK_TripType_Hotel" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="8.730205078125" />
-          <ConnectorPoint PointX="3.75" PointY="12.37474609375" />
-          <ConnectorPoint PointX="5.25" PointY="12.37474609375" />
+        <AssociationConnector Association="DanicoModel.FK_Quote_Hotel" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="4.375" />
+          <ConnectorPoint PointX="4.875" PointY="4" />
+          <ConnectorPoint PointX="4.875" PointY="4.4417936197916656" />
+          <ConnectorPoint PointX="5.0035744349011209" PointY="4.3132191848905439" />
+          <ConnectorPoint PointX="5.1214255650988791" PointY="4.1953680546927865" />
+          <ConnectorPoint PointX="5.25" PointY="4.0667936197916656" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_HotelService_Room" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="7.8218489583333319" />
-          <ConnectorPoint PointX="8.25" PointY="7.8218489583333319" />
+          <ConnectorPoint PointX="7.15625" PointY="9.5" />
+          <ConnectorPoint PointX="7.15625" PointY="8.1941943359375" />
+          <ConnectorPoint PointX="7.791666666666667" PointY="8.1941943359375" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="8.1941943359375" />
+          <ConnectorPoint PointX="8.25" PointY="8.1941943359375" />
         </AssociationConnector>
         <AssociationConnector Association="DanicoModel.FK_HotelService_Service" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="1.6439925130208337" />
-          <ConnectorPoint PointX="9" PointY="1.6439925130208337" />
-          <ConnectorPoint PointX="9" PointY="4.75" />
+          <ConnectorPoint PointX="7.5" PointY="11.876152846153847" />
+          <ConnectorPoint PointX="7.875" PointY="11.501152846153847" />
+          <ConnectorPoint PointX="7.875" PointY="6.64397216796875" />
+          <ConnectorPoint PointX="8.25" PointY="6.64397216796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="DanicoModel.FK_Quote_TripType" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.797841796875" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="2.7978417968749993" />
+          <ConnectorPoint PointX="5.145833333333333" PointY="2.797841796875" />
+          <ConnectorPoint PointX="5.25" PointY="2.797841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="DanicoModel.FK_Quote_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="10.313460538461539" />
+          <ConnectorPoint PointX="5.0625" PointY="9.75096053846154" />
+          <ConnectorPoint PointX="5.0625" PointY="1.9301688984374992" />
+          <ConnectorPoint PointX="5.25" PointY="1.9301688984374992" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
