@@ -39,11 +39,11 @@ namespace DanicoProject.Controllers
 
         //
         // GET: /Quote/Create
-
         public ActionResult Create(long idHParameter, string nameHParameter)
         {
             vQuote vquote = new vQuote() { QidHotel = idHParameter, Hname = nameHParameter };
-
+           
+            /***combobox****/
             List<Models.TripType> tripTypeList = new List<Models.TripType>();
             tripTypeList = varHotel.getTripType();
 
@@ -53,34 +53,27 @@ namespace DanicoProject.Controllers
                 list.Add(new SelectListItem() { Text = item.name, Value = item.pk_idTripType.ToString() });
             }
             ViewBag.trips = list;
-
+            /***combobox****/
             return View(vquote);
         }
 
         //
         // POST: /Quote/Create
-
-        /*    public ActionResult Create(vQuote vquote)
-            {
-            
-                return View(vquote);
-            } */
-
         [HttpPost]
         public ActionResult Create(vQuote vquote)
         {
-            
-            cUser user = new cUser() { name = vquote.Uname, email = vquote.Uemail };
-            long idUser = user.insertUser();
+            long idQuote = -1;
+            string msge = "";
 
+            UserT user = new UserT() { name = vquote.Uname, email = vquote.Uemail };
+            cUser userTmp = new cUser(user);
+            long idUser = userTmp.insertUser();
+          
             if (vquote.QidHotel != null && idUser > -1)
             {
                 DateTime currentTime = DateTime.Now;
                 DateTime myTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(currentTime, "Central Standard Time");
 
-                /*TripType tmptriptype = new TripType() { pk_idTripType  = Convert.ToInt32(vquote.idTripType) ,name = "malot"};
-                UserT tmpUsert = new UserT() { pk_idUser = idUser, name = "maloU"};
-                Hotel tmpHotel = new Hotel() {pk_idHotel=vquote.QidHotel, address="",description="",state= true ,fk_idTown=1};*/
                 Quote quote = new Quote()
                 {
                     idHotel = vquote.QidHotel,
@@ -90,18 +83,29 @@ namespace DanicoProject.Controllers
                     description = vquote.Qdescription,
                     requestDate = myTime,
                     tripEndDate = vquote.QtripEndDate,
-                    tripStartDate = vquote.QtripStartDate/*,
-                    TripType = tmptriptype,
-                    UserT = tmpUsert,
-                    Hotel = tmpHotel*/
+                    tripStartDate = vquote.QtripStartDate
                 };
-                using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
-                {
-
-                    tmp.Quotes.AddObject(quote);
-                    tmp.SaveChanges();
-                }
+                cQuote quotetmp = new cQuote(quote);
+                idQuote =quotetmp.insertQuote();
             }
+
+            if (idQuote > -1)
+            {
+                msge = "La cotización se solicitó satisfactoriamente, En los siguientes días el hotel se pondrá en contacto contigo";
+            }
+            else { msge = "Se produjo un error, puedes intenta de nuevo mas tarde"; }
+
+            /***combobox****/
+            List<Models.TripType> tripTypeList = new List<Models.TripType>();
+            tripTypeList = varHotel.getTripType();
+
+            var list = new List<SelectListItem>();
+            foreach (var item in tripTypeList)
+            {
+                list.Add(new SelectListItem() { Text = item.name, Value = item.pk_idTripType.ToString() });
+            }
+            ViewBag.trips = list;
+            /***combobox****/
 
             return View(vquote);
         }

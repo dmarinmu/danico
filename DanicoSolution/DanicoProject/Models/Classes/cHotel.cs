@@ -229,8 +229,6 @@ namespace DanicoProject.Models.Classes
             return ret;
         }
 
-
-
         public List<TripType> getTripType()
         {
             List<Models.TripType> tripTypeList = new List<TripType>();
@@ -240,5 +238,7 @@ namespace DanicoProject.Models.Classes
             }
             return tripTypeList;
         }
+
+     
     }   
 }

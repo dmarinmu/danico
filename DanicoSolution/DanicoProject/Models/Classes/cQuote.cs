@@ -5,30 +5,29 @@ using System.Web;
 
 namespace DanicoProject.Models.Classes
 {
-    public class cUser
+    public class cQuote
     {
-      
-        UserT user = new UserT();
-        public cUser(UserT user)
+
+        Quote quote = new Quote();
+        public  cQuote(Quote quote)
         {
-            this.user = user;
+            this.quote = quote;
         }
-        public cUser()
+        public  cQuote()
         {
         }
 
-        public long insertUser() {
-
+        internal long insertQuote()
+        {
             long id = -1;
             using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
             {
-                tmp.UserTs.AddObject(user);
-                tmp.SaveChanges();
-                id = user.pk_idUser;
-            }
 
+                tmp.Quotes.AddObject(quote);
+                tmp.SaveChanges();
+                id = quote.pk_idQuote;
+            }
             return id;
         }
-
     }
 }

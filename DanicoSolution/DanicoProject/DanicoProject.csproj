@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="Models\Classes\cGeocoding.cs" />
     <Compile Include="Models\Classes\cHotel.cs" />
+    <Compile Include="Models\Classes\cQuote.cs" />
     <Compile Include="Models\Classes\cUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
