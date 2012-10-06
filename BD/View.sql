@@ -5,9 +5,9 @@ select * from Service
 select * from Room
 select * from Town
 select * from TripType
-
-
-
+select * from vDiscount
+select * from vQuote
+select * from UserT
 /*En hotel service servicetype= h es excluyente con idroom.
 es decir, si la fila esta asociada con un idroom, el servicetype de esa file no puede ser H
 un tipo de habitacion puede tener hasta seis imagenes 
@@ -65,12 +65,15 @@ WHERE  Hotel.pk_idHotel = Discount.idHotel
 AND    Discount.state =  1
 AND    Hotel.state =1
 
-
---drop view vDiscount 
-CREATE VIEW vQuote AS
-SELECT UserT.name Uname, UserT.email Uemail ,
-	   Quote.requestDate QrequestDate, Quote.idHotel QidHotel, Quote.description Qdescription,Quote.tripStartDate QtripStartDate,Quote.tripEndDate QtripEndDate ,idTripType
-	   --TripType.name Tname, TripType.pk_idTripType Tpk_idTripType 
-FROM   UserT,Quote left outer join TripType 
-ON Quote.idTripType = TripType.pk_idTripType
-WHERE UserT.pk_idUser = Quote.iduser
+select * from vQuote
+--drop view vQuote 
+CREATE  VIEW vQuote AS
+SELECT  NULLIF(Hotel.name,'') Hname,
+		UserT.name Uname, NULLIF(UserT.email,'') Uemail ,
+	    Quote.requestDate QrequestDate,ISNULL(Quote.idHotel,'') QidHotel, Quote.description Qdescription,Quote.tripStartDate QtripStartDate,Quote.tripEndDate QtripEndDate ,idTripType
+	    --TripType.name Tname, TripType.pk_idTripType Tpk_idTripType 
+FROM    Hotel,UserT,Quote left outer join TripType 
+	    	 
+ON		Quote.idTripType = TripType.pk_idTripType
+WHERE	UserT.pk_idUser = Quote.iduser
+AND		Hotel.pk_idHotel = Quote.idHotel

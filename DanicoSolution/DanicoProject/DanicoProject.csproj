@@ -67,6 +67,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
+    <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -77,6 +78,7 @@
     </Compile>
     <Compile Include="Models\Classes\cGeocoding.cs" />
     <Compile Include="Models\Classes\cHotel.cs" />
+    <Compile Include="Models\Classes\cUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,12 +91,29 @@
     <Content Include="Content\css\cssTheme\skeleton.css" />
     <Content Include="Content\css\cssTheme\slider.css" />
     <Content Include="Content\css\cssTheme\style.css" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\DatePicker\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\DatePicker\smoothness\jquery-ui-1.8.24.custom.css" />
     <Content Include="Content\css\example.css" />
     <Content Include="Content\css\MapStyle.css" />
     <Content Include="Content\css\mosaic.css" />
+    <Content Include="Content\css\Quote.css" />
     <Content Include="Content\css\searchBox.css" />
+    <Content Include="Content\images\danico\after.png" />
     <Content Include="Content\images\danico\aside-bg.gif" />
     <Content Include="Content\images\danico\bano.png" />
+    <Content Include="Content\images\danico\before.png" />
     <Content Include="Content\images\danico\bg-black.png" />
     <Content Include="Content\images\danico\body-bg.gif" />
     <Content Include="Content\images\danico\caja.png" />
@@ -137,6 +156,7 @@
     <Content Include="Content\images\danico\internet.png" />
     <Content Include="Content\images\danico\label_sale_red.png" />
     <Content Include="Content\images\danico\lavanderia.png" />
+    <Content Include="Content\images\danico\letter_bg.png" />
     <Content Include="Content\images\danico\link-bg.gif" />
     <Content Include="Content\images\danico\marker.png" />
     <Content Include="Content\images\danico\nal-li-bg.gif" />
@@ -255,6 +275,8 @@
     <Content Include="Content\images\Hotels\hotel4\page3-img4.jpg" />
     <Content Include="Content\images\Hotels\hotel4\page3-img5.jpg" />
     <Content Include="Content\images\Hotels\hotel4\page4-img1.jpg" />
+    <Content Include="Content\jQuery\DatePicker\jquery-1.8.2.min.js" />
+    <Content Include="Content\jQuery\DatePicker\jquery-ui-1.8.24.custom.min.js" />
     <Content Include="Content\jQuery\jquery.flex.js" />
     <Content Include="Content\jQuery\jsTheme\camera.js" />
     <Content Include="Content\jQuery\jsTheme\excanvas.js" />
@@ -325,6 +347,11 @@
     <None Include="Content\css\cssTheme\fonts\optima-webfont.woff" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Quote\Index.cshtml" />
+    <Content Include="Views\Quote\Details.cshtml" />
+    <Content Include="Views\Quote\Create.cshtml" />
+    <Content Include="Views\Quote\Edit.cshtml" />
+    <Content Include="Views\Quote\Delete.cshtml" />
     <EntityDeploy Include="Models\All.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>All.Designer.cs</LastGenOutput>

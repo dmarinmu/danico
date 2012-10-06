@@ -1,0 +1,45 @@
+﻿@model DanicoProject.Models.vQuote
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>vQuote</legend>
+
+    <div class="display-label">Uname</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Uname)
+    </div>
+
+    <div class="display-label">QrequestDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QrequestDate)
+    </div>
+
+    <div class="display-label">Qdescription</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Qdescription)
+    </div>
+
+    <div class="display-label">QtripStartDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QtripStartDate)
+    </div>
+
+    <div class="display-label">QtripEndDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QtripEndDate)
+    </div>
+
+    <div class="display-label">idTripType</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.idTripType)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -47,6 +47,11 @@ namespace DanicoProject.Controllers
 
       
 
+   /*     [HttpPost]
+        public ActionResult Details(List<Models.vHotel> hotels)
+        {
+            return RedirectToAction("Create", "Quote", new { id = 0, name = "prueba"});
+        }*/
         //
         // GET: /Hotel/Create
 

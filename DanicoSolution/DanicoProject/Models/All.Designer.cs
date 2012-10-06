@@ -21,11 +21,11 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_discount_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "Discount", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Discount), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_Hotel_Town", "Town", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Town), "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Hotel), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.HotelService), true)]
-[assembly: EdmRelationshipAttribute("DanicoModel", "FK_Quote_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.Hotel), "Quote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Quote), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_Quote_Hotel", "Hotel", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Hotel), "Quote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Quote), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Room", "Room", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Room), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_HotelService_Service", "Service", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.Service), "HotelService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.HotelService), true)]
 [assembly: EdmRelationshipAttribute("DanicoModel", "FK_Quote_TripType", "TripType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.TripType), "Quote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Quote), true)]
-[assembly: EdmRelationshipAttribute("DanicoModel", "FK_Quote_User", "UserT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DanicoProject.Models.UserT), "Quote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Quote), true)]
+[assembly: EdmRelationshipAttribute("DanicoModel", "FK_Quote_UserT", "UserT", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DanicoProject.Models.UserT), "Quote", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DanicoProject.Models.Quote), true)]
 
 #endregion
 
@@ -1557,13 +1557,11 @@ namespace DanicoProject.Models
         /// <summary>
         /// Create a new Quote object.
         /// </summary>
-        /// <param name="idHotel">Initial value of the idHotel property.</param>
-        /// <param name="iduser">Initial value of the iduser property.</param>
-        public static Quote CreateQuote(global::System.Int64 idHotel, global::System.Int64 iduser)
+        /// <param name="pk_idQuote">Initial value of the pk_idQuote property.</param>
+        public static Quote CreateQuote(global::System.Int64 pk_idQuote)
         {
             Quote quote = new Quote();
-            quote.idHotel = idHotel;
-            quote.iduser = iduser;
+            quote.pk_idQuote = pk_idQuote;
             return quote;
         }
 
@@ -1573,33 +1571,36 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> requestDate
+        public global::System.Int64 pk_idQuote
         {
             get
             {
-                return _requestDate;
+                return _pk_idQuote;
             }
             set
             {
-                OnrequestDateChanging(value);
-                ReportPropertyChanging("requestDate");
-                _requestDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("requestDate");
-                OnrequestDateChanged();
+                if (_pk_idQuote != value)
+                {
+                    Onpk_idQuoteChanging(value);
+                    ReportPropertyChanging("pk_idQuote");
+                    _pk_idQuote = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("pk_idQuote");
+                    Onpk_idQuoteChanged();
+                }
             }
         }
-        private Nullable<global::System.DateTime> _requestDate;
-        partial void OnrequestDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnrequestDateChanged();
+        private global::System.Int64 _pk_idQuote;
+        partial void Onpk_idQuoteChanging(global::System.Int64 value);
+        partial void Onpk_idQuoteChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int64 idHotel
+        public Nullable<global::System.Int64> idHotel
         {
             get
             {
@@ -1607,26 +1608,23 @@ namespace DanicoProject.Models
             }
             set
             {
-                if (_idHotel != value)
-                {
-                    OnidHotelChanging(value);
-                    ReportPropertyChanging("idHotel");
-                    _idHotel = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("idHotel");
-                    OnidHotelChanged();
-                }
+                OnidHotelChanging(value);
+                ReportPropertyChanging("idHotel");
+                _idHotel = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idHotel");
+                OnidHotelChanged();
             }
         }
-        private global::System.Int64 _idHotel;
-        partial void OnidHotelChanging(global::System.Int64 value);
+        private Nullable<global::System.Int64> _idHotel;
+        partial void OnidHotelChanging(Nullable<global::System.Int64> value);
         partial void OnidHotelChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int64 iduser
+        public Nullable<global::System.Int64> iduser
         {
             get
             {
@@ -1634,19 +1632,40 @@ namespace DanicoProject.Models
             }
             set
             {
-                if (_iduser != value)
-                {
-                    OniduserChanging(value);
-                    ReportPropertyChanging("iduser");
-                    _iduser = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("iduser");
-                    OniduserChanged();
-                }
+                OniduserChanging(value);
+                ReportPropertyChanging("iduser");
+                _iduser = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("iduser");
+                OniduserChanged();
             }
         }
-        private global::System.Int64 _iduser;
-        partial void OniduserChanging(global::System.Int64 value);
+        private Nullable<global::System.Int64> _iduser;
+        partial void OniduserChanging(Nullable<global::System.Int64> value);
         partial void OniduserChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int64> idTripType
+        {
+            get
+            {
+                return _idTripType;
+            }
+            set
+            {
+                OnidTripTypeChanging(value);
+                ReportPropertyChanging("idTripType");
+                _idTripType = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("idTripType");
+                OnidTripTypeChanged();
+            }
+        }
+        private Nullable<global::System.Int64> _idTripType;
+        partial void OnidTripTypeChanging(Nullable<global::System.Int64> value);
+        partial void OnidTripTypeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1725,24 +1744,24 @@ namespace DanicoProject.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> idTripType
+        public Nullable<global::System.DateTime> requestDate
         {
             get
             {
-                return _idTripType;
+                return _requestDate;
             }
             set
             {
-                OnidTripTypeChanging(value);
-                ReportPropertyChanging("idTripType");
-                _idTripType = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("idTripType");
-                OnidTripTypeChanged();
+                OnrequestDateChanging(value);
+                ReportPropertyChanging("requestDate");
+                _requestDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("requestDate");
+                OnrequestDateChanged();
             }
         }
-        private Nullable<global::System.Int64> _idTripType;
-        partial void OnidTripTypeChanging(Nullable<global::System.Int64> value);
-        partial void OnidTripTypeChanged();
+        private Nullable<global::System.DateTime> _requestDate;
+        partial void OnrequestDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnrequestDateChanged();
 
         #endregion
     
@@ -1830,16 +1849,16 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_Quote_User", "UserT")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_Quote_UserT", "UserT")]
         public UserT UserT
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserT>("DanicoModel.FK_Quote_User", "UserT").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserT>("DanicoModel.FK_Quote_UserT", "UserT").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserT>("DanicoModel.FK_Quote_User", "UserT").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserT>("DanicoModel.FK_Quote_UserT", "UserT").Value = value;
             }
         }
         /// <summary>
@@ -1851,13 +1870,13 @@ namespace DanicoProject.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserT>("DanicoModel.FK_Quote_User", "UserT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserT>("DanicoModel.FK_Quote_UserT", "UserT");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserT>("DanicoModel.FK_Quote_User", "UserT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserT>("DanicoModel.FK_Quote_UserT", "UserT", value);
                 }
             }
         }
@@ -2482,12 +2501,10 @@ namespace DanicoProject.Models
         /// Create a new UserT object.
         /// </summary>
         /// <param name="pk_idUser">Initial value of the pk_idUser property.</param>
-        /// <param name="email">Initial value of the email property.</param>
-        public static UserT CreateUserT(global::System.Int64 pk_idUser, global::System.String email)
+        public static UserT CreateUserT(global::System.Int64 pk_idUser)
         {
             UserT userT = new UserT();
             userT.pk_idUser = pk_idUser;
-            userT.email = email;
             return userT;
         }
 
@@ -2548,7 +2565,7 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String email
         {
@@ -2560,7 +2577,7 @@ namespace DanicoProject.Models
             {
                 OnemailChanging(value);
                 ReportPropertyChanging("email");
-                _email = StructuralObject.SetValidValue(value, false);
+                _email = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("email");
                 OnemailChanged();
             }
@@ -2579,18 +2596,18 @@ namespace DanicoProject.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_Quote_User", "Quote")]
+        [EdmRelationshipNavigationPropertyAttribute("DanicoModel", "FK_Quote_UserT", "Quote")]
         public EntityCollection<Quote> Quotes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Quote>("DanicoModel.FK_Quote_User", "Quote");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Quote>("DanicoModel.FK_Quote_UserT", "Quote");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Quote>("DanicoModel.FK_Quote_User", "Quote", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Quote>("DanicoModel.FK_Quote_UserT", "Quote", value);
                 }
             }
         }
@@ -3537,18 +3554,40 @@ namespace DanicoProject.Models
         /// <summary>
         /// Create a new vQuote object.
         /// </summary>
-        /// <param name="uemail">Initial value of the Uemail property.</param>
         /// <param name="qidHotel">Initial value of the QidHotel property.</param>
-        public static vQuote CreatevQuote(global::System.String uemail, global::System.Int64 qidHotel)
+        public static vQuote CreatevQuote(global::System.Int64 qidHotel)
         {
             vQuote vQuote = new vQuote();
-            vQuote.Uemail = uemail;
             vQuote.QidHotel = qidHotel;
             return vQuote;
         }
 
         #endregion
         #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Hname
+        {
+            get
+            {
+                return _Hname;
+            }
+            set
+            {
+                OnHnameChanging(value);
+                ReportPropertyChanging("Hname");
+                _Hname = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Hname");
+                OnHnameChanged();
+            }
+        }
+        private global::System.String _Hname;
+        partial void OnHnameChanging(global::System.String value);
+        partial void OnHnameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3577,7 +3616,7 @@ namespace DanicoProject.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Uemail
         {
@@ -3587,14 +3626,11 @@ namespace DanicoProject.Models
             }
             set
             {
-                if (_Uemail != value)
-                {
-                    OnUemailChanging(value);
-                    ReportPropertyChanging("Uemail");
-                    _Uemail = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Uemail");
-                    OnUemailChanged();
-                }
+                OnUemailChanging(value);
+                ReportPropertyChanging("Uemail");
+                _Uemail = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Uemail");
+                OnUemailChanged();
             }
         }
         private global::System.String _Uemail;

@@ -229,8 +229,16 @@ namespace DanicoProject.Models.Classes
             return ret;
         }
 
-        
+
+
+        public List<TripType> getTripType()
+        {
+            List<Models.TripType> tripTypeList = new List<TripType>();
+            using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
+            {
+                tripTypeList = tmp.TripTypes.Select(a => a).ToList();
+            }
+            return tripTypeList;
+        }
     }   
-        
-    
 }

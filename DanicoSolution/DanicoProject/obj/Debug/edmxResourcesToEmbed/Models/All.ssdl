@@ -27,17 +27,7 @@
       [HotelService].[capactity] AS [capactity]
       FROM [dbo].[HotelService] AS [HotelService]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="Quote" EntityType="DanicoModel.Store.Quote" store:Type="Tables" store:Schema="dbo" store:Name="Quote">
-      <DefiningQuery>SELECT 
-      [Quote].[requestDate] AS [requestDate], 
-      [Quote].[idHotel] AS [idHotel], 
-      [Quote].[iduser] AS [iduser], 
-      [Quote].[description] AS [description], 
-      [Quote].[tripStartDate] AS [tripStartDate], 
-      [Quote].[tripEndDate] AS [tripEndDate], 
-      [Quote].[idTripType] AS [idTripType]
-      FROM [dbo].[Quote] AS [Quote]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="Quote" EntityType="DanicoModel.Store.Quote" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Room" EntityType="DanicoModel.Store.Room" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Service" EntityType="DanicoModel.Store.Service" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="sysdiagrams" EntityType="DanicoModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
@@ -90,6 +80,7 @@
     </EntitySet>
     <EntitySet Name="vQuote" EntityType="DanicoModel.Store.vQuote" store:Type="Views" store:Schema="dbo" store:Name="vQuote">
       <DefiningQuery>SELECT 
+      [vQuote].[Hname] AS [Hname], 
       [vQuote].[Uname] AS [Uname], 
       [vQuote].[Uemail] AS [Uemail], 
       [vQuote].[QrequestDate] AS [QrequestDate], 
@@ -128,7 +119,7 @@
       <End Role="TripType" EntitySet="TripType" />
       <End Role="Quote" EntitySet="Quote" />
     </AssociationSet>
-    <AssociationSet Name="FK_Quote_User" Association="DanicoModel.Store.FK_Quote_User">
+    <AssociationSet Name="FK_Quote_UserT" Association="DanicoModel.Store.FK_Quote_UserT">
       <End Role="UserT" EntitySet="UserT" />
       <End Role="Quote" EntitySet="Quote" />
     </AssociationSet>
@@ -185,21 +176,18 @@
     <Property Name="idService" Type="bigint" />
     <Property Name="capactity" Type="bigint" />
   </EntityType>
-  <!--Errors Found During Generation:
-      warning 6002: The table/view 'Danico.dbo.Quote' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
   <EntityType Name="Quote">
     <Key>
-      <PropertyRef Name="idHotel" />
-      <PropertyRef Name="iduser" />
+      <PropertyRef Name="pk_idQuote" />
     </Key>
-    <Property Name="requestDate" Type="date" />
-    <Property Name="idHotel" Type="bigint" Nullable="false" />
-    <Property Name="iduser" Type="bigint" Nullable="false" />
+    <Property Name="pk_idQuote" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="idHotel" Type="bigint" />
+    <Property Name="iduser" Type="bigint" />
+    <Property Name="idTripType" Type="bigint" />
     <Property Name="description" Type="varchar" MaxLength="200" />
     <Property Name="tripStartDate" Type="date" />
     <Property Name="tripEndDate" Type="date" />
-    <Property Name="idTripType" Type="bigint" />
+    <Property Name="requestDate" Type="date" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -246,7 +234,7 @@
     </Key>
     <Property Name="pk_idUser" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="varchar" MaxLength="100" />
-    <Property Name="email" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
   </EntityType>
   <!--Errors Found During Generation:
       warning 6002: The table/view 'Danico.dbo.vDiscount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -305,11 +293,11 @@
       -->
   <EntityType Name="vQuote">
     <Key>
-      <PropertyRef Name="Uemail" />
       <PropertyRef Name="QidHotel" />
     </Key>
+    <Property Name="Hname" Type="varchar" MaxLength="50" />
     <Property Name="Uname" Type="varchar" MaxLength="100" />
-    <Property Name="Uemail" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Uemail" Type="varchar" MaxLength="100" />
     <Property Name="QrequestDate" Type="date" />
     <Property Name="QidHotel" Type="bigint" Nullable="false" />
     <Property Name="Qdescription" Type="varchar" MaxLength="200" />
@@ -378,7 +366,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Quote_Hotel">
-    <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="1" />
+    <End Role="Hotel" Type="DanicoModel.Store.Hotel" Multiplicity="0..1" />
     <End Role="Quote" Type="DanicoModel.Store.Quote" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Hotel">
@@ -401,8 +389,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Quote_User">
-    <End Role="UserT" Type="DanicoModel.Store.UserT" Multiplicity="1" />
+  <Association Name="FK_Quote_UserT">
+    <End Role="UserT" Type="DanicoModel.Store.UserT" Multiplicity="0..1" />
     <End Role="Quote" Type="DanicoModel.Store.Quote" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserT">

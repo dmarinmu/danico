@@ -97,30 +97,7 @@
     <div class="container">
         <div class="sixteen columns page-title">
             <div id="formdiv">
-                <!--   @using (Html.BeginForm("Search", "Home", FormMethod.Get,
-                        new { @id = "formdivInput" }))
-                       {
-                           //<form id="new_pick" accept-charset="UTF-8" action="/picks" method="post">
-                    <div class="row">
-                        <div class="span13">
-                        @* <input id="address" name="address" placeholder="Medellin" type="text" /> *@
-                        @Html.TextBox("address", ViewBag.townFilter as string, new { @placeholder = "Medellín" })
-
-                         <button class="btn primary" name="button" type="submit">go</button>
-
-                        </div>
-
-                        <div class="span3">
-                           
-                        </div>
-                    </div>
-                           // </form>
-                       }
-                <form id="searchbox" action="">
-                    <input id="" type="text" placeholder="Type here">
-                    <input id="submit" type="submit" value="Search">
-                </form>
-                -->
+               
                  @using (Html.BeginForm("Search", "Home", FormMethod.Get))
                  {
                       <div class="searchbox">

@@ -18,6 +18,7 @@
 {   
     <script type="text/javascript"  src="http://maps.google.com/maps/api/js?sensor=false"></script> 
     <link href="../../Content/css/MapStyle.css" rel="stylesheet" type="text/css" /> <!-- idea taken from http://www.codeproject.com/Articles/148949/ASP-NET-MVC-3-the-Razor-View-Engine-and-Google-Map -->
+    
     <script type="text/javascript">
         function initialize() {
             var latlng = new google.maps.LatLng(@Model.FirstOrDefault().Hlat, @Model.FirstOrDefault().Hlng);
@@ -37,8 +38,22 @@
         $(function () {
             initialize();
         }); 
+</script> 
+ <!-- $(document).ready(function () {  comentado porque utilice form para esto
+                    
+          $('#btnSolicitarCot').click(function (e) 
+          {
+              var idHotelvar = '@Model.FirstOrDefault().Hpk_idHotel';  
+            
+              var routevar="~/Quote/Create/ ";
+              var routevar2= routevar.concat(idHotelvar); 
+
+              location.href = '@Url.Content("~/Quote/Create/"+4)';
+          });
+          
+        });-->
+
     
-    </script> 
 }
 
     
@@ -111,7 +126,19 @@
             <div class="clearfix">
              
                 <div class="sixteen columns">
-                    <button class="btnSearch" name="submit" type="submit">Solicitar Cotización</button>
+               <!--    
+                    <input type="button" value="Solicitar Cotización" onclick="window.location.href=~@Url.Action("Create", "Quote")" />
+                    <input id='btnSolicitarCot' type="" value="Solicitar Cotización" /> -->
+
+                  
+                   @using (Html.BeginForm("Create", "Quote", FormMethod.Get, new { id = "quoteForm" }))    
+                    {
+                        @Html.TextBox("idHParameter", Model.FirstOrDefault().Hpk_idHotel , new {style = "display:none;" })
+                        @Html.TextBox("nameHParameter", Model.FirstOrDefault().Hname, new { style = "display:none;" })
+                        <input id="Search" type="submit" value="Solicitar Cotización" class="quoteButton" />
+                           
+                    }
+
 
                     <ul class="cat-list fright filter_list">
                           <li><a href="javascript: void(0)" rel="*">Todas</a></li>

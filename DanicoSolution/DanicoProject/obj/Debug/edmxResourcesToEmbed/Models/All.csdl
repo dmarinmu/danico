@@ -42,7 +42,7 @@
       <End Role="TripType" EntitySet="TripTypes" />
       <End Role="Quote" EntitySet="Quotes" />
     </AssociationSet>
-    <AssociationSet Name="FK_Quote_User" Association="DanicoModel.FK_Quote_User">
+    <AssociationSet Name="FK_Quote_UserT" Association="DanicoModel.FK_Quote_UserT">
       <End Role="UserT" EntitySet="UserTs" />
       <End Role="Quote" EntitySet="Quotes" />
     </AssociationSet>
@@ -103,19 +103,19 @@
   </EntityType>
   <EntityType Name="Quote">
     <Key>
-      <PropertyRef Name="idHotel" />
-      <PropertyRef Name="iduser" />
+      <PropertyRef Name="pk_idQuote" />
     </Key>
-    <Property Name="requestDate" Type="DateTime" />
-    <Property Name="idHotel" Type="Int64" Nullable="false" />
-    <Property Name="iduser" Type="Int64" Nullable="false" />
+    <Property Name="pk_idQuote" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idHotel" Type="Int64" />
+    <Property Name="iduser" Type="Int64" />
+    <Property Name="idTripType" Type="Int64" />
     <Property Name="description" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
     <Property Name="tripStartDate" Type="DateTime" />
     <Property Name="tripEndDate" Type="DateTime" />
-    <Property Name="idTripType" Type="Int64" />
+    <Property Name="requestDate" Type="DateTime" />
     <NavigationProperty Name="Hotel" Relationship="DanicoModel.FK_Quote_Hotel" FromRole="Quote" ToRole="Hotel" />
     <NavigationProperty Name="TripType" Relationship="DanicoModel.FK_Quote_TripType" FromRole="Quote" ToRole="TripType" />
-    <NavigationProperty Name="UserT" Relationship="DanicoModel.FK_Quote_User" FromRole="Quote" ToRole="UserT" />
+    <NavigationProperty Name="UserT" Relationship="DanicoModel.FK_Quote_UserT" FromRole="Quote" ToRole="UserT" />
   </EntityType>
   <EntityType Name="Room">
     <Key>
@@ -166,8 +166,8 @@
     </Key>
     <Property Name="pk_idUser" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-    <NavigationProperty Name="Quotes" Relationship="DanicoModel.FK_Quote_User" FromRole="UserT" ToRole="Quote" />
+    <Property Name="email" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Quotes" Relationship="DanicoModel.FK_Quote_UserT" FromRole="UserT" ToRole="Quote" />
   </EntityType>
   <EntityType Name="vDiscount">
     <Key>
@@ -217,11 +217,11 @@
   </EntityType>
   <EntityType Name="vQuote">
     <Key>
-      <PropertyRef Name="Uemail" />
       <PropertyRef Name="QidHotel" />
     </Key>
+    <Property Name="Hname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Uname" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="Uemail" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Uemail" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <Property Name="QrequestDate" Type="DateTime" />
     <Property Name="QidHotel" Type="Int64" Nullable="false" />
     <Property Name="Qdescription" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
@@ -266,7 +266,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Quote_Hotel">
-    <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="1" />
+    <End Role="Hotel" Type="DanicoModel.Hotel" Multiplicity="0..1" />
     <End Role="Quote" Type="DanicoModel.Quote" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Hotel">
@@ -313,8 +313,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Quote_User">
-    <End Role="UserT" Type="DanicoModel.UserT" Multiplicity="1" />
+  <Association Name="FK_Quote_UserT">
+    <End Role="UserT" Type="DanicoModel.UserT" Multiplicity="0..1" />
     <End Role="Quote" Type="DanicoModel.Quote" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserT">

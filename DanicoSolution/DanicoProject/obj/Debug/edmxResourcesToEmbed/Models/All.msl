@@ -53,13 +53,14 @@
     <EntitySetMapping Name="Quotes">
       <EntityTypeMapping TypeName="DanicoModel.Quote">
         <MappingFragment StoreEntitySet="Quote">
-          <ScalarProperty Name="requestDate" ColumnName="requestDate" />
+          <ScalarProperty Name="pk_idQuote" ColumnName="pk_idQuote" />
           <ScalarProperty Name="idHotel" ColumnName="idHotel" />
           <ScalarProperty Name="iduser" ColumnName="iduser" />
+          <ScalarProperty Name="idTripType" ColumnName="idTripType" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="tripStartDate" ColumnName="tripStartDate" />
           <ScalarProperty Name="tripEndDate" ColumnName="tripEndDate" />
-          <ScalarProperty Name="idTripType" ColumnName="idTripType" />
+          <ScalarProperty Name="requestDate" ColumnName="requestDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -167,6 +168,7 @@
     <EntitySetMapping Name="vQuotes">
       <EntityTypeMapping TypeName="DanicoModel.vQuote">
         <MappingFragment StoreEntitySet="vQuote">
+          <ScalarProperty Name="Hname" ColumnName="Hname" />
           <ScalarProperty Name="Uname" ColumnName="Uname" />
           <ScalarProperty Name="Uemail" ColumnName="Uemail" />
           <ScalarProperty Name="QrequestDate" ColumnName="QrequestDate" />
