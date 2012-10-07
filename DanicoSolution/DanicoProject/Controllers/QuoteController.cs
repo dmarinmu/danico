@@ -31,10 +31,10 @@ namespace DanicoProject.Controllers
         //
         // GET: /Quote/Details/5
 
-        public ViewResult Details(string id)
+        public ViewResult Details()
         {
-            vQuote vquote = db.vQuotes.Single(v => v.Uemail == id);
-            return View(vquote);
+
+            return View();
         }
 
         //
@@ -42,7 +42,7 @@ namespace DanicoProject.Controllers
         public ActionResult Create(long idHParameter, string nameHParameter)
         {
             vQuote vquote = new vQuote() { QidHotel = idHParameter, Hname = nameHParameter };
-           
+
             /***combobox****/
             List<Models.TripType> tripTypeList = new List<Models.TripType>();
             tripTypeList = varHotel.getTripType();
@@ -68,7 +68,7 @@ namespace DanicoProject.Controllers
             UserT user = new UserT() { name = vquote.Uname, email = vquote.Uemail };
             cUser userTmp = new cUser(user);
             long idUser = userTmp.insertUser();
-          
+
             if (vquote.QidHotel != null && idUser > -1)
             {
                 DateTime currentTime = DateTime.Now;
@@ -86,14 +86,15 @@ namespace DanicoProject.Controllers
                     tripStartDate = vquote.QtripStartDate
                 };
                 cQuote quotetmp = new cQuote(quote);
-                idQuote =quotetmp.insertQuote();
+                idQuote = quotetmp.insertQuote();
             }
 
             if (idQuote > -1)
             {
                 msge = "La cotización se solicitó satisfactoriamente, En los siguientes días el hotel se pondrá en contacto contigo";
             }
-            else { msge = "Se produjo un error, puedes intenta de nuevo mas tarde"; }
+            else { msge = "Se produjo un error, puedes intentar de nuevo mas tarde"; }
+            ViewBag.msge = msge;
 
             /***combobox****/
             List<Models.TripType> tripTypeList = new List<Models.TripType>();
@@ -107,34 +108,32 @@ namespace DanicoProject.Controllers
             ViewBag.trips = list;
             /***combobox****/
 
+
             return View(vquote);
         }
 
-        //
-        // GET: /Quote/Edit/5
-
-        public ActionResult Edit(string id)
-        {
-
-            vQuote vquote = db.vQuotes.Single(v => v.Uemail == id);
-            return View(vquote);
+        public ActionResult Edit() { 
+            return View();
         }
 
-        //
-        // POST: /Quote/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(vQuote vquote)
+        public JsonResult AutocompleteSuggestions(string term)
         {
-            if (ModelState.IsValid)
+         /*   List<string> townList = new System.Collections.Generic.List<string>();
+            using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
             {
-                db.vQuotes.Attach(vquote);
-                db.ObjectStateManager.ChangeObjectState(vquote, EntityState.Modified);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(vquote);
+                var suggestions = from s in tmp.Towns select s.name;
+                townList = suggestions.Where(n => n.ToLower().StartsWith(term.ToLower())).ToList();
+
+            }*/
+
+            AllConection db = new AllConection();
+            var suggestions = from s in db.Towns select s.name;
+            var namelist = suggestions.Where(n => n.ToLower().StartsWith(term.ToLower())).ToList();
+            // return namelist.ToList();
+            return Json(namelist, JsonRequestBehavior.AllowGet);
+
         }
+
 
         //
         // GET: /Quote/Delete/5

@@ -1,77 +1,74 @@
-﻿@model DanicoProject.Models.vQuote
+﻿@{
+    ViewBag.Title = "Delete";
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    
+    <link href="../../Content/css/Autocomplete/jquery-ui-1.8.24.custom.css" rel="stylesheet"
+        type="text/css" />
+    <script src="../../Content/jQuery/Autocomplete/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="../../Content/jQuery/Autocomplete/jquery-ui-1.8.24.custom.min.js" type="text/javascript"></script>
 
-@{
-    ViewBag.Title = "Edit";
+    <script type="text/javascript">
+      
+        $(function () {
+            var availableTags = [
+			"ActionScript",
+			"AppleScript",
+			"Asp",
+			"BASIC",
+			"C",
+			"C++",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Erlang",
+			"Fortran",
+			"Groovy",
+			"Haskell",
+			"Java",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Scala",
+			"Scheme"
+		];
+            $("#tags").autocomplete({
+                source: availableTags
+            });
+
+            $("#SearchString").autocomplete({
+                source: "/Quote/AutocompleteSuggestions",
+                minLength: 1,
+                select: function (event, ui) {
+                    if (ui.item) {
+                        $("#SearchString").val(ui.item.value);
+                        $("form").submit();
+                    }
+                }
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+</body>
+</html>
+
+@using (Html.BeginForm())
+{
+    <p>
+    Find by name: @Html.TextBox("SearchString")  
+    <input type="submit" value="Search" /></p>
 }
 
-<h2>Edit</h2>
-
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>vQuote</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Uname)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Uname)
-            @Html.ValidationMessageFor(model => model.Uname)
-        </div>
-
-        @Html.HiddenFor(model => model.Uemail)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.QrequestDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.QrequestDate)
-            @Html.ValidationMessageFor(model => model.QrequestDate)
-        </div>
-
-        @Html.HiddenFor(model => model.QidHotel)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Qdescription)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Qdescription)
-            @Html.ValidationMessageFor(model => model.Qdescription)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.QtripStartDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.QtripStartDate)
-            @Html.ValidationMessageFor(model => model.QtripStartDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.QtripEndDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.QtripEndDate)
-            @Html.ValidationMessageFor(model => model.QtripEndDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.idTripType)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.idTripType)
-            @Html.ValidationMessageFor(model => model.idTripType)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="ui-widget">
+	<label for="tags">Tags: </label>
+	<input id="tags">
 </div>

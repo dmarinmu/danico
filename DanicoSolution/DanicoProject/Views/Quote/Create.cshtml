@@ -4,21 +4,37 @@
     ViewBag.Title = "Create";
 }
 
+
 @section section4
 { 
-  <link href="../../Content/css/Quote.css" rel="stylesheet" type="text/css" />
-   
-  <link href="../../Content/css/DatePicker/smoothness/jquery-ui-1.8.24.custom.css" rel="stylesheet" type="text/css" />
+        <link href="../../Content/css/Quote.css" rel="stylesheet" type="text/css" />
+        <link href="../../Content/css/DatePicker/smoothness/jquery-ui-1.8.24.custom.css" rel="stylesheet" type="text/css" />
+
+         <!--<link href="../../Content/css/modalWindow/styles.css" rel="stylesheet" type="text/css" />  -->
+         <link href="../../Content/css/modalWindow/avgrund.css" rel="stylesheet" type="text/css" />
+
         <script src="../../Content/jQuery/DatePicker/jquery-1.8.2.min.js" type="text/javascript"></script>
         <script src="../../Content/jQuery/DatePicker/jquery-ui-1.8.24.custom.min.js" type="text/javascript"></script>
+        <script src="../../Content/jQuery/modalWindow/avgrund.js" type="text/javascript"></script>
+
 
 		<script type="text/javascript">
+		    var msge = '@(ViewBag.msge)';
+
 		    $(function () {
+
+		        if (msge != null && msge != "") {
+		            /*alert("prueba");*/
+		            $("#modalWindow").trigger('click');
+                    
+
+		        }
+
 		        $("#from").datepicker({
 		            defaultDate: "+1w",
 		            changeMonth: true,
 		            numberOfMonths: 1,
-                    dateFormat: "dd-mm-yy",
+		            dateFormat: "dd-mm-yy",
 		            onSelect: function (selectedDate) {
 		                $("#to").datepicker("option", "minDate", selectedDate);
 
@@ -45,22 +61,38 @@
 
 		        });
 
-		     $("#from").mouseout(function (event) {
+		        $("#from").mouseout(function (event) {
 
-		            if (event.relatedTarget.nodeName == "DIV") {
-		              //      alert("entro");
-		              //  $('#form_wrap').addClass("freezeForm_wrap");
-		               // $('#prueba').addClass("freezeForm");
+		        if (event.relatedTarget.nodeName == "DIV") {
+		        //      alert("entro");
+		        //  $('#form_wrap').addClass("freezeForm_wrap");
+		        // $('#prueba').addClass("freezeForm");
 
-		            }
+		        }
 		        });*/
 		    });
 
+		    
+		    function openDialog() {
+		        Avgrund.show("#default-popup");
+		    }
+		    function closeDialog() {
+		        Avgrund.hide();
+		    }
 		</script>
 
 }
 
 
+<aside id="default-popup" class="avgrund-popup">
+			<h2>That's all, folks</h2>
+			<p>
+				@ViewBag.msge
+			</p>
+			
+			<button onclick="javascript:closeDialog();">Cerrar</button>
+		</aside>
+        <button id="modalWindow" onclick="javascript:openDialog();"style="display:none" >CloseQuote</button>
 
 <div id="content">
 <div id="wrap">
@@ -68,7 +100,7 @@
 		<div id='form_wrap' class="freezeForm_wrap">
        
 			@using (Html.BeginForm("Create", "Quote", FormMethod.Post, new { name = "prueba", id = "prueba", @class = "freezeForm" }))
-            {
+   {
 				<p class="quoteTittle">Detalles Cotización para @Model.Hname</p>
                     @Html.HiddenFor(model => model.Hname)
                     @Html.HiddenFor(model => model.QidHotel)

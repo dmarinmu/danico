@@ -83,6 +83,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\Autocomplete\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\Autocomplete\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\Autocomplete\jquery-ui-1.8.24.custom.css" />
     <Content Include="Content\css\cssTheme\camera.css" />
     <Content Include="Content\css\cssTheme\fonts\brushscriptstd-webfont.svg" />
     <Content Include="Content\css\cssTheme\fonts\optima-webfont.svg" />
@@ -108,6 +122,8 @@
     <Content Include="Content\css\DatePicker\smoothness\jquery-ui-1.8.24.custom.css" />
     <Content Include="Content\css\example.css" />
     <Content Include="Content\css\MapStyle.css" />
+    <Content Include="Content\css\modalWindow\avgrund.css" />
+    <Content Include="Content\css\modalWindow\styles.css" />
     <Content Include="Content\css\mosaic.css" />
     <Content Include="Content\css\Quote.css" />
     <Content Include="Content\css\searchBox.css" />
@@ -276,6 +292,8 @@
     <Content Include="Content\images\Hotels\hotel4\page3-img4.jpg" />
     <Content Include="Content\images\Hotels\hotel4\page3-img5.jpg" />
     <Content Include="Content\images\Hotels\hotel4\page4-img1.jpg" />
+    <Content Include="Content\jQuery\Autocomplete\jquery-1.8.2.min.js" />
+    <Content Include="Content\jQuery\Autocomplete\jquery-ui-1.8.24.custom.min.js" />
     <Content Include="Content\jQuery\DatePicker\jquery-1.8.2.min.js" />
     <Content Include="Content\jQuery\DatePicker\jquery-ui-1.8.24.custom.min.js" />
     <Content Include="Content\jQuery\jquery.flex.js" />
@@ -290,6 +308,7 @@
     <Content Include="Content\jQuery\jsTheme\jquery.prettyPhoto.js" />
     <Content Include="Content\jQuery\jsTheme\respond.src.js" />
     <Content Include="Content\jQuery\jsTheme\script.js" />
+    <Content Include="Content\jQuery\modalWindow\avgrund.js" />
     <Content Include="Content\jQuery\mosaic.1.0.1.js" />
     <Content Include="Content\jQuery\mosaic.1.0.1.min.js" />
     <Content Include="Global.asax" />

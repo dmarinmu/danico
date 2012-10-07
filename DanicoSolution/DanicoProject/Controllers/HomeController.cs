@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DanicoProject.Models.Classes;
+using DanicoProject.Models;
 
 namespace DanicoProject.Controllers
 {
@@ -22,7 +23,7 @@ namespace DanicoProject.Controllers
             List<long?> serviceIdInDB = varHotel.getServiceID(orderNumbers);
             List<Models.Hotel> hotelList = new List<Models.Hotel>();
 
-            using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
+            using (AllConection tmp = new AllConection())
             {
                  hotelList= tmp.Hotels.Select(a =>  a).ToList();
                  //1s filter
@@ -54,14 +55,32 @@ namespace DanicoProject.Controllers
         public ActionResult AutocompleteAsync(string search)
         {
             List<string> townList = new System.Collections.Generic.List<string>();
-            using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
+            using (AllConection tmp = new AllConection())
             {
                 townList = (from a in tmp.Towns where a.name.StartsWith(search) select a.name).ToList();
             }
             return Json(townList, JsonRequestBehavior.AllowGet);
         }
 
-        
+
+        public JsonResult AutocompleteSuggestions(string term)
+        {
+            /*   List<string> townList = new System.Collections.Generic.List<string>();
+               using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
+               {
+                   var suggestions = from s in tmp.Towns select s.name;
+                   townList = suggestions.Where(n => n.ToLower().StartsWith(term.ToLower())).ToList();
+
+               }*/
+
+            AllConection db = new AllConection();
+            var suggestions = from s in db.Towns select s.name;
+            var namelist = suggestions.Where(n => n.ToLower().StartsWith(term.ToLower())).ToList();
+            // return namelist.ToList();
+            return Json(namelist, JsonRequestBehavior.AllowGet);
+
+        }
+
 
         //
         // GET: /HomeController.cs/
