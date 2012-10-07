@@ -29,7 +29,8 @@ namespace DanicoProject.Controllers
                  //1s filter
                 if (!String.IsNullOrEmpty(search))
                  {
-                     hotelList = hotelList.Where(s => s.fk_idTown.ToString().Equals(search)).ToList();
+                     long idTown = varHotel.getIdTown(search);
+                     hotelList = hotelList.Where(s => s.fk_idTown.Equals(idTown)).ToList();
                      //2d filter
                      if (serviceIdInDB.Count > 0)
                      {
@@ -52,32 +53,24 @@ namespace DanicoProject.Controllers
             return PartialView("_PartialFooter", disList);
         }
 
-        public ActionResult AutocompleteAsync(string search)
+        public ActionResult AutocompleteAsync(string term)
         {
             List<string> townList = new System.Collections.Generic.List<string>();
             using (AllConection tmp = new AllConection())
             {
-                townList = (from a in tmp.Towns where a.name.StartsWith(search) select a.name).ToList();
+                townList = (from a in tmp.Towns where a.name.StartsWith(term) select a.name).Take(10).ToList();
             }
-            return Json(townList, JsonRequestBehavior.AllowGet);
+
+            var ret = townList;
+            return Json(ret, JsonRequestBehavior.AllowGet);
         }
 
 
-        public JsonResult AutocompleteSuggestions(string term)
+        public JsonResult AutocompleteSuggestions(string searchText)
         {
-            /*   List<string> townList = new System.Collections.Generic.List<string>();
-               using (DanicoProject.Models.AllConection tmp = new Models.AllConection())
-               {
-                   var suggestions = from s in tmp.Towns select s.name;
-                   townList = suggestions.Where(n => n.ToLower().StartsWith(term.ToLower())).ToList();
 
-               }*/
-
-            AllConection db = new AllConection();
-            var suggestions = from s in db.Towns select s.name;
-            var namelist = suggestions.Where(n => n.ToLower().StartsWith(term.ToLower())).ToList();
-            // return namelist.ToList();
-            return Json(namelist, JsonRequestBehavior.AllowGet);
+            var tmp = varHotel.getTowns(searchText);
+            return Json(tmp, JsonRequestBehavior.AllowGet);
 
         }
 

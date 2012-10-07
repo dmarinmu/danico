@@ -239,6 +239,31 @@ namespace DanicoProject.Models.Classes
             return tripTypeList;
         }
 
-     
+        public IList<Town> getTowns(string term)
+        {
+            IList<Town> townList;
+            using (AllConection db = new AllConection())
+            {
+                townList = db.Towns.Where(n => n.name.ToLower().StartsWith(term.ToLower())).ToList();
+                townList = townList.Take(10).ToList();
+                /*townList = (from c in db.Towns
+                            where c.name.ToLower().StartsWith(term.ToLower())
+                            select new Town { pk_idTown = c.pk_idTown, name = c.name }).ToList();
+                townList = townList.Take(10).ToList();*/
+            }
+            return townList;
+        }
+
+
+        internal long getIdTown(string term)
+        {
+            long idTown = 0;
+            using (AllConection db = new AllConection())
+            {
+                // idTown = Convert.ToInt32(db.Towns.Where(n => n.name.ToLower().Equals(term.ToLower())).Select(a=>a.pk_idTown));
+                idTown = Convert.ToInt32((from c in db.Towns where c.name.ToLower().Equals(term.ToLower()) select c.pk_idTown).Single());
+            }
+            return idTown;
+        }
     }   
 }
