@@ -30,16 +30,21 @@ namespace DanicoProject.Controllers
                 if (!String.IsNullOrEmpty(search))
                  {
                      long idTown = varHotel.getIdTown(search);
-                     hotelList = hotelList.Where(s => s.fk_idTown.Equals(idTown)).ToList();
-                     //2d filter
-                     if (serviceIdInDB.Count > 0)
+                     //2d filter 
+                     if (idTown > -1)
                      {
-                         hotelList =
-                          (from hotel in tmp.Hotels
-                           join service in tmp.HotelServices on hotel.pk_idHotel equals service.idHotel
-                           where serviceIdInDB.Contains(service.idService)
-                           select hotel).ToList<Models.Hotel>();
+                         hotelList = hotelList.Where(s => s.fk_idTown.Equals(idTown)).ToList();
+                         //3d filter
+                         if (serviceIdInDB.Count > 0)
+                         {
+                             hotelList =
+                              (from hotel in tmp.Hotels
+                               join service in tmp.HotelServices on hotel.pk_idHotel equals service.idHotel
+                               where serviceIdInDB.Contains(service.idService)
+                               select hotel).ToList<Models.Hotel>();
+                         }
                      }
+                    
                  }
             }
             return View(hotelList);

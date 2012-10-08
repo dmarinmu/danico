@@ -258,11 +258,19 @@ namespace DanicoProject.Models.Classes
         internal long getIdTown(string term)
         {
             long idTown = 0;
-            using (AllConection db = new AllConection())
+            try
             {
-                // idTown = Convert.ToInt32(db.Towns.Where(n => n.name.ToLower().Equals(term.ToLower())).Select(a=>a.pk_idTown));
-                idTown = Convert.ToInt32((from c in db.Towns where c.name.ToLower().Equals(term.ToLower()) select c.pk_idTown).Single());
+                using (AllConection db = new AllConection())
+                {
+                    // idTown = Convert.ToInt32(db.Towns.Where(n => n.name.ToLower().Equals(term.ToLower())).Select(a=>a.pk_idTown));
+                    idTown = Convert.ToInt32((from c in db.Towns where c.name.ToLower().Equals(term.ToLower()) select c.pk_idTown).Single());
+                }
             }
+            catch (Exception)
+            {
+                return -1;
+            }
+           
             return idTown;
         }
     }   
