@@ -78,6 +78,14 @@
     </Compile>
     <Compile Include="Models\Classes\cGeocoding.cs" />
     <Compile Include="Models\Classes\cHotel.cs" />
+    <Compile Include="Models\Classes\cMessage.cs" />
+    <Compile Include="Models\Classes\CodeLib\Net\Dns\DnsMessage.cs" />
+    <Compile Include="Models\Classes\CodeLib\Net\Dns\DnsMessageCoder.cs" />
+    <Compile Include="Models\Classes\CodeLib\Net\Dns\DnsQuery.cs" />
+    <Compile Include="Models\Classes\CodeLib\Net\Dns\DnsResource.cs" />
+    <Compile Include="Models\Classes\CodeLib\Net\Dns\MailExchange.cs" />
+    <Compile Include="Models\Classes\CodeLib\Net\DomainNameUtil.cs" />
+    <Compile Include="Models\Classes\CodeLib\Net\EmailSender.cs" />
     <Compile Include="Models\Classes\cQuote.cs" />
     <Compile Include="Models\Classes\cUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

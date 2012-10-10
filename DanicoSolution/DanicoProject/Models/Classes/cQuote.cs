@@ -9,10 +9,12 @@ namespace DanicoProject.Models.Classes
     {
 
         Quote quote = new Quote();
+
         public  cQuote(Quote quote)
         {
             this.quote = quote;
         }
+
         public  cQuote()
         {
         }

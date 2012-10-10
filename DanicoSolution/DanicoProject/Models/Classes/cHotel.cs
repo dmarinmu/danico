@@ -254,7 +254,6 @@ namespace DanicoProject.Models.Classes
             return townList;
         }
 
-
         internal long getIdTown(string term)
         {
             long idTown = 0;
@@ -272,6 +271,19 @@ namespace DanicoProject.Models.Classes
             }
            
             return idTown;
+        }
+
+        internal Hotel getDetails(long id)
+        {
+            Hotel hotelRet = new Hotel();
+            
+            using (AllConection db = new AllConection())
+            {
+                // idTown = Convert.ToInt32(db.Towns.Where(n => n.name.ToLower().Equals(term.ToLower())).Select(a=>a.pk_idTown));
+                hotelRet = db.Hotels.Single(v => v.pk_idHotel == id);
+            }
+
+            return hotelRet;
         }
     }   
 }

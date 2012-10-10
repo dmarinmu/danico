@@ -13,6 +13,7 @@ namespace DanicoProject.Models.Classes
         {
             this.user = user;
         }
+
         public cUser()
         {
         }

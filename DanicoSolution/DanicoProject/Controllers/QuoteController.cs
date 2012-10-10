@@ -65,10 +65,13 @@ namespace DanicoProject.Controllers
             long idQuote = -1;
             string msge = "";
 
+            /***user****/
             UserT user = new UserT() { name = vquote.Uname, email = vquote.Uemail };
             cUser userTmp = new cUser(user);
             long idUser = userTmp.insertUser();
+            /***user****/
 
+            /***quote****/
             if (vquote.QidHotel != null && idUser > -1)
             {
                 DateTime currentTime = DateTime.Now;
@@ -79,7 +82,6 @@ namespace DanicoProject.Controllers
                     idHotel = vquote.QidHotel,
                     iduser = idUser,
                     idTripType = vquote.idTripType,
-
                     description = vquote.Qdescription,
                     requestDate = myTime,
                     tripEndDate = vquote.QtripEndDate,
@@ -87,6 +89,16 @@ namespace DanicoProject.Controllers
                 };
                 cQuote quotetmp = new cQuote(quote);
                 idQuote = quotetmp.insertQuote();
+
+                Models.Hotel hotelTmp = varHotel.getDetails(vquote.QidHotel);
+                /***email****/
+                string hotelBody= "Te informamos que el usuario "+ user.name +" esta interesado en conocer más sobre tu hotel y ha solicitado una cotización en el sitio web Danico. Para conocer los detalles recuerda ponerte en contacto con el equipo del sitio." + "\n Equipo de Danico" ;
+                cMessage msggeHotel = new cMessage(user.email, hotelTmp.email, "solicitar Cotización a través de Danico", hotelBody);
+                bool ret1 = msggeHotel.send();
+                string userBody = "Te informamos que Has solicitado una cotización a el Hotel " + hotelTmp.name + " en el sitio web Danico. Si tienes alguna duda no dudes en contactar el equipo del sitio." + "\n Equipo de Danico";
+                cMessage msggeUser = new cMessage("dmarinmu@gmail.com", user.email, "Cotización solicitada a través de Danico", userBody);
+                bool ret2 = msggeUser.send();
+                /***email****/
             }
 
             if (idQuote > -1)
@@ -95,6 +107,8 @@ namespace DanicoProject.Controllers
             }
             else { msge = "Se produjo un error, puedes intentar de nuevo mas tarde"; }
             ViewBag.msge = msge;
+            /***quote****/
+
 
             /***combobox****/
             List<Models.TripType> tripTypeList = new List<Models.TripType>();
@@ -107,7 +121,6 @@ namespace DanicoProject.Controllers
             }
             ViewBag.trips = list;
             /***combobox****/
-
 
             return View(vquote);
         }
