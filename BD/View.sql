@@ -8,6 +8,7 @@ select * from TripType
 select * from vDiscount
 select * from vQuote
 select * from UserT
+select * from Quote
 /*En hotel service servicetype= h es excluyente con idroom.
 es decir, si la fila esta asociada con un idroom, el servicetype de esa file no puede ser H
 un tipo de habitacion puede tener hasta seis imagenes 

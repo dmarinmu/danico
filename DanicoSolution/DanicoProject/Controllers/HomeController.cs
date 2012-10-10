@@ -25,10 +25,11 @@ namespace DanicoProject.Controllers
 
             using (AllConection tmp = new AllConection())
             {
-                 hotelList= tmp.Hotels.Select(a =>  a).ToList();
+                
                  //1s filter
                 if (!String.IsNullOrEmpty(search))
                  {
+                     hotelList = tmp.Hotels.Select(a => a).ToList();
                      long idTown = varHotel.getIdTown(search);
                      //2d filter 
                      if (idTown > -1)
@@ -37,11 +38,14 @@ namespace DanicoProject.Controllers
                          //3d filter
                          if (serviceIdInDB.Count > 0)
                          {
+                             List<long> hotelListIDs = hotelList.ConvertAll(obj => obj.pk_idHotel).ToList();
+
                              hotelList =
                               (from hotel in tmp.Hotels
                                join service in tmp.HotelServices on hotel.pk_idHotel equals service.idHotel
+                               where hotelListIDs.Contains(hotel.pk_idHotel)
                                where serviceIdInDB.Contains(service.idService)
-                               select hotel).ToList<Models.Hotel>();
+                               select hotel).Distinct().ToList<Models.Hotel>();
                          }
                      }
                     
