@@ -1,7 +1,7 @@
 select * from Hotel
 select * from HotelService
-select * from vHotel
 select * from Service
+select * from vHotel
 select * from Room
 select * from Town
 select * from TripType
@@ -19,6 +19,7 @@ tipos de habitacion:
 basica
 especial
 suite 
+
 */
 
 /******************************************QUERIES***************************************************/
@@ -78,3 +79,28 @@ FROM    Hotel,UserT,Quote left outer join TripType
 ON		Quote.idTripType = TripType.pk_idTripType
 WHERE	UserT.pk_idUser = Quote.iduser
 AND		Hotel.pk_idHotel = Quote.idHotel
+
+/*************query filtro*********************/
+SELECT  Hotel.name, hotel.pk_idHotel, HotelService.idService
+FROM	Hotel  
+inner JOIN HotelService
+ON		Hotel.pk_idHotel = HotelService.idHotel
+and Hotel.fk_idTown=('3')
+and		HotelService.idService in ('19','13')
+
+/*
+				case "9":
+                    return "comida";
+                case "19":
+                    return "parqueadero";
+                case "15":
+                    return "baño";
+                case "12":
+                    return "internet";
+                case "13":
+                    return "caja fuerte";
+                case "20":
+                    return "lavanderia";
+                case "22":
+                    return "tarjetas de credito";
+                default:*/

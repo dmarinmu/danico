@@ -78,6 +78,7 @@
     <Property Name="state" Type="Boolean" Nullable="false" />
     <Property Name="lat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="lng" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="twitterId" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Discount" Relationship="DanicoModel.FK_discount_Hotel" FromRole="Hotel" ToRole="Discount" />
     <NavigationProperty Name="Town" Relationship="DanicoModel.FK_Hotel_Town" FromRole="Hotel" ToRole="Town" />
     <NavigationProperty Name="HotelService" Relationship="DanicoModel.FK_HotelService_Hotel" FromRole="Hotel" ToRole="HotelService" />
@@ -214,6 +215,7 @@
     <Property Name="Spk_idService" Type="Int64" />
     <Property Name="RpkidHabitacion" Type="Int64" />
     <Property Name="Rtype" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Type="String" Name="HtwitterId" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="vQuote">
     <Key>

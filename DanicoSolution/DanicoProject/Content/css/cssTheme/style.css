@@ -1394,3 +1394,11 @@ nav.footer li a:hover, nav.footer li.current a{
     border: 0;
     padding: 0;
 	}
+
+/*******/
+.danicoTwitter 
+{   
+    float:   left !important; 
+    width:   50% !important;
+    margin:  10px 0px !important;
+}

@@ -1012,6 +1012,30 @@ namespace DanicoProject.Models
         private global::System.String _lng;
         partial void OnlngChanging(global::System.String value);
         partial void OnlngChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String twitterId
+        {
+            get
+            {
+                return _twitterId;
+            }
+            set
+            {
+                OntwitterIdChanging(value);
+                ReportPropertyChanging("twitterId");
+                _twitterId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("twitterId");
+                OntwitterIdChanged();
+            }
+        }
+        private global::System.String _twitterId;
+        partial void OntwitterIdChanging(global::System.String value);
+        partial void OntwitterIdChanged();
 
         #endregion
     
@@ -3536,6 +3560,30 @@ namespace DanicoProject.Models
         private global::System.String _Rtype;
         partial void OnRtypeChanging(global::System.String value);
         partial void OnRtypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String HtwitterId
+        {
+            get
+            {
+                return _HtwitterId;
+            }
+            set
+            {
+                OnHtwitterIdChanging(value);
+                ReportPropertyChanging("HtwitterId");
+                _HtwitterId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("HtwitterId");
+                OnHtwitterIdChanged();
+            }
+        }
+        private global::System.String _HtwitterId;
+        partial void OnHtwitterIdChanging(global::System.String value);
+        partial void OnHtwitterIdChanged();
 
         #endregion
     
